@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Organizational Structure</title>
+<style>
+  :root{
+    --bg-top:#0b1120;
+    --bg-bot:#050810;
+    --box-a:#1c2b4a;
+    --box-b:#2f5aa8;
+    --stroke:#4d8fe0;
+    --glow:#38bdf8;
+    --line:#3a5a86;
+    --text:#eaf2ff;
+    --title:#8fc4ff;
+  }
+  *{ box-sizing:border-box; }
+  body{
+    margin:0;
+    min-height:100vh;
+    font-family:'Segoe UI', Arial, Helvetica, sans-serif;
+    background: radial-gradient(ellipse at 50% -10%, #142443 0%, var(--bg-top) 45%, var(--bg-bot) 100%);
+    padding:36px 12px 60px;
+  }
+  h1{
+    text-align:center;
+    color:var(--title);
+    font-size:1.6rem;
+    letter-spacing:0.5px;
+    margin:0 0 8px;
+    text-shadow:0 0 18px rgba(56,189,248,0.35);
+  }
+  .subtitle{
+    text-align:center;
+    color:#7d93b8;
+    font-size:0.85rem;
+    margin:0 0 30px;
+  }
+  .chart-wrap{
+    max-width:920px;
+    margin:0 auto;
+    overflow-x:auto;
+    -webkit-overflow-scrolling:touch;
+  }
+  .chart-wrap svg{
+    display:block;
+    width:100%;
+    min-width:680px;
+    height:auto;
+  }
+
+  /* ---- box styling ---- */
+  .box rect{
+    fill:url(#boxGrad);
+    stroke:var(--stroke);
+    stroke-width:1.2;
+    filter:drop-shadow(0 0 0 rgba(56,189,248,0));
+    transition:filter 0.25s ease, stroke 0.25s ease;
+  }
+  .box text{
+    fill:var(--text);
+    font-size:13px;
+    font-weight:600;
+    text-anchor:middle;
+    pointer-events:none;
+  }
+  .box{
+    cursor:default;
+    opacity:0;
+    transform-origin:center;
+    animation:boxIn 0.55s ease forwards;
+  }
+  .box:hover rect{
+    stroke:var(--glow);
+    filter:drop-shadow(0 0 10px rgba(56,189,248,0.85));
+  }
+
+  @keyframes boxIn{
+    from{ opacity:0; transform:translateY(10px) scale(0.96); }
+    to{ opacity:1; transform:translateY(0) scale(1); }
+  }
+
+  /* ---- connector styling ---- */
+  .conn{
+    fill:none;
+    stroke:var(--line);
+    stroke-width:1.6;
+    stroke-linecap:round;
+    opacity:0;
+    animation:drawLine 0.5s linear forwards, glowFade 2.2s ease-in-out 0.6s infinite alternate;
+  }
+  @keyframes drawLine{
+    0%{ opacity:0; stroke-dashoffset:100; }
+    1%{ opacity:1; }
+    100%{ opacity:1; stroke-dashoffset:0; }
+  }
+  @keyframes glowFade{
+    from{ stroke:var(--line); }
+    to{ stroke:#5b8fd4; }
+  }
+
+  /* gentle ambient pulse on the whole chart after load */
+  @keyframes ambientPulse{
+    0%,100%{ filter:drop-shadow(0 0 0 rgba(56,189,248,0)); }
+    50%{ filter:drop-shadow(0 0 6px rgba(56,189,248,0.18)); }
+  }
+  svg{
+    animation:ambientPulse 6s ease-in-out 3s infinite;
+  }
+</style>
+</head>
+<body>
+
+<h1>Organizational Structure</h1>
+<p class="subtitle">Hover a box to highlight &middot; loads top-down</p>
+
+<div class="chart-wrap">
+<svg viewBox="0 0 820 690" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <linearGradient id="boxGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="var(--box-b)"/>
+      <stop offset="100%" stop-color="var(--box-a)"/>
+    </linearGradient>
+    <marker id="arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="var(--line)"/>
+    </marker>
+  </defs>
+
+  <!-- ===================== CONNECTORS ===================== -->
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.1s"
+        d="M395,54 V90" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.3s"
+        d="M480,105 H560" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.4s"
+        d="M645,126 V140 H480 V120" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.5s"
+        d="M395,126 V230" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.6s" d="M105,148 H712"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.7s" d="M105,148 V160" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.7s" d="M302,148 V160" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.7s" d="M507,148 V155" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.7s" d="M712,148 V155" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:0.9s" d="M395,266 V280 H645"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.0s" d="M395,280 H187"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.1s" d="M187,280 V295" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.1s" d="M645,280 V295" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.3s"
+        d="M187,331 V345 H157 V360" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.3s"
+        d="M645,331 V345 H632 V360" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.5s" d="M632,396 V408 H705"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.6s" d="M632,408 H482"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.7s" d="M482,408 V425" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.7s" d="M705,408 V420" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.9s" d="M705,466 V485" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.1s" d="M705,521 V550" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:1.9s"
+        d="M615,443 H420 V490" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.1s"
+        d="M330,508 H260" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.1s"
+        d="M420,526 V540 H380 V555" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.3s" d="M380,591 V600 H452"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.4s" d="M380,600 H262"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.5s" d="M262,600 V615" marker-end="url(#arrow)"/>
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.5s" d="M452,600 V615" marker-end="url(#arrow)"/>
+
+  <path class="conn" pathLength="100" stroke-dasharray="100" style="animation-delay:2.7s"
+        d="M335,633 H375" marker-start="url(#arrow)" marker-end="url(#arrow)"/>
+
+  <!-- ===================== BOXES ===================== -->
+
+  <g class="box" style="animation-delay:0.15s">
+    <rect x="300" y="10" width="190" height="44" rx="4"/>
+    <text x="395" y="37">GENERAL ASSEMBLY</text>
+  </g>
+
+  <g class="box" style="animation-delay:0.4s">
+    <rect x="310" y="90" width="170" height="36" rx="4"/>
+    <text x="395" y="112">Executive Committee</text>
+  </g>
+
+  <g class="box" style="animation-delay:0.45s">
+    <rect x="560" y="90" width="170" height="36" rx="4"/>
+    <text x="645" y="112">Advisory Committee</text>
+  </g>
+
+  <g class="box" style="animation-delay:0.85s">
+    <rect x="10" y="160" width="190" height="36" rx="4"/>
+    <text x="105" y="182">Internal Audit Committee</text>
+  </g>
+
+  <g class="box" style="animation-delay:0.9s">
+    <rect x="215" y="160" width="175" height="36" rx="4"/>
+    <text x="302" y="182">Procurement Committee</text>
+  </g>
+
+  <g class="box" style="animation-delay:0.95s">
+    <rect x="410" y="155" width="195" height="46" rx="4"/>
+    <text x="507" y="174">Human Resource</text>
+    <text x="507" y="190">Management Committee</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.0s">
+    <rect x="615" y="155" width="195" height="46" rx="4"/>
+    <text x="712" y="174">Monitoring &amp; Evaluation</text>
+    <text x="712" y="190">Committee</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.15s">
+    <rect x="310" y="230" width="170" height="36" rx="4"/>
+    <text x="395" y="252">Executive Director</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.35s">
+    <rect x="90" y="295" width="195" height="36" rx="4"/>
+    <text x="187" y="317">Admin &amp; Finance Officer</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.4s">
+    <rect x="555" y="295" width="180" height="36" rx="4"/>
+    <text x="645" y="317">Program Officer</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.6s">
+    <rect x="70" y="360" width="175" height="36" rx="4"/>
+    <text x="157" y="382">Office Assistant</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.65s">
+    <rect x="530" y="360" width="205" height="36" rx="4"/>
+    <text x="632" y="382">Social Mobilization Officer</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.9s">
+    <rect x="395" y="425" width="175" height="36" rx="4"/>
+    <text x="482" y="447">Social Mobilizer</text>
+  </g>
+
+  <g class="box" style="animation-delay:1.95s">
+    <rect x="615" y="420" width="180" height="46" rx="4"/>
+    <text x="705" y="439">Community Based</text>
+    <text x="705" y="455">Motivator</text>
+  </g>
+
+  <g class="box" style="animation-delay:2.15s">
+    <rect x="330" y="490" width="180" height="36" rx="4"/>
+    <text x="420" y="512">Graduate Networks</text>
+  </g>
+
+  <g class="box" style="animation-delay:2.2s">
+    <rect x="615" y="485" width="180" height="36" rx="4"/>
+    <text x="705" y="507">Animator</text>
+  </g>
+
+  <g class="box" style="animation-delay:2.3s">
+    <rect x="90" y="490" width="170" height="36" rx="4"/>
+    <text x="175" y="512">School Samvad</text>
+  </g>
+
+  <g class="box" style="animation-delay:2.35s">
+    <rect x="615" y="550" width="180" height="36" rx="4"/>
+    <text x="705" y="572">Samvad center</text>
+  </g>
+
+  <g class="box" style="animation-delay:2.4s">
+    <rect x="300" y="555" width="160" height="36" rx="4"/>
+    <text x="380" y="577">Graduate Forum</text>
+  </g>
+
+  <g class="box" style="animation-delay:2.65s">
+    <rect x="190" y="615" width="145" height="36" rx="4"/>
+    <text x="262" y="637">Balbagaicha</text>
+  </g>
+
+  <g class="box" style="animation-delay:2.7s">
+    <rect x="375" y="615" width="155" height="36" rx="4"/>
+    <text x="452" y="637">Mother Samvad</text>
+  </g>
+
+</svg>
+</div>
+
+</body>
+</html>

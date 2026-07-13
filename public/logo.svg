@@ -1,0 +1,18 @@
+<svg xmlns="http://www.svg.org/2000/svg" viewBox="0 0 400 400" width="100%" height="100%">
+  <defs>
+    <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0284c7;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#06b6d4;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="grad2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#059669;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#10b981;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background Shield/Leaf shape -->
+  <path d="M 200 20 C 350 20, 380 150, 200 380 C 20 150, 50 20, 200 20 Z" fill="none" stroke="url(#grad1)" stroke-width="24" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- Inner stylized 'S' -->
+  <path d="M 260 120 C 200 80, 140 120, 140 160 C 140 220, 260 200, 260 260 C 260 320, 160 320, 120 280" fill="none" stroke="url(#grad2)" stroke-width="32" stroke-linecap="round"/>
+  <!-- Leaf detail -->
+  <path d="M 200 200 C 250 150, 300 200, 260 250 C 220 300, 150 250, 200 200 Z" fill="url(#grad1)" opacity="0.8"/>
+</svg>
