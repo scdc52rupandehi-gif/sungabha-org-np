@@ -7,7 +7,7 @@ const handleI18nRouting = createIntlMiddleware(routing)
 
 export async function middleware(request: NextRequest) {
   // Step 1: Run next-intl middleware to handle localization
-  let response = handleI18nRouting(request)
+  const response = handleI18nRouting(request)
 
   // Step 2: Handle Supabase Auth
   const supabase = createServerClient(
