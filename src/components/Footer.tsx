@@ -4,7 +4,7 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { MapPin, Phone, Mail, ArrowRight, Heart } from 'lucide-react';
+import { MapPin, Phone, Mail, ArrowRight, Heart, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
 
 const Footer = () => {
   const pathname = usePathname();
@@ -42,10 +42,18 @@ const Footer = () => {
               Sungabha Community Development Centre (SCDC) is a non-governmental organization working towards a justice-able and equitable society by improving the livelihoods of marginalized communities.
             </p>
             <div className="flex items-center gap-3">
-              <a href="#" aria-label="Facebook" className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-foreground hover:bg-brand-blue hover:text-white transition-all font-bold text-xs">FB</a>
-              <a href="#" aria-label="X (Twitter)" className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-foreground hover:bg-foreground hover:text-background transition-all font-bold text-xs">X</a>
-              <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-foreground hover:bg-brand-orange hover:text-white transition-all font-bold text-xs">IG</a>
-              <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-foreground hover:bg-brand-blue hover:text-white transition-all font-bold text-xs">IN</a>
+              <a href="#" aria-label="Facebook" className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all">
+                <Facebook size={18} fill="currentColor" />
+              </a>
+              <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all border-none">
+                <Instagram size={18} />
+              </a>
+              <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 hover:bg-blue-700 hover:text-white transition-all">
+                <Linkedin size={18} fill="currentColor" />
+              </a>
+              <a href="#" aria-label="YouTube" className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all">
+                <Youtube size={18} fill="currentColor" />
+              </a>
             </div>
           </div>
 
