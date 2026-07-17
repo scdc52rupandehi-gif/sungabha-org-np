@@ -10,44 +10,35 @@ import Image from 'next/image';
 import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare } from 'lucide-react';
 
 async function getProjects() {
-  try {
-    const cookieStore = await cookies();
-    const supabase = createServerClient(
-      process.env.NEXT_PUBLIC_SUPABASE_URL!,
-      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-      { cookies: { getAll() { return cookieStore.getAll() } } }
-    );
-    const { data, error } = await supabase.from('projects').select('*').eq('is_featured', true).limit(3);
-    if (error || !data) throw new Error("Fallback to static");
-    return data;
-  } catch (e) {
-    return [
-      {
-        id: "1",
-        title: "Mental Health Awareness",
-        description: "Reducing social discriminative behavior towards mental health affected people and providing access to government services.",
-        featured_image: "https://images.unsplash.com/photo-1527525443983-6e60c75fff50?q=80&w=1000&auto=format&fit=crop",
-        status: "Active",
-        location: "Rupandehi"
-      },
-      {
-        id: "2",
-        title: "Anti Human Trafficking",
-        description: "7 Women groups formed and mobilized to fight against Human Trafficking alongside adolescent peer educators.",
-        featured_image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=1000&auto=format&fit=crop",
-        status: "Completed",
-        location: "Kanchan Rural Municipal"
-      },
-      {
-        id: "3",
-        title: "SEEDS/SAMVAD Education",
-        description: "Re-enrolling dropped out adolescents, improving life skills, and preventing child marriages through youth forums.",
-        featured_image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop",
-        status: "Completed",
-        location: "Rupandehi District"
-      }
-    ];
-  }
+  return [
+    {
+      id: "1",
+      title: "HIV/AIDS Project",
+      description: "5 VACC has been formed at local government level and are mobilized for prevention of HIV/AIDS. 76 HIV infected people have formed AWAZ Samuha at local level and transmission rate has been reduced by 51%.",
+      featured_image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1000&auto=format&fit=crop",
+      status: "Completed",
+      location: "Rupandehi",
+      slug: "hiv-aids-project"
+    },
+    {
+      id: "2",
+      title: "Anti Human Trafficking",
+      description: "396 families Benefitted from the Project. 7 Women groups formed and mobilized to fight against Human Trafficking alongside adolescent peer educators.",
+      featured_image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=1000&auto=format&fit=crop",
+      status: "Completed",
+      location: "Rupandehi",
+      slug: "anti-human-trafficking"
+    },
+    {
+      id: "3",
+      title: "SEEDS/SAMVAD Education",
+      description: "Re-enrolling dropped out adolescents, improving life skills, and preventing child marriages through youth forums and SATHEE networks.",
+      featured_image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop",
+      status: "Completed",
+      location: "Kanchan Rural Municipal",
+      slug: "seeds-samvad-project"
+    }
+  ];
 }
 
 export default async function Home() {
