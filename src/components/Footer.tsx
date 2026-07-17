@@ -81,10 +81,7 @@ const Footer = () => {
                 <MapPin className="text-brand-blue shrink-0 mt-0.5" size={18} />
                 <p className="text-sm">Kanchan-4, Sungabha Chowk, Rupandehi, Nepal</p>
               </div>
-              <div className="flex items-start gap-3 text-muted-foreground">
-                <Phone className="text-brand-blue shrink-0 mt-0.5" size={18} />
-                <p className="text-sm">+977 984-1628280</p>
-              </div>
+
               <div className="flex items-start gap-3 text-muted-foreground">
                 <Mail className="text-brand-blue shrink-0 mt-0.5" size={18} />
                 <p className="text-sm">scdc52rupandehi@gmail.com</p>
