@@ -165,9 +165,6 @@ const Header = () => {
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
           
-          <Link href="/search" className={`p-2 rounded-full transition-colors ${isScrolled ? 'text-foreground/70 hover:bg-accent hover:text-foreground' : 'text-white hover:bg-white/10'}`}>
-            <Search className="w-5 h-5" />
-          </Link>
           <Link href="/volunteer" className={`px-5 py-2 rounded-full font-semibold text-sm transition-all border ${
             isScrolled 
               ? 'border-border text-foreground hover:bg-accent hover:border-accent' 
