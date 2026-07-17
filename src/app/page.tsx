@@ -9,7 +9,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare } from 'lucide-react';
 
-async function getProjects() {
+async function getProjects(): Promise<any[]> {
   return [
     {
       id: "1",

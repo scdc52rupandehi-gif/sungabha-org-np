@@ -4,7 +4,7 @@ import ProjectCard from '@/components/ProjectCard';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
-async function getProjects() {
+async function getProjects(): Promise<any[]> {
   return [
     {
       id: "1",
