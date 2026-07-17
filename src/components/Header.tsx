@@ -39,11 +39,10 @@ const Header = () => {
       ]
     },
     { 
-      name: 'What We Do', 
+      name: 'Core Program Areas', 
       href: '#',
       dropdown: [
         { name: 'Projects', href: '/projects' },
-        { name: 'Core & Program Areas', href: '/programs' },
       ]
     },
     { 
