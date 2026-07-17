@@ -14,7 +14,12 @@ async function getSupabase() {
 
 export async function createProject(formData: FormData) {
   const supabase = await getSupabase();
-  const data = Object.fromEntries(formData.entries());
+  const data = Object.fromEntries(formData.entries()) as any;
+  
+  if (!data.slug && data.title) {
+    data.slug = data.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, '');
+  }
+
   const { error } = await supabase.from('projects').insert(data);
   if (error) throw new Error(error.message);
   revalidatePath("/admin/projects");

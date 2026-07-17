@@ -1,0 +1,18 @@
+{
+  "Navbar": {
+    "home": "Home",
+    "whoWeAre": "Who We Are",
+    "whatWeDo": "What We Do",
+    "media": "Media",
+    "resources": "Resources",
+    "whistleblower": "Whistleblower",
+    "contact": "Contact",
+    "volunteer": "Volunteer",
+    "donate": "Donate Now"
+  },
+  "HomePage": {
+    "heroTitle": "Empowering Communities for a Brighter Future",
+    "heroSubtitle": "Working towards a justice-able and equitable society by improving the livelihoods of marginalized communities in Nepal.",
+    "exploreProjects": "Explore Projects"
+  }
+}

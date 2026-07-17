@@ -1,11 +1,15 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import createIntlMiddleware from 'next-intl/middleware'
+import { routing } from './i18n/routing'
+
+const handleI18nRouting = createIntlMiddleware(routing)
 
 export async function middleware(request: NextRequest) {
-  let supabaseResponse = NextResponse.next({
-    request,
-  })
+  // Step 1: Run next-intl middleware to handle localization
+  let response = handleI18nRouting(request)
 
+  // Step 2: Handle Supabase Auth
   const supabase = createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -16,11 +20,8 @@ export async function middleware(request: NextRequest) {
         },
         setAll(cookiesToSet) {
           cookiesToSet.forEach(({ name, value, options }) => request.cookies.set(name, value))
-          supabaseResponse = NextResponse.next({
-            request,
-          })
           cookiesToSet.forEach(({ name, value, options }) =>
-            supabaseResponse.cookies.set(name, value, options)
+            response.cookies.set(name, value, options)
           )
         },
       },
@@ -31,23 +32,25 @@ export async function middleware(request: NextRequest) {
     data: { user },
   } = await supabase.auth.getUser()
 
-  if (
-    !user &&
-    request.nextUrl.pathname.startsWith('/admin') &&
-    !request.nextUrl.pathname.startsWith('/admin/login')
-  ) {
+  const pathname = request.nextUrl.pathname
+  const isAuthPage = pathname.includes('/admin/login')
+  const isAdminPage = pathname.includes('/admin')
+
+  if (!user && isAdminPage && !isAuthPage) {
     const url = request.nextUrl.clone()
-    url.pathname = '/admin/login'
+    const locale = pathname.split('/')[1]
+    url.pathname = `/${['en', 'ne'].includes(locale) ? locale : 'en'}/admin/login`
     return NextResponse.redirect(url)
   }
 
-  if (user && request.nextUrl.pathname.startsWith('/admin/login')) {
+  if (user && isAuthPage) {
     const url = request.nextUrl.clone()
-    url.pathname = '/admin'
+    const locale = pathname.split('/')[1]
+    url.pathname = `/${['en', 'ne'].includes(locale) ? locale : 'en'}/admin`
     return NextResponse.redirect(url)
   }
 
-  return supabaseResponse
+  return response
 }
 
 export const config = {

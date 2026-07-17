@@ -8,6 +8,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import Image from 'next/image';
 import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare } from 'lucide-react';
+import { getTranslations, getLocale } from 'next-intl/server';
 
 async function getProjects(): Promise<any[]> {
   return [
@@ -15,7 +16,7 @@ async function getProjects(): Promise<any[]> {
       id: "1",
       title: "HIV/AIDS Project",
       description: "5 VACC has been formed at local government level and are mobilized for prevention of HIV/AIDS. 76 HIV infected people have formed AWAZ Samuha at local level and transmission rate has been reduced by 51%.",
-      featured_image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Health%20%26%20Nutrition.png",
       status: "Completed",
       location: "Rupandehi",
       slug: "hiv-aids-project"
@@ -24,7 +25,7 @@ async function getProjects(): Promise<any[]> {
       id: "2",
       title: "Anti Human Trafficking",
       description: "396 families Benefitted from the Project. 7 Women groups formed and mobilized to fight against Human Trafficking alongside adolescent peer educators.",
-      featured_image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Women%20Empowerment.png",
       status: "Completed",
       location: "Rupandehi",
       slug: "anti-human-trafficking"
@@ -33,7 +34,7 @@ async function getProjects(): Promise<any[]> {
       id: "3",
       title: "SEEDS/SAMVAD Education",
       description: "Re-enrolling dropped out adolescents, improving life skills, and preventing child marriages through youth forums and SATHEE networks.",
-      featured_image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Education%20Program.png",
       status: "Completed",
       location: "Kanchan Rural Municipal",
       slug: "seeds-samvad-project"
@@ -43,11 +44,13 @@ async function getProjects(): Promise<any[]> {
 
 export default async function Home() {
   const projects = await getProjects();
+  const t = await getTranslations('HomePage');
+  const locale = await getLocale();
 
   const slides = [
     {
-      title: "Empowering Communities for a Better Tomorrow",
-      subtitle: "Sungabha Community Development Centre (SCDC) has been working since 1997 to improve education, livelihoods, women's empowerment and community resilience across Nepal.",
+      title: t('heroTitle'),
+      subtitle: t('heroSubtitle'),
       backgroundImage: "/Image/Homepage Hero Banner.png"
     },
     {
@@ -76,7 +79,7 @@ export default async function Home() {
     <>
       <HeroSlider 
         slides={slides}
-        primaryAction={{ label: "Explore Our Work", href: "/projects/active" }}
+        primaryAction={{ label: t('exploreProjects'), href: "/projects/active" }}
         secondaryAction={{ label: "Become a Volunteer", href: "/volunteer" }}
       />
       
@@ -177,22 +180,26 @@ export default async function Home() {
       {/* Featured Projects */}
       <Section title="Featured Projects" subtitle="Discover how we are making a real impact in rural communities.">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-8">
-          {projects.map((p) => (
-            <ProjectCard 
-              key={p.id}
-              id={p.id}
-              title={p.title}
-              excerpt={p.description?.substring(0, 100) + "..."}
-              image={p.featured_image}
-              status={p.status as any}
-              location={p.location || "Rupandehi"}
-              href={"/projects/" + (p.slug || p.id)}
-            />
-          ))}
+          {projects.map((p) => {
+            const displayTitle = locale === 'ne' && p.title_ne ? p.title_ne : p.title;
+            const displayDesc = locale === 'ne' && p.description_ne ? p.description_ne : p.description;
+            return (
+              <ProjectCard 
+                key={p.id}
+                id={p.id}
+                title={displayTitle}
+                excerpt={displayDesc?.substring(0, 100) + "..."}
+                image={p.featured_image}
+                status={p.status as any}
+                location={p.location || (locale === 'ne' ? "रुपन्देही" : "Rupandehi")}
+                href={"/projects/" + (p.slug || p.id)}
+              />
+            )
+          })}
         </div>
         <div className="text-center mt-16">
           <Link href="/projects/active" className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue border border-brand-blue/20 px-8 py-4 rounded-xl font-bold hover:bg-brand-blue hover:text-white transition-all shadow-md active:scale-95">
-            View All Projects <ArrowRight className="w-5 h-5" />
+            {t('exploreProjects')} <ArrowRight className="w-5 h-5" />
           </Link>
         </div>
       </Section>
@@ -218,6 +225,27 @@ export default async function Home() {
               Become a Volunteer
             </Link>
           </div>
+        </div>
+      </section>
+
+      {/* Map Section */}
+      <section className="w-full h-[400px] md:h-[500px] relative">
+        <iframe 
+          src="https://maps.google.com/maps?q=Sungabha%20Community%20Development%20Center%20(SCDC)&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+          width="100%" 
+          height="100%" 
+          style={{ border: 0 }} 
+          allowFullScreen={false} 
+          loading="lazy" 
+          referrerPolicy="no-referrer-when-downgrade"
+          className="w-full h-full grayscale-[20%] contrast-125 opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
+        />
+        <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-border">
+          <h3 className="font-bold text-foreground font-heading">Find Us on Google Maps</h3>
+          <p className="text-sm text-muted-foreground mt-1">Sungabha Community Development Center (SCDC)</p>
+          <a href="https://share.google/MxNOIE2JTIzLPkFzi" target="_blank" rel="noreferrer" className="text-sm text-brand-blue font-bold hover:underline mt-2 inline-block">
+            Get Directions →
+          </a>
         </div>
       </section>
     </>

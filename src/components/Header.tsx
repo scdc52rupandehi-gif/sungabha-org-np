@@ -7,12 +7,16 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Search, Heart } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
+import { LanguageToggle } from '@/components/LanguageToggle';
+import { useTranslations } from 'next-intl';
 
 const Header = () => {
   const pathname = usePathname();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  const t = useTranslations('Navbar');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -23,9 +27,9 @@ const Header = () => {
   }, []);
 
   const navLinks = [
-    { name: 'Home', href: '/' },
+    { name: t('home'), href: '/' },
     { 
-      name: 'Who We Are', 
+      name: t('whoWeAre'), 
       href: '#',
       dropdown: [
         { name: 'History', href: '/about/history' },
@@ -39,7 +43,7 @@ const Header = () => {
       ]
     },
     { 
-      name: 'What We Do', 
+      name: t('whatWeDo'), 
       href: '#',
       dropdown: [
         { name: 'Projects', href: '/projects' },
@@ -47,7 +51,7 @@ const Header = () => {
       ]
     },
     { 
-      name: 'Media', 
+      name: t('media'), 
       href: '#',
       dropdown: [
         { name: 'News', href: '/news' },
@@ -58,7 +62,7 @@ const Header = () => {
       ]
     },
     { 
-      name: 'Resources', 
+      name: t('resources'), 
       href: '#',
       dropdown: [
         { name: 'Publications', href: '/publication' },
@@ -67,8 +71,8 @@ const Header = () => {
         { name: 'Tenders', href: '/tender' },
       ]
     },
-    { name: 'Whistleblower', href: '/whistleblower' },
-    { name: 'Contact', href: '/contact' }
+    { name: t('whistleblower'), href: '/whistleblower' },
+    { name: t('contact'), href: '/contact' },
   ];
 
   if (pathname.startsWith('/admin')) {
@@ -165,6 +169,7 @@ const Header = () => {
         {/* Actions */}
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
+          <LanguageToggle />
           
           <Link href="/volunteer" className={`px-5 py-2 rounded-full font-semibold text-sm transition-all border ${
             isScrolled 
@@ -183,6 +188,7 @@ const Header = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="flex items-center gap-4 lg:hidden">
+          <LanguageToggle />
           <ThemeToggle />
           <button 
             className={`p-2 relative z-50 rounded-full transition-colors ${isScrolled || isMobileMenuOpen ? 'text-foreground hover:bg-accent' : 'text-white hover:bg-white/10'}`}

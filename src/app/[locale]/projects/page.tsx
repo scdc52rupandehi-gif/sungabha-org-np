@@ -10,7 +10,7 @@ async function getProjects(): Promise<any[]> {
       id: "1",
       title: "HIV/AIDS Project",
       description: "5 VACC has been formed at local government level and are mobilized for prevention of HIV/AIDS. 76 HIV infected people have formed AWAZ Samuha at local level and transmission rate has been reduced by 51%.",
-      featured_image: "https://images.unsplash.com/photo-1576086213369-97a306d36557?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Health%20%26%20Nutrition.png",
       status: "Completed",
       location: "Rupandehi",
       slug: "hiv-aids-project"
@@ -19,7 +19,7 @@ async function getProjects(): Promise<any[]> {
       id: "2",
       title: "Anti Human Trafficking",
       description: "396 families Benefitted from the Project. 7 Women groups formed and mobilized to fight against Human Trafficking alongside adolescent peer educators.",
-      featured_image: "https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Women%20Empowerment.png",
       status: "Completed",
       location: "Rupandehi",
       slug: "anti-human-trafficking"
@@ -28,7 +28,7 @@ async function getProjects(): Promise<any[]> {
       id: "3",
       title: "Adolescents Sexual Reproductive Health",
       description: "550 families benefitted. ASRH groups formed and mobilized in 12 Schools. Adolescents girls' friendly school Health Corner supported.",
-      featured_image: "https://images.unsplash.com/photo-1509062522246-3755977927d7?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Health%20%26%20Nutrition.png",
       status: "Completed",
       location: "Two Working Municipals",
       slug: "asrh-project"
@@ -37,7 +37,7 @@ async function getProjects(): Promise<any[]> {
       id: "4",
       title: "SEEDS/SAMVAD Education",
       description: "Re-enrolling dropped out adolescents, improving life skills, and preventing child marriages through youth forums and SATHEE networks.",
-      featured_image: "https://images.unsplash.com/photo-1542810634-71277d95dcbb?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Education%20Program.png",
       status: "Completed",
       location: "Kanchan Rural Municipal",
       slug: "seeds-samvad-project"
@@ -46,7 +46,7 @@ async function getProjects(): Promise<any[]> {
       id: "5",
       title: "Mental Health Project",
       description: "In total 209 mental health affected people are in recovering stage after receiving the treatment; Reduced social discriminative behavior.",
-      featured_image: "https://images.unsplash.com/photo-1527525443983-6e60c75fff50?q=80&w=1000&auto=format&fit=crop",
+      featured_image: "/Image/Child%20Protection.png",
       status: "Completed",
       location: "Local Level",
       slug: "mental-health-project"
