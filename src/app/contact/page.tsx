@@ -53,7 +53,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h4 className="font-semibold">Head Office</h4>
-                  <p className="text-sm">Sainamaina Municipality-3, Murgiya, Rupandehi, Nepal</p>
+                  <p className="text-sm">Kanchan -4, Rupandehi, Nepal</p>
                 </div>
               </div>
               <div className="flex items-center gap-4 text-zinc-700 dark:text-zinc-300">
