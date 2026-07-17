@@ -25,7 +25,7 @@ const Header = () => {
   const navLinks = [
     { name: 'Home', href: '/' },
     { 
-      name: 'About Us', 
+      name: 'Who We Are', 
       href: '#',
       dropdown: [
         { name: 'History', href: '/about/history' },
@@ -36,17 +36,14 @@ const Header = () => {
         { name: 'Staff Members', href: '/about/staff' },
         { name: 'Org Structure', href: '/about/structure' },
         { name: 'Our Partners', href: '/about/partners' },
-        { name: 'Membership', href: '/about/membership' },
       ]
     },
     { 
-      name: 'Projects', 
+      name: 'What We Do', 
       href: '#',
       dropdown: [
-        { name: 'Active Projects', href: '/projects/active' },
-        { name: 'Completed Projects', href: '/projects/completed' },
-        { name: 'Upcoming Projects', href: '/projects/upcoming' },
-        { name: 'Programs & Activities', href: '/programs' },
+        { name: 'Projects', href: '/projects' },
+        { name: 'Core & Program Areas', href: '/programs' },
       ]
     },
     { 
@@ -64,12 +61,9 @@ const Header = () => {
       name: 'Resources', 
       href: '#',
       dropdown: [
-        { name: 'Downloads', href: '/downloads' },
-        { name: 'Annual Reports', href: '/reports/annual' },
-        { name: 'Financial Reports', href: '/reports/financial' },
-        { name: 'Audit Reports', href: '/reports/audit' },
         { name: 'Publications', href: '/publication' },
         { name: 'Notices', href: '/notice' },
+        { name: 'Newsletters', href: '/newsletter' },
         { name: 'Tenders', href: '/tender' },
       ]
     },
@@ -101,9 +95,6 @@ const Header = () => {
             </span>
             <span className={`text-[10px] lg:text-[12px] uppercase font-bold tracking-wider hidden sm:block mt-1 leading-tight max-w-[200px] lg:max-w-[250px] ${isScrolled ? 'text-foreground' : 'text-white/90'}`}>
               Community Development Centre
-            </span>
-            <span className={`text-[9px] lg:text-[10px] font-medium tracking-wide hidden sm:block mt-0.5 leading-tight max-w-[200px] lg:max-w-[250px] ${isScrolled ? 'text-muted-foreground' : 'text-white/70'}`}>
-              Rudrapur, Rupandehi, Nepal
             </span>
           </div>
         </Link>
