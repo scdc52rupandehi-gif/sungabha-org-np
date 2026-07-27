@@ -2,28 +2,75 @@ import React from 'react';
 import Hero from '@/components/Hero';
 import Section from '@/components/Section';
 import { Metadata } from 'next';
+import { UserCircle2 } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Staff Members',
+  title: 'Our Staff',
 };
+
+const staffMembers = [
+  { id: 1, name: 'Gopal Bahadur K.C', position: 'Executive Director' },
+  { id: 2, name: 'Srijana Chaudhary', position: 'Program Coordinator' },
+  { id: 3, name: 'Umesh Devkota', position: 'Admin & Finance Officer' },
+  { id: 4, name: 'Khoma Neupane', position: 'Social Mobilization Officer' },
+  { id: 5, name: 'Susmita Nepali', position: 'Social Mobilizer' },
+  { id: 6, name: 'Samiksha Rana', position: 'Social Mobilizer' },
+  { id: 7, name: 'Sunita Harijan', position: 'Social Mobilizer' },
+  { id: 8, name: 'Sushila Chhetri', position: 'Social Mobilizer' },
+  { id: 9, name: 'Srijana Tharu', position: 'Social Mobilizer' },
+  { id: 10, name: 'Bishnu B.K Gotame Sunar', position: 'Psychosocial Counsellor' },
+  { id: 11, name: 'Sabitra Acharya Paudel', position: 'Psychosocial Counsellor' },
+  { id: 12, name: 'Ramkumari Chaudhary', position: 'Psychosocial Counsellor' },
+  { id: 13, name: 'Bijay Kumar BK Lohar', position: 'Social Mobilizer' },
+  { id: 14, name: 'Sangita Chhetri', position: 'Office Assistant' },
+];
 
 export default function Page() {
   return (
     <>
       <Hero 
-        title="Staff Members" 
-        subtitle="Detailed information about Staff Members."
-        backgroundImage="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop"
+        title="Our Staff" 
+        subtitle="Meet the dedicated team driving our mission forward."
+        backgroundImage="https://images.unsplash.com/photo-1522071820081-009f0129c71c?q=80&w=2070&auto=format&fit=crop"
       />
       <Section className="py-24">
-        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-12 text-center border border-zinc-200 dark:border-zinc-800 shadow-sm max-w-4xl mx-auto">
-          <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="material-symbols-outlined text-4xl text-emerald-600 dark:text-emerald-500">construction</span>
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-card rounded-3xl border border-border shadow-sm overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left border-collapse">
+                <thead>
+                  <tr className="bg-muted/50 border-b border-border">
+                    <th className="py-4 px-6 font-bold text-foreground w-20 text-center">S.N.</th>
+                    <th className="py-4 px-6 font-bold text-foreground">Name</th>
+                    <th className="py-4 px-6 font-bold text-foreground">Position</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-border">
+                  {staffMembers.map((staff, index) => (
+                    <tr 
+                      key={staff.id} 
+                      className="hover:bg-accent/50 transition-colors group"
+                    >
+                      <td className="py-4 px-6 text-muted-foreground text-center font-medium">
+                        {index + 1}
+                      </td>
+                      <td className="py-4 px-6 font-semibold text-foreground flex items-center gap-3">
+                        <div className="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue group-hover:scale-110 transition-transform">
+                          <UserCircle2 className="w-6 h-6" />
+                        </div>
+                        {staff.name}
+                      </td>
+                      <td className="py-4 px-6 text-muted-foreground">
+                        <span className="inline-flex px-3 py-1 rounded-full bg-accent text-sm font-medium">
+                          {staff.position}
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
-          <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-4">Content Coming Soon</h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-lg">
-            This module is connected to the Supabase database. Real data will be populated here dynamically once entered through the Admin Dashboard.
-          </p>
         </div>
       </Section>
     </>
