@@ -57,7 +57,12 @@ export async function createStaff(formData: FormData) {
     const ext = imageFile.name.split('.').pop();
     const fileName = `staff/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
     
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, imageFile);
+    const arrayBuffer = await imageFile.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    
+    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, buffer, {
+      contentType: imageFile.type,
+    });
     if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
     
     const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
@@ -92,7 +97,12 @@ export async function updateStaff(id: string, formData: FormData) {
     const ext = imageFile.name.split('.').pop();
     const fileName = `staff/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
     
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, imageFile);
+    const arrayBuffer = await imageFile.arrayBuffer();
+    const buffer = Buffer.from(arrayBuffer);
+    
+    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, buffer, {
+      contentType: imageFile.type,
+    });
     if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
     
     const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
