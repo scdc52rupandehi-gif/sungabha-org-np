@@ -62,37 +62,28 @@ export default function EditStaffPage({ params }: { params: Promise<{ id: string
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg border-b pb-2">English</h3>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Name</label>
-                  <Input name="name" defaultValue={staff.name} required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Position</label>
-                  <Input name="position" defaultValue={staff.position} required />
-                </div>
+            <input type="hidden" name="existing_image_url" value={staff.image_url || ''} />
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Name</label>
+                <Input name="name" defaultValue={staff.name} required />
               </div>
-
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg border-b pb-2">Nepali (Optional)</h3>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Name (Nepali)</label>
-                  <Input name="name_ne" defaultValue={staff.name_ne} />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Position (Nepali)</label>
-                  <Input name="position_ne" defaultValue={staff.position_ne} />
-                </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Position</label>
+                <Input name="position" defaultValue={staff.position} required />
               </div>
             </div>
 
             <div className="space-y-4 mt-6 pt-6 border-t">
               <div className="space-y-2">
-                <label className="text-sm font-medium">Profile Image URL</label>
-                <Input name="image_url" defaultValue={staff.image_url} />
-                <p className="text-xs text-muted-foreground">Provide a direct link to the profile image.</p>
+                <label className="text-sm font-medium">Profile Image</label>
+                {staff.image_url && (
+                  <div className="mb-2">
+                    <img src={staff.image_url} alt={staff.name} className="w-20 h-20 object-cover rounded-full border" />
+                  </div>
+                )}
+                <Input name="image" type="file" accept="image/jpeg, image/png, image/webp" />
+                <p className="text-xs text-muted-foreground">Upload a new image to replace the current one, or leave blank to keep it.</p>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Order Index</label>

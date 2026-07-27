@@ -43,37 +43,22 @@ export default function CreateStaffPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg border-b pb-2">English</h3>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Name</label>
-                  <Input name="name" placeholder="John Doe" required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Position</label>
-                  <Input name="position" placeholder="Executive Director" required />
-                </div>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Name</label>
+                <Input name="name" placeholder="John Doe" required />
               </div>
-
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg border-b pb-2">Nepali (Optional)</h3>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Name (Nepali)</label>
-                  <Input name="name_ne" placeholder="जोन डो" />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Position (Nepali)</label>
-                  <Input name="position_ne" placeholder="कार्यकारी निर्देशक" />
-                </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Position</label>
+                <Input name="position" placeholder="Executive Director" required />
               </div>
             </div>
 
             <div className="space-y-4 mt-6 pt-6 border-t">
               <div className="space-y-2">
-                <label className="text-sm font-medium">Profile Image URL</label>
-                <Input name="image_url" placeholder="https://example.com/image.jpg" />
-                <p className="text-xs text-muted-foreground">Provide a direct link to the profile image.</p>
+                <label className="text-sm font-medium">Profile Image</label>
+                <Input name="image" type="file" accept="image/jpeg, image/png, image/webp" />
+                <p className="text-xs text-muted-foreground">Upload a JPG or PNG image.</p>
               </div>
               <div className="space-y-2">
                 <label className="text-sm font-medium">Order Index</label>

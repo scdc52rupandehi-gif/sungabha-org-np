@@ -46,13 +46,29 @@ export async function getStaffById(id: string) {
 export async function createStaff(formData: FormData) {
   const supabase = await getSupabase();
   
+  const name = formData.get('name') as string;
+  const position = formData.get('position') as string;
+  const order_index = parseInt(formData.get('order_index') as string) || 0;
+  
+  const imageFile = formData.get('image') as File | null;
+  let image_url = null;
+  
+  if (imageFile && imageFile.size > 0) {
+    const ext = imageFile.name.split('.').pop();
+    const fileName = `staff/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+    
+    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, imageFile);
+    if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
+    
+    const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
+    image_url = publicUrlData.publicUrl;
+  }
+
   const payload = {
-    name: formData.get('name'),
-    position: formData.get('position'),
-    name_ne: formData.get('name_ne') || null,
-    position_ne: formData.get('position_ne') || null,
-    image_url: formData.get('image_url') || null,
-    order_index: parseInt(formData.get('order_index') as string) || 0,
+    name,
+    position,
+    image_url,
+    order_index,
   };
 
   const { error } = await supabase.from('staff_members').insert(payload);
@@ -65,13 +81,29 @@ export async function createStaff(formData: FormData) {
 export async function updateStaff(id: string, formData: FormData) {
   const supabase = await getSupabase();
   
+  const name = formData.get('name') as string;
+  const position = formData.get('position') as string;
+  const order_index = parseInt(formData.get('order_index') as string) || 0;
+  
+  const imageFile = formData.get('image') as File | null;
+  let image_url = formData.get('existing_image_url') as string | null;
+  
+  if (imageFile && imageFile.size > 0) {
+    const ext = imageFile.name.split('.').pop();
+    const fileName = `staff/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+    
+    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, imageFile);
+    if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
+    
+    const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
+    image_url = publicUrlData.publicUrl;
+  }
+  
   const payload = {
-    name: formData.get('name'),
-    position: formData.get('position'),
-    name_ne: formData.get('name_ne') || null,
-    position_ne: formData.get('position_ne') || null,
-    image_url: formData.get('image_url') || null,
-    order_index: parseInt(formData.get('order_index') as string) || 0,
+    name,
+    position,
+    image_url,
+    order_index,
   };
 
   const { error } = await supabase.from('staff_members').update(payload).eq('id', id);
@@ -88,3 +120,4 @@ export async function deleteStaff(id: string) {
   revalidatePath('/[locale]/admin/staff', 'page');
   revalidatePath('/[locale]/about/staff', 'page');
 }
+
