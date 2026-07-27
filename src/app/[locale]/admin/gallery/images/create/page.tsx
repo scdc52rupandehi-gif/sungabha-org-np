@@ -16,9 +16,22 @@ export default function CreateImagePage() {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
+    const title = formData.get("title");
+    const title_ne = formData.get("title_ne");
+    const images = formData.getAll("image") as File[];
+    
     try {
-      await createGalleryImage(formData);
-      toast.success("Image added to gallery!");
+      // Submit each image individually to avoid payload too large errors
+      for (const image of images) {
+        if (image.size === 0) continue;
+        const singleFormData = new FormData();
+        singleFormData.append("title", title as string);
+        if (title_ne) singleFormData.append("title_ne", title_ne as string);
+        singleFormData.append("image", image);
+        
+        await createGalleryImage(singleFormData);
+      }
+      toast.success("Images added to gallery!");
       router.push("/admin/gallery");
     } catch (error: any) {
       toast.error(error.message || "Something went wrong");
