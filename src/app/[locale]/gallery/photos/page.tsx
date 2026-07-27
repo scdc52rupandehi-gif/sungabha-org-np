@@ -3,7 +3,7 @@ import Hero from '@/components/Hero';
 import Section from '@/components/Section';
 import { Metadata } from 'next';
 import { getGalleryImages } from '@/app/actions/gallery';
-import Image from 'next/image';
+import PhotoGalleryGrid from '@/components/PhotoGalleryGrid';
 
 export const metadata: Metadata = {
   title: 'Photo Gallery',
@@ -28,23 +28,7 @@ export default async function Page() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-            {images.map(img => (
-              <div key={img.id} className="group overflow-hidden rounded-2xl shadow-sm border border-border bg-card hover:shadow-md transition-all">
-                <div className="aspect-square relative overflow-hidden bg-muted">
-                  <Image 
-                    src={img.image_url} 
-                    alt={img.title} 
-                    fill 
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-foreground truncate">{img.title}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
+          <PhotoGalleryGrid images={images} />
         )}
       </Section>
     </>

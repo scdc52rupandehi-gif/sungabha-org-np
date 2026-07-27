@@ -27,18 +27,27 @@ export default async function Page() {
             </p>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {videos.map(vid => (
-              <div key={vid.id} className="group overflow-hidden rounded-2xl shadow-sm border border-border bg-card hover:shadow-md transition-all">
-                <div className="aspect-video relative bg-muted">
-                  <iframe src={vid.video_url} className="w-full h-full" allowFullScreen></iframe>
-                </div>
-                <div className="p-4">
-                  <h3 className="font-semibold text-foreground truncate">{vid.title}</h3>
-                </div>
-              </div>
-            ))}
-          </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              {videos.map(vid => {
+                let embedUrl = vid.video_url;
+                if (embedUrl.includes('youtube.com/watch?v=')) {
+                  embedUrl = embedUrl.replace('watch?v=', 'embed/').split('&')[0];
+                } else if (embedUrl.includes('youtu.be/')) {
+                  embedUrl = embedUrl.replace('youtu.be/', 'youtube.com/embed/').split('?')[0];
+                }
+                
+                return (
+                  <div key={vid.id} className="group overflow-hidden rounded-2xl shadow-sm border border-border bg-card hover:shadow-md transition-all">
+                    <div className="aspect-video relative bg-muted">
+                      <iframe src={embedUrl} className="w-full h-full" allowFullScreen></iframe>
+                    </div>
+                    <div className="p-4">
+                      <h3 className="font-semibold text-foreground truncate">{vid.title}</h3>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
         )}
       </Section>
     </>

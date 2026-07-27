@@ -113,25 +113,34 @@ export default function GalleryListPage() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {videos.map(vid => (
-                <div key={vid.id} className="group relative rounded-xl overflow-hidden border bg-card p-4 flex flex-col">
-                  <div className="aspect-video relative rounded-lg overflow-hidden bg-muted mb-3">
-                    <iframe src={vid.video_url} className="w-full h-full" allowFullScreen></iframe>
-                  </div>
-                  <p className="font-semibold flex-1">{vid.title}</p>
-                  <div className="flex gap-2 mt-4">
-                    <Link href={`/admin/gallery/videos/${vid.id}/edit`} className="flex-1">
-                      <Button variant="outline" size="sm" className="w-full">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-edit-2 mr-2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
-                        Edit
+              {videos.map(vid => {
+                let embedUrl = vid.video_url;
+                if (embedUrl.includes('youtube.com/watch?v=')) {
+                  embedUrl = embedUrl.replace('watch?v=', 'embed/').split('&')[0];
+                } else if (embedUrl.includes('youtu.be/')) {
+                  embedUrl = embedUrl.replace('youtu.be/', 'youtube.com/embed/').split('?')[0];
+                }
+                
+                return (
+                  <div key={vid.id} className="group relative rounded-xl overflow-hidden border bg-card p-4 flex flex-col">
+                    <div className="aspect-video relative rounded-lg overflow-hidden bg-muted mb-3">
+                      <iframe src={embedUrl} className="w-full h-full" allowFullScreen></iframe>
+                    </div>
+                    <p className="font-semibold flex-1">{vid.title}</p>
+                    <div className="flex gap-2 mt-4">
+                      <Link href={`/admin/gallery/videos/${vid.id}/edit`} className="flex-1">
+                        <Button variant="outline" size="sm" className="w-full">
+                          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-edit-2 mr-2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/></svg>
+                          Edit
+                        </Button>
+                      </Link>
+                      <Button variant="destructive" size="sm" onClick={() => handleDeleteVideo(vid.id)} className="flex-1">
+                        <Trash2 className="w-4 h-4 mr-2" /> Delete
                       </Button>
-                    </Link>
-                    <Button variant="destructive" size="sm" onClick={() => handleDeleteVideo(vid.id)} className="flex-1">
-                      <Trash2 className="w-4 h-4 mr-2" /> Delete
-                    </Button>
+                    </div>
                   </div>
-                </div>
-              ))}
+                );
+              })}
               {videos.length === 0 && <p className="col-span-full text-center py-8 text-zinc-500">No videos added yet.</p>}
             </div>
           )}
