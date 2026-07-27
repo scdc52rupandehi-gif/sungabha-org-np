@@ -1,93 +1,127 @@
 "use client";
+
 import React, { useEffect, useState } from 'react';
-import { createClient } from '@/lib/supabase/client';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import { Plus, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from "sonner";
-import { DataTable } from "@/components/ui/data-table";
-import { DeleteDialog } from "@/components/ui/delete-dialog";
-import { deleteGallery } from "@/app/actions/gallery";
+import { getGalleryImages, getGalleryVideos, deleteGalleryImage, deleteGalleryVideo } from "@/app/actions/gallery";
+import Image from 'next/image';
 
 export default function GalleryListPage() {
-  const supabase = createClient();
-  const [items, setItems] = useState<any[]>([]);
+  const [images, setImages] = useState<any[]>([]);
+  const [videos, setVideos] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
-  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [tab, setTab] = useState<'images' | 'videos'>('images');
 
   useEffect(() => {
-    fetchItems();
+    fetchData();
   }, []);
 
-  const fetchItems = async () => {
+  const fetchData = async () => {
     try {
-      const { data, error } = await supabase.from('gallery').select('*').order('created_at', { ascending: false });
-      if (error) throw error;
-      setItems(data || []);
+      const [imgData, vidData] = await Promise.all([getGalleryImages(), getGalleryVideos()]);
+      setImages(imgData);
+      setVideos(vidData);
     } catch (error) {
-      toast.error("Failed to fetch data");
+      toast.error("Failed to load gallery");
     } finally {
       setLoading(false);
     }
   };
 
-  const handleDelete = async () => {
-    if (!deleteId) return;
-    try {
-      await deleteGallery(deleteId);
-      toast.success("Deleted successfully");
-      fetchItems();
-    } catch (error) {
-      toast.error("Failed to delete");
-    } finally {
-      setDeleteId(null);
+  const handleDeleteImage = async (id: string) => {
+    if(confirm("Delete this image?")) {
+      await deleteGalleryImage(id);
+      toast.success("Image deleted");
+      fetchData();
     }
   };
 
-  const columns = [
-    { header: "ID / Title", accessorKey: "title", cell: (item: any) => item.title || item.name || item.full_name || item.id },
-    { header: "Created At", accessorKey: "created_at", cell: (item: any) => new Date(item.created_at).toLocaleDateString() }
-  ];
+  const handleDeleteVideo = async (id: string) => {
+    if(confirm("Delete this video?")) {
+      await deleteGalleryVideo(id);
+      toast.success("Video deleted");
+      fetchData();
+    }
+  };
 
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center">
-        <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Gallerys</h2>
-        <Link href="/admin/gallery/create">
-          <Button className="bg-emerald-600 hover:bg-emerald-700 text-white flex items-center gap-2">
-            <Plus size={18} /> Add Gallery
-          </Button>
-        </Link>
+        <div>
+          <h2 className="text-3xl font-bold tracking-tight text-zinc-900 dark:text-zinc-100">Gallery Management</h2>
+          <p className="text-zinc-500">Manage photos and YouTube videos.</p>
+        </div>
+        <div className="flex gap-3">
+          <Link href="/admin/gallery/images/create">
+            <Button className="bg-emerald-600 hover:bg-emerald-700">
+              <Plus className="mr-2 h-4 w-4" /> Add Image
+            </Button>
+          </Link>
+          <Link href="/admin/gallery/videos/create">
+            <Button className="bg-blue-600 hover:bg-blue-700">
+              <Plus className="mr-2 h-4 w-4" /> Add Video
+            </Button>
+          </Link>
+        </div>
       </div>
+
+      <div className="flex gap-4 border-b">
+        <button 
+          onClick={() => setTab('images')}
+          className={`pb-2 px-4 font-medium transition-colors ${tab === 'images' ? 'border-b-2 border-brand-blue text-brand-blue' : 'text-zinc-500 hover:text-zinc-700'}`}
+        >
+          Photos ({images.length})
+        </button>
+        <button 
+          onClick={() => setTab('videos')}
+          className={`pb-2 px-4 font-medium transition-colors ${tab === 'videos' ? 'border-b-2 border-brand-blue text-brand-blue' : 'text-zinc-500 hover:text-zinc-700'}`}
+        >
+          Videos ({videos.length})
+        </button>
+      </div>
+
       <Card>
-        <CardHeader className="pb-4">
-          <CardTitle>Manage Gallerys</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <DataTable 
-            columns={columns} 
-            data={items} 
-            searchKey="title" 
-            actions={(item) => (
-              <>
-                <Link href={`/admin/gallery/${item.id}/edit`}>
-                  <Button variant="ghost" size="icon"><Edit size={16} /></Button>
-                </Link>
-                <Button variant="ghost" size="icon" onClick={() => setDeleteId(item.id)} className="text-red-500">
-                  <Trash2 size={16} />
-                </Button>
-              </>
-            )}
-          />
+        <CardContent className="p-6">
+          {loading ? (
+            <div className="text-center py-8 text-zinc-500">Loading media...</div>
+          ) : tab === 'images' ? (
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+              {images.map(img => (
+                <div key={img.id} className="group relative rounded-xl overflow-hidden border">
+                  <div className="aspect-square relative bg-muted">
+                    <Image src={img.image_url} alt={img.title} fill className="object-cover" />
+                  </div>
+                  <div className="p-3 bg-card border-t">
+                    <p className="font-semibold text-sm truncate">{img.title}</p>
+                  </div>
+                  <button onClick={() => handleDeleteImage(img.id)} className="absolute top-2 right-2 bg-red-500 text-white p-2 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                    <Trash2 className="w-4 h-4" />
+                  </button>
+                </div>
+              ))}
+              {images.length === 0 && <p className="col-span-full text-center py-8 text-zinc-500">No images uploaded yet.</p>}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {videos.map(vid => (
+                <div key={vid.id} className="group relative rounded-xl overflow-hidden border bg-card p-4">
+                  <div className="aspect-video relative rounded-lg overflow-hidden bg-muted mb-3">
+                    <iframe src={vid.video_url} className="w-full h-full" allowFullScreen></iframe>
+                  </div>
+                  <p className="font-semibold">{vid.title}</p>
+                  <Button variant="destructive" size="sm" onClick={() => handleDeleteVideo(vid.id)} className="w-full mt-3">
+                    <Trash2 className="w-4 h-4 mr-2" /> Delete Video
+                  </Button>
+                </div>
+              ))}
+              {videos.length === 0 && <p className="col-span-full text-center py-8 text-zinc-500">No videos added yet.</p>}
+            </div>
+          )}
         </CardContent>
       </Card>
-      
-      <DeleteDialog 
-        isOpen={!!deleteId} 
-        onClose={() => setDeleteId(null)} 
-        onConfirm={handleDelete} 
-      />
     </div>
   );
 }

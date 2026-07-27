@@ -24,7 +24,7 @@ export default function AdminSidebar() {
     { name: 'Gallery', href: '/admin/gallery', icon: ImageIcon },
     { name: 'Donations', href: '/admin/donations', icon: Heart },
     { name: 'Volunteers', href: '/admin/volunteers', icon: UserCheck },
-    { name: 'Partners', href: '/admin/partners', icon: UsersRound },
+    { name: 'Staff Members', href: '/admin/staff', icon: UsersRound },
     { name: 'Messages', href: '/admin/messages', icon: Mail },
     { name: 'Settings', href: '/admin/settings', icon: Settings },
   ];

@@ -2,29 +2,44 @@ import React from 'react';
 import Hero from '@/components/Hero';
 import Section from '@/components/Section';
 import { Metadata } from 'next';
+import { getGalleryVideos } from '@/app/actions/gallery';
 
 export const metadata: Metadata = {
   title: 'Video Gallery',
 };
 
-export default function Page() {
+export default async function Page() {
+  const videos = await getGalleryVideos();
+
   return (
     <>
       <Hero 
         title="Video Gallery" 
-        subtitle="Detailed information about Video Gallery."
+        subtitle="Watch our activities and stories."
         backgroundImage="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop"
       />
       <Section className="py-24">
-        <div className="bg-white dark:bg-zinc-900 rounded-3xl p-12 text-center border border-zinc-200 dark:border-zinc-800 shadow-sm max-w-4xl mx-auto">
-          <div className="w-20 h-20 bg-emerald-100 dark:bg-emerald-900/30 rounded-full flex items-center justify-center mx-auto mb-6">
-            <span className="material-symbols-outlined text-4xl text-emerald-600 dark:text-emerald-500">construction</span>
+        {videos.length === 0 ? (
+          <div className="bg-white dark:bg-zinc-900 rounded-3xl p-12 text-center border border-zinc-200 dark:border-zinc-800 shadow-sm max-w-4xl mx-auto">
+            <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-4">No Videos Yet</h2>
+            <p className="text-zinc-600 dark:text-zinc-400 text-lg">
+              Check back soon for new videos.
+            </p>
           </div>
-          <h2 className="text-3xl font-bold text-zinc-900 dark:text-white mb-4">Content Coming Soon</h2>
-          <p className="text-zinc-600 dark:text-zinc-400 text-lg">
-            This module is connected to the Supabase database. Real data will be populated here dynamically once entered through the Admin Dashboard.
-          </p>
-        </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {videos.map(vid => (
+              <div key={vid.id} className="group overflow-hidden rounded-2xl shadow-sm border border-border bg-card hover:shadow-md transition-all">
+                <div className="aspect-video relative bg-muted">
+                  <iframe src={vid.video_url} className="w-full h-full" allowFullScreen></iframe>
+                </div>
+                <div className="p-4">
+                  <h3 className="font-semibold text-foreground truncate">{vid.title}</h3>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
       </Section>
     </>
   );

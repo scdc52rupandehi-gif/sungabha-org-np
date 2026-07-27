@@ -75,7 +75,7 @@ const Header = () => {
     { name: t('contact'), href: '/contact' },
   ];
 
-  if (pathname.startsWith('/admin')) {
+  if (pathname.includes('/admin')) {
     return null;
   }
 
