@@ -93,6 +93,18 @@ export async function createGalleryImage(formData: FormData) {
   revalidatePath('/[locale]/gallery/photos', 'page');
 }
 
+export async function saveGalleryImages(inserts: { title: string; title_ne?: string; image_url: string }[]) {
+  const supabase = await getSupabase();
+  
+  if (inserts.length > 0) {
+    const { error } = await supabase.from('gallery_images').insert(inserts);
+    if (error) throw new Error(error.message);
+  }
+  
+  revalidatePath('/[locale]/admin/gallery', 'page');
+  revalidatePath('/[locale]/gallery/photos', 'page');
+}
+
 export async function updateGalleryImage(id: string, formData: FormData) {
   const supabase = await getSupabase();
   const title = formData.get('title') as string;

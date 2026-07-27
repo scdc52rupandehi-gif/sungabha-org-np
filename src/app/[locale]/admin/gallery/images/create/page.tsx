@@ -5,32 +5,52 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
-import { createGalleryImage } from "@/app/actions/gallery";
+import { createGalleryImage, saveGalleryImages } from "@/app/actions/gallery";
 import Link from 'next/link';
+
+import { createClient } from '@/lib/supabase/client';
 
 export default function CreateImagePage() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
+  const supabase = createClient();
   
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
-    const title = formData.get("title");
-    const title_ne = formData.get("title_ne");
+    const title = formData.get("title") as string;
+    const title_ne = formData.get("title_ne") as string;
     const images = formData.getAll("image") as File[];
     
     try {
-      // Submit each image individually to avoid payload too large errors
+      const inserts = [];
+      
       for (const image of images) {
         if (image.size === 0) continue;
-        const singleFormData = new FormData();
-        singleFormData.append("title", title as string);
-        if (title_ne) singleFormData.append("title_ne", title_ne as string);
-        singleFormData.append("image", image);
         
-        await createGalleryImage(singleFormData);
+        const ext = image.name.split('.').pop();
+        const fileName = `gallery/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+        
+        const { error: uploadError } = await supabase.storage.from('media').upload(fileName, image, {
+          contentType: image.type,
+          upsert: false
+        });
+
+        if (uploadError) throw new Error(`Failed to upload image: ${uploadError.message}`);
+        
+        const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
+        inserts.push({
+          title,
+          title_ne: title_ne || undefined,
+          image_url: publicUrlData.publicUrl
+        });
       }
+      
+      if (inserts.length > 0) {
+        await saveGalleryImages(inserts);
+      }
+      
       toast.success("Images added to gallery!");
       router.push("/admin/gallery");
     } catch (error: any) {
