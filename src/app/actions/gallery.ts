@@ -52,31 +52,42 @@ export async function createGalleryImage(formData: FormData) {
   const supabase = await getSupabase();
   const title = formData.get('title') as string;
   const title_ne = formData.get('title_ne') as string;
-  const imageFile = formData.get('image') as File | null;
-  let image_url = '';
-
-  if (imageFile && imageFile.size > 0) {
-    const ext = imageFile.name.split('.').pop();
-    const fileName = `gallery/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
-    
-    const arrayBuffer = await imageFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
-    
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, buffer, {
-      contentType: imageFile.type,
-      upsert: false
-    });
-
-    if (uploadError) throw new Error(`Failed to upload image: ${uploadError.message}`);
-    
-    const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
-    image_url = publicUrlData.publicUrl;
-  } else {
-    throw new Error("Image file is required");
+  const imageFiles = formData.getAll('image') as File[];
+  
+  if (!imageFiles || imageFiles.length === 0 || imageFiles[0].size === 0) {
+    throw new Error("At least one image file is required");
   }
 
-  const { error } = await supabase.from('gallery_images').insert({ title, title_ne, image_url });
-  if (error) throw new Error(error.message);
+  const inserts = [];
+
+  for (const imageFile of imageFiles) {
+    if (imageFile.size > 0) {
+      const ext = imageFile.name.split('.').pop();
+      const fileName = `gallery/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+      
+      const arrayBuffer = await imageFile.arrayBuffer();
+      const buffer = Buffer.from(arrayBuffer);
+      
+      const { error: uploadError } = await supabase.storage.from('media').upload(fileName, buffer, {
+        contentType: imageFile.type,
+        upsert: false
+      });
+
+      if (uploadError) throw new Error(`Failed to upload image: ${uploadError.message}`);
+      
+      const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
+      inserts.push({
+        title,
+        title_ne,
+        image_url: publicUrlData.publicUrl
+      });
+    }
+  }
+
+  if (inserts.length > 0) {
+    const { error } = await supabase.from('gallery_images').insert(inserts);
+    if (error) throw new Error(error.message);
+  }
   
   revalidatePath('/[locale]/admin/gallery', 'page');
   revalidatePath('/[locale]/gallery/photos', 'page');

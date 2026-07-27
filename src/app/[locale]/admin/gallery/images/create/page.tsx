@@ -55,9 +55,9 @@ export default function CreateImagePage() {
             </div>
 
             <div className="space-y-2">
-              <label className="text-sm font-medium">Image File</label>
-              <Input type="file" name="image" accept="image/png, image/jpeg, image/jpg, image/webp" required />
-              <p className="text-xs text-muted-foreground">Upload a JPG or PNG image.</p>
+              <label className="text-sm font-medium">Image File(s)</label>
+              <Input type="file" name="image" accept="image/png, image/jpeg, image/jpg, image/webp" multiple required />
+              <p className="text-xs text-muted-foreground">Upload one or multiple JPG/PNG images. All selected images will use the title above.</p>
             </div>
 
             <div className="flex justify-end pt-4">
