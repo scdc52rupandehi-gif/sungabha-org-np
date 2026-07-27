@@ -56,45 +56,20 @@ export default async function Page() {
               <h2 className="text-3xl font-bold font-heading text-foreground">Our Dedicated Team</h2>
               <p className="text-muted-foreground mt-2">The individuals working tirelessly on the ground</p>
             </div>
-            <div className="bg-card rounded-3xl border border-border shadow-sm overflow-hidden max-w-4xl mx-auto">
-              <div className="overflow-x-auto">
-                <table className="w-full text-left border-collapse">
-                  <thead>
-                    <tr className="bg-muted/50 border-b border-border">
-                      <th className="py-4 px-6 font-bold text-foreground w-20 text-center">S.N.</th>
-                      <th className="py-4 px-6 font-bold text-foreground">Name</th>
-                      <th className="py-4 px-6 font-bold text-foreground">Position</th>
-                    </tr>
-                  </thead>
-                  <tbody className="divide-y divide-border">
-                    {otherStaff.map((staff, index) => (
-                      <tr 
-                        key={staff.id} 
-                        className="hover:bg-accent/50 transition-colors group"
-                      >
-                        <td className="py-4 px-6 text-muted-foreground text-center font-medium">
-                          {index + 5}
-                        </td>
-                        <td className="py-4 px-6 font-semibold text-foreground flex items-center gap-3">
-                          <div className="w-10 h-10 rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue group-hover:scale-110 transition-transform overflow-hidden relative">
-                            {staff.image_url ? (
-                              <Image src={staff.image_url} alt={staff.name} fill className="object-cover" />
-                            ) : (
-                              <UserCircle2 className="w-6 h-6" />
-                            )}
-                          </div>
-                          {staff.name}
-                        </td>
-                        <td className="py-4 px-6 text-muted-foreground">
-                          <span className="inline-flex px-3 py-1 rounded-full bg-accent text-sm font-medium">
-                            {staff.position}
-                          </span>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {otherStaff.map((staff) => (
+                <div key={staff.id} className="bg-card border border-border shadow-md rounded-3xl p-6 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group">
+                  <div className="w-40 h-40 mx-auto rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors mb-6 overflow-hidden relative shadow-sm border-4 border-white dark:border-zinc-800">
+                    {staff.image_url ? (
+                      <Image src={staff.image_url} alt={staff.name} fill className="object-cover" />
+                    ) : (
+                      <UserCircle2 className="w-20 h-20" />
+                    )}
+                  </div>
+                  <h3 className="font-bold text-xl text-foreground mb-1">{staff.name}</h3>
+                  <p className="text-sm font-medium text-brand-blue bg-brand-blue/10 inline-block px-3 py-1 rounded-full">{staff.position}</p>
+                </div>
+              ))}
             </div>
           </div>
 
