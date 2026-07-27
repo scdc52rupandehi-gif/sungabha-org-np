@@ -87,9 +87,9 @@ const Header = () => {
           : 'bg-transparent py-6'
       }`}
     >
-      <div className="max-w-screen-2xl mx-auto px-4 sm:px-8 lg:px-12 flex justify-between items-center gap-6 lg:gap-10">
+      <div className="w-full mx-auto px-4 sm:px-8 lg:px-12 xl:px-16 flex justify-between items-center gap-6 lg:gap-10">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 relative z-50 group -ml-2 lg:-ml-6">
+        <Link href="/" className="flex items-center gap-3 relative z-50 group -ml-2 lg:-ml-8">
           <motion.div whileHover={{ scale: 1.05 }} className="relative w-16 h-16 lg:w-20 lg:h-20 flex-shrink-0">
             <Image src="/Logo.png" alt="SCDC Logo" fill className="object-contain" />
           </motion.div>
