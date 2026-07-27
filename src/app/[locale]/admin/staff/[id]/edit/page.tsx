@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, use } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,15 +8,18 @@ import { useRouter } from "next/navigation";
 import { updateStaff, getStaffById } from "@/app/actions/staff";
 import Link from 'next/link';
 
-export default function EditStaffPage({ params }: { params: { id: string } }) {
+export default function EditStaffPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [staff, setStaff] = useState<any>(null);
   
+  const resolvedParams = use(params);
+  const id = resolvedParams.id;
+  
   useEffect(() => {
     const fetchStaff = async () => {
       try {
-        const data = await getStaffById(params.id);
+        const data = await getStaffById(id);
         setStaff(data);
       } catch (error) {
         toast.error("Failed to load staff member details");
@@ -24,14 +27,14 @@ export default function EditStaffPage({ params }: { params: { id: string } }) {
       }
     };
     fetchStaff();
-  }, [params.id, router]);
+  }, [id, router]);
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
-      await updateStaff(params.id, formData);
+      await updateStaff(id, formData);
       toast.success("Staff member updated successfully!");
       router.push("/admin/staff");
     } catch (error: any) {

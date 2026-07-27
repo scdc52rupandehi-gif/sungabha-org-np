@@ -4,8 +4,8 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
-function getSupabase() {
-  const cookieStore = cookies();
+async function getSupabase() {
+  const cookieStore = await cookies();
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -25,47 +25,37 @@ function getSupabase() {
 }
 
 export async function getStaff() {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const { data, error } = await supabase
     .from('staff_members')
     .select('*')
     .order('order_index', { ascending: true })
-    .order('created_at', { ascending: true });
+    .order('created_at', { ascending: false });
     
   if (error) throw new Error(error.message);
   return data;
 }
 
 export async function getStaffById(id: string) {
-  const supabase = getSupabase();
-  const { data, error } = await supabase
-    .from('staff_members')
-    .select('*')
-    .eq('id', id)
-    .single();
-    
+  const supabase = await getSupabase();
+  const { data, error } = await supabase.from('staff_members').select('*').eq('id', id).single();
   if (error) throw new Error(error.message);
   return data;
 }
 
 export async function createStaff(formData: FormData) {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   
-  const name = formData.get('name') as string;
-  const name_ne = formData.get('name_ne') as string;
-  const position = formData.get('position') as string;
-  const position_ne = formData.get('position_ne') as string;
-  const image_url = formData.get('image_url') as string;
-  const order_index = parseInt(formData.get('order_index') as string || '0');
+  const payload = {
+    name: formData.get('name'),
+    position: formData.get('position'),
+    name_ne: formData.get('name_ne') || null,
+    position_ne: formData.get('position_ne') || null,
+    image_url: formData.get('image_url') || null,
+    order_index: parseInt(formData.get('order_index') as string) || 0,
+  };
 
-  const { error } = await supabase.from('staff_members').insert({
-    name,
-    name_ne,
-    position,
-    position_ne,
-    image_url,
-    order_index
-  });
+  const { error } = await supabase.from('staff_members').insert(payload);
 
   if (error) throw new Error(error.message);
   revalidatePath('/[locale]/admin/staff', 'page');
@@ -73,23 +63,18 @@ export async function createStaff(formData: FormData) {
 }
 
 export async function updateStaff(id: string, formData: FormData) {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   
-  const name = formData.get('name') as string;
-  const name_ne = formData.get('name_ne') as string;
-  const position = formData.get('position') as string;
-  const position_ne = formData.get('position_ne') as string;
-  const image_url = formData.get('image_url') as string;
-  const order_index = parseInt(formData.get('order_index') as string || '0');
+  const payload = {
+    name: formData.get('name'),
+    position: formData.get('position'),
+    name_ne: formData.get('name_ne') || null,
+    position_ne: formData.get('position_ne') || null,
+    image_url: formData.get('image_url') || null,
+    order_index: parseInt(formData.get('order_index') as string) || 0,
+  };
 
-  const { error } = await supabase.from('staff_members').update({
-    name,
-    name_ne,
-    position,
-    position_ne,
-    image_url,
-    order_index
-  }).eq('id', id);
+  const { error } = await supabase.from('staff_members').update(payload).eq('id', id);
 
   if (error) throw new Error(error.message);
   revalidatePath('/[locale]/admin/staff', 'page');
@@ -97,7 +82,7 @@ export async function updateStaff(id: string, formData: FormData) {
 }
 
 export async function deleteStaff(id: string) {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const { error } = await supabase.from('staff_members').delete().eq('id', id);
   if (error) throw new Error(error.message);
   revalidatePath('/[locale]/admin/staff', 'page');

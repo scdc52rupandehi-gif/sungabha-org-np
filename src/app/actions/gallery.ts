@@ -4,8 +4,8 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import { revalidatePath } from 'next/cache';
 
-function getSupabase() {
-  const cookieStore = cookies();
+async function getSupabase() {
+  const cookieStore = await cookies();
   return createServerClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
@@ -26,7 +26,7 @@ function getSupabase() {
 
 // Images
 export async function getGalleryImages() {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const { data, error } = await supabase
     .from('gallery_images')
     .select('*')
@@ -37,7 +37,7 @@ export async function getGalleryImages() {
 }
 
 export async function createGalleryImage(formData: FormData) {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const title = formData.get('title') as string;
   const title_ne = formData.get('title_ne') as string;
   const image_url = formData.get('image_url') as string;
@@ -49,7 +49,7 @@ export async function createGalleryImage(formData: FormData) {
 }
 
 export async function deleteGalleryImage(id: string) {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const { error } = await supabase.from('gallery_images').delete().eq('id', id);
   if (error) throw new Error(error.message);
   revalidatePath('/[locale]/admin/gallery', 'page');
@@ -58,7 +58,7 @@ export async function deleteGalleryImage(id: string) {
 
 // Videos
 export async function getGalleryVideos() {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const { data, error } = await supabase
     .from('gallery_videos')
     .select('*')
@@ -69,7 +69,7 @@ export async function getGalleryVideos() {
 }
 
 export async function createGalleryVideo(formData: FormData) {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const title = formData.get('title') as string;
   const title_ne = formData.get('title_ne') as string;
   const video_url = formData.get('video_url') as string;
@@ -81,7 +81,7 @@ export async function createGalleryVideo(formData: FormData) {
 }
 
 export async function deleteGalleryVideo(id: string) {
-  const supabase = getSupabase();
+  const supabase = await getSupabase();
   const { error } = await supabase.from('gallery_videos').delete().eq('id', id);
   if (error) throw new Error(error.message);
   revalidatePath('/[locale]/admin/gallery', 'page');
