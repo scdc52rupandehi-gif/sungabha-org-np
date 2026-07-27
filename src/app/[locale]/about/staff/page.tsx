@@ -36,14 +36,14 @@ export default async function Page() {
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
               {topLeadership.map((staff) => (
                 <div key={staff.id} className="bg-card border border-border shadow-md rounded-3xl p-6 text-center hover:-translate-y-2 hover:shadow-xl transition-all duration-300 group">
-                  <div className="w-20 h-20 mx-auto rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors mb-4 overflow-hidden relative">
+                  <div className="w-40 h-40 mx-auto rounded-full bg-brand-blue/10 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors mb-6 overflow-hidden relative shadow-sm border-4 border-white dark:border-zinc-800">
                     {staff.image_url ? (
                       <Image src={staff.image_url} alt={staff.name} fill className="object-cover" />
                     ) : (
-                      <UserCircle2 className="w-10 h-10" />
+                      <UserCircle2 className="w-20 h-20" />
                     )}
                   </div>
-                  <h3 className="font-bold text-lg text-foreground mb-1">{staff.name}</h3>
+                  <h3 className="font-bold text-xl text-foreground mb-1">{staff.name}</h3>
                   <p className="text-sm font-medium text-brand-blue bg-brand-blue/10 inline-block px-3 py-1 rounded-full">{staff.position}</p>
                 </div>
               ))}
