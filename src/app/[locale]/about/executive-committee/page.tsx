@@ -3,25 +3,15 @@ import Hero from '@/components/Hero';
 import Section from '@/components/Section';
 import { Metadata } from 'next';
 import { UserCircle2 } from 'lucide-react';
+import { getCommittee } from '@/app/actions/committee';
+import Image from 'next/image';
 
 export const metadata: Metadata = {
   title: 'Executive Committee | SCDC',
 };
 
-export default function Page() {
-  const members = [
-    { name: "Amrita Thapa", role: "Chairperson", exp: "15 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Hema Belbase", role: "Vice chairperson", exp: "10 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Pushparaj Sapkota", role: "Secretary", exp: "3 Years", tenure: "29-01-2025 to 29-01-2027", image: "/Executive Committee Image/Pushparaj Sapkota.jpg" },
-    { name: "Khadananda Gyawali", role: "Treasurer", exp: "4 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Pomnath Gotame", role: "Vice-Secretory", exp: "20 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Lata Shreeis Magar Kshetri", role: "Member", exp: "2 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Tilkumari Khatri", role: "Member", exp: "5 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Shobhakhar Acharya", role: "Member", exp: "10 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Deb Bahadur Phauja", role: "Member", exp: "2 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Kamala BK", role: "Member", exp: "4 Years", tenure: "29-01-2025 to 29-01-2027" },
-    { name: "Jaykala Gotame", role: "Member", exp: "3 Years", tenure: "29-01-2025 to 29-01-2027" }
-  ];
+export default async function Page() {
+  const members = await getCommittee();
 
   return (
     <>
@@ -33,17 +23,16 @@ export default function Page() {
       <Section className="py-24 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {members.map((member, i) => (
-              <div key={i} className="bg-card border border-border shadow-md rounded-3xl p-8 flex flex-col items-center text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                {member.image ? (
-                  <div className="w-32 h-32 relative rounded-full overflow-hidden mb-6 border-4 border-brand-blue/20">
-                    <img src={member.image} alt={member.name} className="w-full h-full object-cover" />
-                  </div>
-                ) : (
-                  <div className="w-32 h-32 bg-brand-blue/10 rounded-full flex items-center justify-center mb-6">
-                    <UserCircle2 className="w-16 h-16 text-brand-blue" />
-                  </div>
-                )}
+            {members.map((member) => (
+              <div key={member.id} className="bg-card border border-border shadow-md rounded-3xl p-8 flex flex-col items-center text-center hover:shadow-xl transition-all duration-300 hover:-translate-y-2 group">
+                <div className="w-40 h-40 relative rounded-full overflow-hidden mb-6 border-4 border-brand-blue/20 bg-brand-blue/10 flex items-center justify-center text-brand-blue group-hover:bg-brand-blue group-hover:text-white transition-colors">
+                  {member.image_url ? (
+                    <Image src={member.image_url} alt={member.name} fill className="object-cover" />
+                  ) : (
+                    <UserCircle2 className="w-20 h-20" />
+                  )}
+                </div>
+                
                 <h3 className="text-xl font-heading font-bold text-foreground mb-2">{member.name}</h3>
                 <span className="inline-block px-4 py-1.5 bg-brand-green/10 text-brand-green text-sm font-bold uppercase tracking-wider rounded-full mb-4">
                   {member.role}
@@ -51,7 +40,7 @@ export default function Page() {
                 <div className="w-full h-px bg-border my-4" />
                 <div className="w-full flex justify-between items-center text-sm mb-2">
                   <span className="text-muted-foreground font-medium">Experience</span>
-                  <span className="font-semibold text-foreground">{member.exp}</span>
+                  <span className="font-semibold text-foreground">{member.experience}</span>
                 </div>
                 <div className="w-full flex justify-between items-center text-sm">
                   <span className="text-muted-foreground font-medium">Tenure</span>
