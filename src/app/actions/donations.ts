@@ -95,3 +95,14 @@ export async function deleteDonation(id: string) {
   if (error) throw new Error(error.message);
   revalidatePath("/admin/donations");
 }
+
+export async function getDonations() {
+  try {
+    const supabase = await getSupabase();
+    const { data, error } = await supabase.from('donations').select('*').order('created_at', { ascending: false });
+    if (error) throw error;
+    return { data, error: null };
+  } catch (error: any) {
+    return { data: null, error: error.message || String(error) };
+  }
+}

@@ -8,7 +8,7 @@ import Link from 'next/link';
 import { toast } from "sonner";
 import { DataTable } from "@/components/ui/data-table";
 import { DeleteDialog } from "@/components/ui/delete-dialog";
-import { deleteDonation } from "@/app/actions/donations";
+import { deleteDonation, getDonations } from "@/app/actions/donations";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import Image from "next/image";
 
@@ -25,8 +25,8 @@ export default function DonationListPage() {
 
   const fetchItems = async () => {
     try {
-      const { data, error } = await supabase.from('donations').select('*').order('created_at', { ascending: false });
-      if (error) throw error;
+      const { data, error } = await getDonations();
+      if (error) throw new Error(error);
       setItems(data || []);
     } catch (error) {
       toast.error("Failed to fetch data");
