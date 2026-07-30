@@ -94,17 +94,17 @@ export default async function Home() {
           </div>
           <div className="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
             <Target className="w-10 h-10 text-white mb-4 opacity-80" />
-            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">50+</h3>
+            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">25+</h3>
             <p className="text-white/80 font-medium">Projects Completed</p>
           </div>
           <div className="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
             <Globe className="w-10 h-10 text-white mb-4 opacity-80" />
-            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">12+</h3>
+            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">3</h3>
             <p className="text-white/80 font-medium">Districts Reached</p>
           </div>
           <div className="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
             <Award className="w-10 h-10 text-white mb-4 opacity-80" />
-            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">20+</h3>
+            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">28</h3>
             <p className="text-white/80 font-medium">Years of Service</p>
           </div>
         </div>
@@ -123,10 +123,17 @@ export default async function Home() {
             <p className="text-lg text-muted-foreground leading-relaxed mb-8">
               SCDC is dedicated to improving the quality of life of marginalized, disadvantaged, and vulnerable communities through inclusive and sustainable development initiatives. Established in 2005, the organization works in the areas of education, women's empowerment, disability inclusion, health promotion, livelihood development, and community capacity building.
             </p>
-            <ul className="space-y-4 mb-10">
-              {['Women & Child Empowerment', 'Mental Health Awareness', 'Anti Human Trafficking', 'Livelihood & Agriculture'].map((item, i) => (
-                <li key={i} className="flex items-center gap-3 text-foreground font-medium">
-                  <CheckCircle2 className="text-brand-blue w-6 h-6 flex-shrink-0" />
+            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-10">
+              {[
+                'Inclusive Education', 
+                'Adolescents & Youth Empowerment', 
+                'Anti-Human Trafficking', 
+                'Mental Health (MHPSS)', 
+                'Income-Generating & Entrepreneurship', 
+                'Evidence-Based Advocacy'
+              ].map((item, i) => (
+                <li key={i} className="flex items-center gap-3 text-foreground font-medium text-sm">
+                  <CheckCircle2 className="text-brand-blue w-5 h-5 flex-shrink-0" />
                   {item}
                 </li>
               ))}
@@ -201,6 +208,23 @@ export default async function Home() {
           <Link href="/projects/active" className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue border border-brand-blue/20 px-8 py-4 rounded-xl font-bold hover:bg-brand-blue hover:text-white transition-all shadow-md active:scale-95">
             {t('exploreProjects')} <ArrowRight className="w-5 h-5" />
           </Link>
+        </div>
+      </Section>
+      
+      {/* Our Partners Section */}
+      <Section title="Our Partners" subtitle="Working together to create a sustainable impact." className="bg-zinc-50 dark:bg-zinc-900/50">
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center justify-items-center mt-10">
+          {[1, 2, 3, 4, 5].map((num) => (
+            <div key={num} className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-all hover:-translate-y-1 w-full flex justify-center items-center aspect-video">
+              <Image 
+                src={`/partners/partner-${num}.jpeg`} 
+                alt={`Partner ${num}`} 
+                width={150} 
+                height={100} 
+                className="object-contain max-h-16 w-auto mix-blend-multiply dark:mix-blend-normal" 
+              />
+            </div>
+          ))}
         </div>
       </Section>
       
