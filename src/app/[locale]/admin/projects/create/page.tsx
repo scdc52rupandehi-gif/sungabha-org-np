@@ -40,39 +40,19 @@ export default function CreateProjectPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg border-b pb-2">English Details</h3>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Title</label>
-                  <Input name="title" placeholder="Project title..." required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Description</label>
-                  <textarea 
-                    name="description" 
-                    className="flex min-h-[120px] w-full rounded-md border border-zinc-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:placeholder:text-zinc-400 dark:focus-visible:ring-zinc-300" 
-                    placeholder="Project description..." 
-                    required 
-                  />
-                </div>
+            <div className="space-y-4">
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Title</label>
+                <Input name="title" placeholder="Project title..." required />
               </div>
-
-              <div className="space-y-4">
-                <h3 className="font-semibold text-lg border-b pb-2">Nepali Details (नेपाली)</h3>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Title (नेपाली)</label>
-                  <Input name="title_ne" placeholder="परियोजनाको नाम..." required />
-                </div>
-                <div className="space-y-2">
-                  <label className="text-sm font-medium">Description (नेपाली)</label>
-                  <textarea 
-                    name="description_ne" 
-                    className="flex min-h-[120px] w-full rounded-md border border-zinc-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:placeholder:text-zinc-400 dark:focus-visible:ring-zinc-300" 
-                    placeholder="परियोजनाको विवरण..." 
-                    required 
-                  />
-                </div>
+              <div className="space-y-2">
+                <label className="text-sm font-medium">Description</label>
+                <textarea 
+                  name="description" 
+                  className="flex min-h-[120px] w-full rounded-md border border-zinc-200 bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-zinc-500 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-zinc-950 disabled:cursor-not-allowed disabled:opacity-50 dark:border-zinc-800 dark:placeholder:text-zinc-400 dark:focus-visible:ring-zinc-300" 
+                  placeholder="Project description..." 
+                  required 
+                />
               </div>
             </div>
 

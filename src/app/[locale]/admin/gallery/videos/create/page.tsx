@@ -43,15 +43,9 @@ export default function CreateVideoPage() {
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Title (English)</label>
-                <Input name="title" placeholder="Documentary" required />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Title (Nepali)</label>
-                <Input name="title_ne" placeholder="वृत्तचित्र" />
-              </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Title</label>
+              <Input name="title" placeholder="Documentary" required />
             </div>
 
             <div className="space-y-2">

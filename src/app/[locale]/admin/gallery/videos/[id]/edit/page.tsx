@@ -62,15 +62,9 @@ export default function EditVideoPage({ params }: { params: Promise<{ id: string
         </CardHeader>
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Title (English)</label>
-                <Input name="title" defaultValue={video.title} required />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Title (Nepali)</label>
-                <Input name="title_ne" defaultValue={video.title_ne} />
-              </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Title</label>
+              <Input name="title" defaultValue={video.title} required />
             </div>
 
             <div className="space-y-2">

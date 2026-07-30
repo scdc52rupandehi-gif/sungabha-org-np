@@ -65,15 +65,9 @@ export default function EditImagePage({ params }: { params: Promise<{ id: string
           <form onSubmit={handleSubmit} className="space-y-6">
             <input type="hidden" name="existing_image_url" value={image.image_url || ''} />
             
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Title (English)</label>
-                <Input name="title" defaultValue={image.title} required />
-              </div>
-              <div className="space-y-2">
-                <label className="text-sm font-medium">Title (Nepali)</label>
-                <Input name="title_ne" defaultValue={image.title_ne} />
-              </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Title</label>
+              <Input name="title" defaultValue={image.title} required />
             </div>
 
             <div className="space-y-2">
