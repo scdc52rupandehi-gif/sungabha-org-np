@@ -41,6 +41,7 @@ export async function createDonation(formData: FormData) {
     const payload = {
       first_name: data.first_name,
       last_name: data.last_name,
+      donor_name: `${data.first_name} ${data.last_name}`,
       email: data.email,
       phone: data.phone || null,
       amount: data.amount,
