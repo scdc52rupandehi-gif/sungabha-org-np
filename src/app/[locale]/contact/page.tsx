@@ -16,9 +16,13 @@ export default function ContactPage() {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
-      await createMessage(formData);
-      setIsSubmitted(true);
-      toast.success("Thank you! Your message has been sent.");
+      const result = await createMessage(formData);
+      if (result && !result.success) {
+        toast.error(result.error || "Failed to send message.");
+      } else {
+        setIsSubmitted(true);
+        toast.success("Thank you! Your message has been sent.");
+      }
     } catch (error: any) {
       toast.error(error.message || "Failed to send message. Please try again.");
     } finally {

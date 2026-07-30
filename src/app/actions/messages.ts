@@ -17,32 +17,37 @@ function getAdminSupabase() {
 }
 
 export async function createMessage(formData: FormData) {
-  const supabase = getAdminSupabase();
-  const data = Object.fromEntries(formData.entries());
-  
-  const payload = {
-    first_name: data.first_name,
-    last_name: data.last_name,
-    email: data.email,
-    phone: data.phone || null,
-    subject: data.subject,
-    message: data.message,
-  };
-  
-  const { error } = await supabase.from('contact_messages').insert(payload);
-  if (error) throw new Error(error.message);
-  
-  // Send email notification in the background
-  await sendNotificationEmail({
-    type: 'Contact Form',
-    name: `${data.first_name} ${data.last_name}`,
-    email: data.email as string,
-    phone: data.phone as string,
-    subject: data.subject as string,
-    message: data.message as string,
-  });
+  try {
+    const supabase = getAdminSupabase();
+    const data = Object.fromEntries(formData.entries());
+    
+    const payload = {
+      first_name: data.first_name,
+      last_name: data.last_name,
+      email: data.email,
+      phone: data.phone || null,
+      subject: data.subject,
+      message: data.message,
+    };
+    
+    const { error } = await supabase.from('contact_messages').insert(payload);
+    if (error) return { success: false, error: error.message };
+    
+    // Send email notification in the background
+    await sendNotificationEmail({
+      type: 'Contact Form',
+      name: `${data.first_name} ${data.last_name}`,
+      email: data.email as string,
+      phone: data.phone as string,
+      subject: data.subject as string,
+      message: data.message as string,
+    });
 
-  revalidatePath("/admin/messages");
+    revalidatePath("/admin/messages");
+    return { success: true };
+  } catch (e: any) {
+    return { success: false, error: e.message || String(e) };
+  }
 }
 
 export async function updateMessage(id: string, formData: FormData) {
