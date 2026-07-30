@@ -178,30 +178,30 @@ export default function DonateForm() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
               <div className="flex flex-col items-center justify-center p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700">
-                <QrCode className="w-32 h-32 text-zinc-300 dark:text-zinc-600 mb-4" />
-                <p className="text-sm font-medium text-zinc-500 text-center">Official SCDC QR Code<br/>(Coming Soon)</p>
+                <Image src="/Image/esewa-qr.png" alt="eSewa QR Code" width={200} height={200} className="mb-4 rounded-lg" />
+                <p className="text-sm font-medium text-zinc-500 text-center">Scan to Pay via eSewa</p>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
-                    <p className="text-sm text-zinc-500">Bank Name</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Global IME Bank Ltd.</p>
+                    <p className="text-sm text-zinc-500">Wallet / Bank</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">eSewa</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
                     <p className="text-sm text-zinc-500">Account Name</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Sungabha Community Development Centre</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">AJAY HARIJAN</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
-                    <p className="text-sm text-zinc-500">Account Number</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">XXXXXXXXXXXXXXXXX</p>
+                    <p className="text-sm text-zinc-500">eSewa ID / Phone</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">9811404341</p>
                   </div>
                 </div>
               </div>
