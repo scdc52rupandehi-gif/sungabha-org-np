@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { createDonation } from "@/app/actions/donations";
-import { UploadCloud, CheckCircle2, Building2 } from 'lucide-react';
+import { UploadCloud, CheckCircle2, Building2, QrCode } from 'lucide-react';
 import Image from "next/image";
 
 const PURPOSES = [
@@ -178,31 +178,42 @@ export default function DonateForm() {
             <h3 className="text-xl font-semibold text-emerald-900 dark:text-emerald-400 mb-6 text-center">Scan to Pay OR Bank Transfer</h3>
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-              <div className="flex flex-col items-center justify-center p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700">
-                <Image src="/Image/esewa-qr.png" alt="eSewa QR Code" width={200} height={200} className="mb-4 rounded-lg" />
-                <p className="text-sm font-medium text-zinc-500 text-center">Scan to Pay via eSewa</p>
+              <div className="flex flex-col items-center justify-center p-6 bg-white dark:bg-zinc-800 rounded-lg shadow-sm border border-zinc-200 dark:border-zinc-700 h-full min-h-[250px]">
+                {/* Generic QR placeholder for demo */}
+                <div className="w-48 h-48 bg-zinc-100 dark:bg-zinc-700 rounded-lg border-2 border-dashed border-zinc-300 dark:border-zinc-600 flex flex-col items-center justify-center mb-4 text-zinc-400">
+                  <QrCode className="w-12 h-12 mb-2" />
+                  <span className="text-sm font-medium">QR Code</span>
+                </div>
+                <p className="text-sm font-medium text-zinc-500 text-center">Scan to Pay</p>
               </div>
               
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
-                    <p className="text-sm text-zinc-500">Wallet / Bank</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">eSewa</p>
+                    <p className="text-sm text-zinc-500">Bank Name</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Demo Bank Ltd.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
                     <p className="text-sm text-zinc-500">Account Name</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">AJAY HARIJAN</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Demo NGO Account</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
-                    <p className="text-sm text-zinc-500">eSewa ID / Phone</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">9811404341</p>
+                    <p className="text-sm text-zinc-500">Account Number</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">12345678901234</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Branch</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Main Branch</p>
                   </div>
                 </div>
               </div>
