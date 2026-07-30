@@ -6,7 +6,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { toast } from "sonner";
 import { createDonation } from "@/app/actions/donations";
-import { UploadCloud, CheckCircle2, QrCode, Building2 } from 'lucide-react';
+import { UploadCloud, CheckCircle2, Building2 } from 'lucide-react';
+import Image from "next/image";
 
 const PURPOSES = [
   "General",
