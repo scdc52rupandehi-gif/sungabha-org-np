@@ -1,4 +1,5 @@
 import nodemailer from 'nodemailer';
+import { getCertificateHtml } from './certificateTemplate';
 
 // Create a transporter using Gmail.
 // To use this, you need to set EMAIL_PASSWORD in .env.local to a Gmail "App Password".
@@ -44,26 +45,14 @@ export async function sendNotificationEmail({
   if (type === 'Donation Receipt') {
     toAddress = email || 'scdc52rupandehi@gmail.com';
     mailSubject = `Thank you for your generous donation to SCDC, ${name}!`;
-    htmlContent = `
-      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: #059669; padding: 20px; text-align: center;">
-          <h2 style="color: white; margin: 0;">Certificate of Appreciation</h2>
-        </div>
-        <div style="padding: 24px; background-color: #f8fafc; text-align: center;">
-          <h3 style="color: #334155;">Dear ${name},</h3>
-          <p style="color: #475569; font-size: 16px; line-height: 1.5;">
-            Thank you so much for your generous donation of <strong>${amount}</strong> towards <strong>${purpose}</strong>.
-          </p>
-          <p style="color: #475569; font-size: 16px; line-height: 1.5;">
-            Your contribution plays a vital role in helping Sungabha Community Development Centre (SCDC) empower marginalized communities and build a brighter future. We are incredibly grateful for your support.
-          </p>
-          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0;">
-            <p style="color: #64748b; font-size: 14px; margin-bottom: 4px;">With immense gratitude,</p>
-            <p style="color: #334155; font-weight: bold; margin-top: 0;">SCDC Executive Committee</p>
-          </div>
-        </div>
-      </div>
-    `;
+    
+    // Format date as DD-Month-YYYY
+    const dateObj = new Date();
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    const formattedDate = `${dateObj.getDate()}-${months[dateObj.getMonth()]}-${dateObj.getFullYear()}`;
+    
+    htmlContent = getCertificateHtml(name, formattedDate, amount || '', purpose || '');
+
   } else {
     mailSubject = `New ${type} Message from ${name}`;
     htmlContent = `
