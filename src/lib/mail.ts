@@ -11,12 +11,14 @@ const transporter = nodemailer.createTransport({
 });
 
 export interface EmailParams {
-  type: "Contact Form" | "Whistleblower" | "Volunteer" | "System Alert" | "Volunteer Approved";
+  type: "Contact Form" | "Whistleblower" | "Volunteer" | "System Alert" | "Volunteer Approved" | "New Donation" | "Donation Receipt";
   name: string;
   email?: string;
   phone?: string;
   subject?: string;
-  message: string;
+  message?: string;
+  amount?: string;
+  purpose?: string;
 }
 
 export async function sendNotificationEmail({
@@ -26,6 +28,8 @@ export async function sendNotificationEmail({
   phone,
   subject,
   message,
+  amount,
+  purpose,
 }: EmailParams) {
   // If no password is provided in env, gracefully skip to not crash the app
   if (!process.env.EMAIL_PASSWORD) {
@@ -33,29 +37,65 @@ export async function sendNotificationEmail({
     return;
   }
 
-  const mailOptions = {
-    from: '"SCDC Website" <scdc52rupandehi@gmail.com>',
-    to: 'scdc52rupandehi@gmail.com', // Sending to yourself
-    replyTo: email || undefined,
-    subject: `New ${type} Message from ${name}`,
-    html: `
+  let htmlContent = '';
+  let mailSubject = '';
+  let toAddress = 'scdc52rupandehi@gmail.com';
+
+  if (type === 'Donation Receipt') {
+    toAddress = email || 'scdc52rupandehi@gmail.com';
+    mailSubject = `Thank you for your generous donation to SCDC, ${name}!`;
+    htmlContent = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
-        <div style="background-color: ${type === 'Whistleblower' ? '#d97706' : '#0284c7'}; padding: 20px; text-align: center;">
+        <div style="background-color: #059669; padding: 20px; text-align: center;">
+          <h2 style="color: white; margin: 0;">Certificate of Appreciation</h2>
+        </div>
+        <div style="padding: 24px; background-color: #f8fafc; text-align: center;">
+          <h3 style="color: #334155;">Dear ${name},</h3>
+          <p style="color: #475569; font-size: 16px; line-height: 1.5;">
+            Thank you so much for your generous donation of <strong>${amount}</strong> towards <strong>${purpose}</strong>.
+          </p>
+          <p style="color: #475569; font-size: 16px; line-height: 1.5;">
+            Your contribution plays a vital role in helping Sungabha Community Development Centre (SCDC) empower marginalized communities and build a brighter future. We are incredibly grateful for your support.
+          </p>
+          <div style="margin-top: 32px; padding-top: 24px; border-top: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 4px;">With immense gratitude,</p>
+            <p style="color: #334155; font-weight: bold; margin-top: 0;">SCDC Executive Committee</p>
+          </div>
+        </div>
+      </div>
+    `;
+  } else {
+    mailSubject = `New ${type} Message from ${name}`;
+    htmlContent = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+        <div style="background-color: ${type === 'Whistleblower' ? '#d97706' : type === 'New Donation' ? '#059669' : '#0284c7'}; padding: 20px; text-align: center;">
           <h2 style="color: white; margin: 0;">New ${type} Submission</h2>
         </div>
         <div style="padding: 24px; background-color: #f8fafc;">
           <p><strong>Name:</strong> ${name}</p>
           ${email ? `<p><strong>Email:</strong> ${email}</p>` : ''}
           ${phone ? `<p><strong>Phone:</strong> ${phone}</p>` : ''}
+          ${amount ? `<p><strong>Amount:</strong> ${amount}</p>` : ''}
+          ${purpose ? `<p><strong>Purpose:</strong> ${purpose}</p>` : ''}
           ${subject ? `<p><strong>Subject:</strong> ${subject}</p>` : ''}
           
+          ${message ? `
           <div style="margin-top: 24px; border-top: 1px solid #e2e8f0; pt-4">
             <h3 style="color: #475569; margin-bottom: 8px;">Message Content:</h3>
             <div style="background: white; padding: 16px; border-radius: 6px; border: 1px solid #e2e8f0; white-space: pre-wrap;">${message}</div>
           </div>
+          ` : ''}
         </div>
       </div>
-    `,
+    `;
+  }
+
+  const mailOptions = {
+    from: '"SCDC Website" <scdc52rupandehi@gmail.com>',
+    to: toAddress,
+    replyTo: email || undefined,
+    subject: mailSubject,
+    html: htmlContent,
   };
 
   try {
