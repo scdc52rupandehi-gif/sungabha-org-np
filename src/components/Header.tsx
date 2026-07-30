@@ -7,7 +7,6 @@ import { usePathname } from 'next/navigation';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, ChevronDown, Search, Heart } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import { LanguageToggle } from '@/components/LanguageToggle';
 import { useTranslations } from 'next-intl';
 
 const Header = () => {
@@ -169,7 +168,6 @@ const Header = () => {
         {/* Actions */}
         <div className="hidden lg:flex items-center gap-4">
           <ThemeToggle />
-          <LanguageToggle />
           
           <Link href="/volunteer" className={`px-5 py-2 rounded-full font-semibold text-sm transition-all border ${
             isScrolled 
@@ -188,7 +186,6 @@ const Header = () => {
 
         {/* Mobile Menu Toggle */}
         <div className="flex items-center gap-4 lg:hidden">
-          <LanguageToggle />
           <ThemeToggle />
           <button 
             className={`p-2 relative z-50 rounded-full transition-colors ${isScrolled || isMobileMenuOpen ? 'text-foreground hover:bg-accent' : 'text-white hover:bg-white/10'}`}
