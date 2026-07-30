@@ -170,9 +170,46 @@ export const getCertificateHtml = (name: string, date: string, amount: string, p
     text-transform:uppercase;
     color:#8a9099;
   }
+  
+  /* Print button and print styles */
+  .print-btn-container {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 1000;
+  }
+  .print-btn {
+    background-color: var(--forest);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 6px;
+    font-family: 'Work Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.2s;
+  }
+  .print-btn:hover {
+    background-color: var(--forest-deep);
+  }
+  
+  @media print {
+    body { background: white; }
+    .stage { padding: 0; min-height: auto; }
+    .cert { box-shadow: none; width: 100%; height: 100%; aspect-ratio: auto; }
+    .no-print { display: none !important; }
+    @page { size: landscape; margin: 0; }
+  }
 </style>
 </head>
 <body>
+
+<div class="print-btn-container no-print">
+  <button class="print-btn" onclick="window.print()">Download / Print PDF</button>
+</div>
+
 <div class="stage">
 <div class="cert">
 <!-- Ornate Border and Corners -->
@@ -218,11 +255,11 @@ export const getCertificateHtml = (name: string, date: string, amount: string, p
 <div class="donor-name">${name}</div>
 <div class="name-rule"></div>
 <div class="body-text">
-        In sincere recognition of your generous contribution of <b></b> towards <b></b>,
+        In sincere recognition of your generous contribution of <b>Rs. ${amount}</b> towards <b>${purpose}</b>,
         helping Sungabha Community Development Centre empower marginalized communities in
         Rudrapur, Rupandehi and build a brighter future.
       </div>
-<div class="date-line">Given this 30th day of July, 2026</div>
+<div class="date-line">Given this ${date}</div>
 <div class="sign-row">
 <div class="sign-block">
 <div class="line"></div>
