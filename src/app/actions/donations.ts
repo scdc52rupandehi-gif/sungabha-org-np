@@ -47,6 +47,7 @@ export async function createDonation(formData: FormData) {
       amount: data.amount,
       purpose: data.purpose,
       message: data.message || null,
+      payment_method: 'eSewa/Bank',
       screenshot_url: screenshot_url
     };
     
