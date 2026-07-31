@@ -52,7 +52,7 @@ const Footer = () => {
               <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 hover:bg-blue-700 hover:text-white transition-all">
                 <Linkedin size={18} />
               </a>
-              <a href="#" aria-label="YouTube" className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all">
+              <a href="https://youtube.com/@sungabhacommunitydevelopme1252?si=Jt1C9FmBVnf9uWxw" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all">
                 <Youtube size={18} />
               </a>
             </div>
