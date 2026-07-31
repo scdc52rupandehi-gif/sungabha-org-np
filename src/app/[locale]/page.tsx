@@ -10,6 +10,7 @@ import Image from 'next/image';
 import VideoPlayer from '@/components/VideoPlayer';
 import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare, Play } from 'lucide-react';
 import { getTranslations, getLocale } from 'next-intl/server';
+import AnimatedCounter from '@/components/AnimatedCounter';
 
 async function getProjects(): Promise<any[]> {
   return [
@@ -90,22 +91,22 @@ export default async function Home() {
         <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 divide-y md:divide-y-0 md:divide-x divide-white/20">
           <div className="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
             <Users className="w-10 h-10 text-white mb-4 opacity-80" />
-            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">25K+</h3>
+            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2"><AnimatedCounter value={25} suffix="K+" /></h3>
             <p className="text-white/80 font-medium">Lives Impacted</p>
           </div>
           <div className="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
             <Target className="w-10 h-10 text-white mb-4 opacity-80" />
-            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">25+</h3>
+            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2"><AnimatedCounter value={25} suffix="+" /></h3>
             <p className="text-white/80 font-medium">Projects Completed</p>
           </div>
           <div className="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
             <Globe className="w-10 h-10 text-white mb-4 opacity-80" />
-            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">3</h3>
+            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2"><AnimatedCounter value={3} /></h3>
             <p className="text-white/80 font-medium">Districts Reached</p>
           </div>
           <div className="flex flex-col items-center text-center px-4 pt-4 md:pt-0">
             <Award className="w-10 h-10 text-white mb-4 opacity-80" />
-            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2">28</h3>
+            <h3 className="text-4xl lg:text-5xl font-heading font-bold text-white mb-2"><AnimatedCounter value={28} /></h3>
             <p className="text-white/80 font-medium">Years of Service</p>
           </div>
         </div>
