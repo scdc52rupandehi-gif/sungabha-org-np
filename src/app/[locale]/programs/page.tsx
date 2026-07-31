@@ -1,3 +1,4 @@
+import { School, Users, ShieldAlert, Brain, Landmark, Megaphone, BriefcaseBusiness } from 'lucide-react';
 import React from 'react';
 import Hero from '@/components/Hero';
 import Section from '@/components/Section';
@@ -10,45 +11,42 @@ export const metadata: Metadata = {
 const programs = [
   {
     title: 'Inclusive Education',
-    icon: 'school',
+    icon: School,
     description: 'SCDC’s one of the major Core Program areas is to promote equitable access to quality education for all children, particularly from marginalized communities. Our interventions advocate quality Education and Education for All, campaign for School re-enrollment, Educational materials and Scholarship Support.',
   },
   {
     title: 'Adolescents and Youth Empowerment',
-    icon: 'groups',
+    icon: Users,
     description: 'Capacity building of adolescents and youth and empower them with life skills, leadership, employability, and civic engagement opportunities to help them become confident and responsible citizens. Through youth networks and community initiatives, we promote meaningful participation in decision-making and social transformation.',
   },
   {
     title: 'Anti-Human Trafficking',
-    icon: 'shield_person',
+    icon: ShieldAlert,
     description: 'We work to prevent human trafficking through awareness raising, community mobilization, and strengthening local protection mechanisms. We also support vulnerable individuals by improving access to information, referral services, and livelihood opportunities.',
   },
   {
     title: 'Mental Health and Psychosocial Support (MHPSS)',
-    icon: 'psychology',
+    icon: Brain,
     description: 'We promote mental well-being by providing psychosocial support, counselling, awareness programmes, and community-based mental health services. Our interventions strengthen the capacity of families, schools, health workers, and communities to identify and respond to mental health needs.',
   },
   {
     title: 'Income-Generating Activities (IGA) and Entrepreneurship Support',
-    icon: 'payments',
+    icon: Landmark,
     description: 'We enhance the economic resilience of vulnerable individuals and families by promoting income-generating activities, vocational skills, and entrepreneurship. We facilitate access to training, financial literacy, and market opportunities to improve sustainable livelihoods.',
   },
   {
     title: 'Evidence-Based Advocacy and Campaigns',
-    icon: 'campaign',
+    icon: Megaphone,
     description: 'We generate and use evidence from research, monitoring, and community experiences to influence policies, programmes, and practices. Through advocacy campaigns and stakeholder engagement, we promote the rights and well-being of children, adolescents, youth, and marginalized communities.',
   },
   {
-    title: 'Enterprise Development and Mentoring', // Adjusted title slightly to avoid duplicate title visually, or just keep it exactly as they wrote? The user wrote the exact same title twice. Let's keep it as is, or combine it. I'll keep the exact title but use a different icon.
-    icon: 'business_center',
+    title: 'Enterprise & Business Development',
+    icon: BriefcaseBusiness,
     description: 'We support individuals and groups to develop sustainable enterprises through business development services, mentoring, and enterprise promotion. Our initiatives encourage innovation, self-employment, and economic independence for long-term community development.',
   }
 ];
 
 export default function Page() {
-  // Fix the duplicate title for item 7 based on context
-  programs[6].title = 'Enterprise & Business Development'; 
-  
   return (
     <>
       <Hero 
@@ -66,15 +64,15 @@ export default function Page() {
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {programs.map((program, index) => (
+            {programs.map((program, index) => {
+              const Icon = program.icon;
+              return (
               <div 
                 key={index}
                 className="bg-white dark:bg-zinc-900 rounded-2xl p-8 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-md transition-shadow duration-300"
               >
                 <div className="w-14 h-14 bg-emerald-100 dark:bg-emerald-900/30 rounded-xl flex items-center justify-center mb-6">
-                  <span className="material-symbols-outlined text-3xl text-emerald-600 dark:text-emerald-500">
-                    {program.icon}
-                  </span>
+                  <Icon className="w-7 h-7 text-emerald-600 dark:text-emerald-500" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-4 leading-tight">
                   {program.title}
@@ -83,7 +81,7 @@ export default function Page() {
                   {program.description}
                 </p>
               </div>
-            ))}
+            )})}
           </div>
         </div>
       </Section>
