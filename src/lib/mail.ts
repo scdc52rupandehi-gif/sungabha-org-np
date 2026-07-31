@@ -12,7 +12,7 @@ const transporter = nodemailer.createTransport({
 });
 
 export interface EmailParams {
-  type: "Contact Form" | "Whistleblower" | "Volunteer" | "System Alert" | "Volunteer Approved" | "New Donation" | "Donation Receipt";
+  type: "Contact Form" | "Whistleblower" | "Volunteer" | "System Alert" | "Volunteer Approved" | "New Donation" | "Donation Receipt" | "Donation Acknowledgement";
   name: string;
   email?: string;
   phone?: string;
@@ -44,7 +44,7 @@ export async function sendNotificationEmail({
 
   if (type === 'Donation Receipt') {
     toAddress = email || 'scdc52rupandehi@gmail.com';
-    mailSubject = `Thank you for your generous donation to SCDC, ${name}!`;
+    mailSubject = `Your Donation Certificate - Thank you, ${name}!`;
     
     // Format date as DD-Month-YYYY
     const dateObj = new Date();
@@ -56,12 +56,12 @@ export async function sendNotificationEmail({
     htmlContent = `
       <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
         <div style="background-color: #059669; padding: 20px; text-align: center;">
-          <h2 style="color: white; margin: 0;">Thank You for Your Donation!</h2>
+          <h2 style="color: white; margin: 0;">Payment Verified!</h2>
         </div>
         <div style="padding: 32px 24px; background-color: #f8fafc; text-align: center;">
           <h3 style="color: #334155; margin-top: 0;">Dear ${name},</h3>
           <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
-            Thank you so much for your generous donation of <strong>${amount}</strong> towards <strong>${purpose}</strong>. Your contribution plays a vital role in helping Sungabha Community Development Centre (SCDC) empower marginalized communities and build a brighter future.
+            We have successfully verified your donation of <strong>${amount}</strong> towards <strong>${purpose}</strong>. Your contribution plays a vital role in helping Sungabha Community Development Centre (SCDC) empower marginalized communities and build a brighter future.
           </p>
           <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">
             In sincere recognition of your support, we have prepared a Certificate of Appreciation for you.
@@ -71,6 +71,30 @@ export async function sendNotificationEmail({
           <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid #e2e8f0;">
             <p style="color: #64748b; font-size: 14px; margin-bottom: 4px;">With immense gratitude,</p>
             <p style="color: #334155; font-weight: bold; margin-top: 0;">SCDC Executive Committee</p>
+          </div>
+        </div>
+      </div>
+    `;
+  } else if (type === 'Donation Acknowledgement') {
+    toAddress = email || 'scdc52rupandehi@gmail.com';
+    mailSubject = `Donation Request Received - SCDC`;
+    
+    htmlContent = `
+      <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto; border: 1px solid #e2e8f0; border-radius: 8px; overflow: hidden;">
+        <div style="background-color: #0ea5e9; padding: 20px; text-align: center;">
+          <h2 style="color: white; margin: 0;">Request Received</h2>
+        </div>
+        <div style="padding: 32px 24px; background-color: #f8fafc; text-align: center;">
+          <h3 style="color: #334155; margin-top: 0;">Dear ${name},</h3>
+          <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 24px;">
+            Thank you for submitting your donation details. We have received your screenshot for the amount of <strong>${amount}</strong>.
+          </p>
+          <p style="color: #475569; font-size: 16px; line-height: 1.6; margin-bottom: 32px;">
+            Our team is currently verifying the payment. Once the payment is verified, we will send you your official <strong>Certificate of Appreciation</strong> in a separate email shortly.
+          </p>
+          <div style="margin-top: 40px; padding-top: 24px; border-top: 1px solid #e2e8f0;">
+            <p style="color: #64748b; font-size: 14px; margin-bottom: 4px;">Thank you for your patience,</p>
+            <p style="color: #334155; font-weight: bold; margin-top: 0;">SCDC Team</p>
           </div>
         </div>
       </div>

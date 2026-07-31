@@ -19,6 +19,8 @@ export default function DonationListPage() {
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [selectedDonation, setSelectedDonation] = useState<any | null>(null);
 
+  const [verifying, setVerifying] = useState(false);
+
   useEffect(() => {
     fetchItems();
   }, []);
@@ -48,11 +50,37 @@ export default function DonationListPage() {
     }
   };
 
+  const handleVerify = async () => {
+    if (!selectedDonation) return;
+    setVerifying(true);
+    try {
+      // Import the action dynamically to avoid top-level issues if needed, or just use the imported one.
+      // Wait, we need to import it at the top of the file. I'll make sure verifyDonation is imported.
+      const { verifyDonation } = await import("@/app/actions/donations");
+      const res = await verifyDonation(selectedDonation.id);
+      if (res.success) {
+        toast.success("Payment verified & Certificate sent!");
+        fetchItems();
+        setSelectedDonation({ ...selectedDonation, status: 'verified' });
+      } else {
+        toast.error(res.error || "Failed to verify");
+      }
+    } catch (e) {
+      toast.error("An error occurred");
+    } finally {
+      setVerifying(false);
+    }
+  };
+
   const columns = [
     { header: "Name", accessorKey: "name", cell: (item: any) => item.first_name ? `${item.first_name} ${item.last_name || ''}` : item.title || item.id },
     { header: "Email / Phone", accessorKey: "contact", cell: (item: any) => item.email || item.phone || 'N/A' },
-    { header: "Purpose", accessorKey: "purpose", cell: (item: any) => item.purpose || 'N/A' },
     { header: "Amount", accessorKey: "amount", cell: (item: any) => item.amount ? <span className="font-semibold text-emerald-600 dark:text-emerald-400">{item.amount}</span> : 'N/A' },
+    { header: "Status", accessorKey: "status", cell: (item: any) => (
+      <span className={`px-2 py-1 rounded-full text-xs font-semibold ${item.status === 'verified' ? 'bg-emerald-100 text-emerald-700 dark:bg-emerald-900/30 dark:text-emerald-400' : 'bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-400'}`}>
+        {item.status === 'verified' ? 'Verified' : 'Pending'}
+      </span>
+    )},
     { header: "Created At", accessorKey: "created_at", cell: (item: any) => new Date(item.created_at).toLocaleDateString() }
   ];
 
@@ -94,8 +122,13 @@ export default function DonationListPage() {
       <Dialog open={!!selectedDonation} onOpenChange={(open) => !open && setSelectedDonation(null)}>
         <DialogContent className="max-w-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 overflow-y-auto max-h-[90vh]">
           <DialogHeader>
-            <DialogTitle className="text-xl font-bold border-b border-zinc-100 dark:border-zinc-800 pb-4">
-              Donation Details
+            <DialogTitle className="text-xl font-bold border-b border-zinc-100 dark:border-zinc-800 pb-4 flex justify-between items-center">
+              <span>Donation Details</span>
+              {selectedDonation?.status === 'verified' ? (
+                <span className="bg-emerald-100 text-emerald-700 text-xs px-2 py-1 rounded-full uppercase tracking-wider font-bold">Verified</span>
+              ) : (
+                <span className="bg-amber-100 text-amber-700 text-xs px-2 py-1 rounded-full uppercase tracking-wider font-bold">Pending Verification</span>
+              )}
             </DialogTitle>
           </DialogHeader>
           
@@ -156,6 +189,18 @@ export default function DonationListPage() {
                   </div>
                 )}
               </div>
+              
+              {(!selectedDonation.status || selectedDonation.status === 'pending') && (
+                <div className="mt-6 pt-6 border-t border-zinc-100 dark:border-zinc-800 flex justify-end">
+                  <Button 
+                    onClick={handleVerify} 
+                    disabled={verifying}
+                    className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-6 font-bold text-lg rounded-xl shadow-lg w-full"
+                  >
+                    {verifying ? "Verifying & Sending..." : "Verify Payment & Send Certificate"}
+                  </Button>
+                </div>
+              )}
             </div>
           )}
         </DialogContent>

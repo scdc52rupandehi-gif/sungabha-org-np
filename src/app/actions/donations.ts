@@ -45,7 +45,8 @@ export async function createDonation(formData: FormData) {
       purpose: data.purpose,
       message: data.message || null,
       payment_method: 'eSewa/Bank',
-      screenshot_url: screenshot_url
+      screenshot_url: screenshot_url,
+      status: 'pending' // Added status column tracking
     };
     
     const { error } = await supabase.from('donations').insert(payload);
@@ -62,13 +63,50 @@ export async function createDonation(formData: FormData) {
       message: data.message as string,
     });
 
-    // Send email receipt to Donor
+    // Send email acknowledgement to Donor (NOT the final certificate)
     await sendNotificationEmail({
-      type: 'Donation Receipt',
+      type: 'Donation Acknowledgement',
       name: `${data.first_name} ${data.last_name}`,
       email: data.email as string,
       amount: data.amount as string,
       purpose: data.purpose as string,
+    });
+
+    revalidatePath("/admin/donations");
+    return { success: true };
+  } catch (e: any) {
+    return { success: false, error: e.message || String(e) };
+  }
+}
+
+export async function verifyDonation(id: string) {
+  try {
+    const supabase = await getSupabase();
+    
+    // 1. Update status to verified
+    const { error: updateError } = await supabase
+      .from('donations')
+      .update({ status: 'verified' })
+      .eq('id', id);
+      
+    if (updateError) throw new Error(updateError.message);
+
+    // 2. Fetch the donation details to send the certificate
+    const { data: donation, error: fetchError } = await supabase
+      .from('donations')
+      .select('*')
+      .eq('id', id)
+      .single();
+      
+    if (fetchError || !donation) throw new Error(fetchError?.message || "Donation not found");
+
+    // 3. Send the actual Certificate Receipt
+    await sendNotificationEmail({
+      type: 'Donation Receipt',
+      name: donation.first_name ? `${donation.first_name} ${donation.last_name || ''}` : donation.donor_name || 'Valued Donor',
+      email: donation.email as string,
+      amount: donation.amount as string,
+      purpose: donation.purpose as string,
     });
 
     revalidatePath("/admin/donations");
