@@ -174,7 +174,7 @@ export default async function Home() {
         <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 aspect-[16/9] bg-zinc-900 group">
           <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/10 to-brand-green/10 z-0" />
           <VideoPlayer 
-            src="/video/scdc-documentary.mp4" 
+            src="https://youtu.be/81eueCcHufA" 
             poster="/Image/Homepage Hero Banner.png"
             className="w-full h-full relative z-10"
           />
