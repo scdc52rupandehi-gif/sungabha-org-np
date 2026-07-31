@@ -271,5 +271,13 @@ export const getCertificateHtml = (name: string, date: string, amount: string, p
 </div>
 </div>
 </div>
+<script>
+  window.onload = function() {
+    // Automatically trigger print dialog (which allows saving as PDF) after a small delay
+    setTimeout(function() {
+      window.print();
+    }, 800);
+  };
+</script>
 </body></html>
 `;
