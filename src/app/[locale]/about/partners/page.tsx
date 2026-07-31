@@ -12,33 +12,33 @@ export default function Page() {
   const partners = [
     {
       id: 1,
-      name: "Stromme Foundation",
+      name: "United Mission to Nepal",
       image: "/partners/partner-1.jpeg",
-      description: "Stromme Foundation has been a Donor Partner for SCDC from 2014 and Successfully completed ODW SAMVAD Program, Empowering adolescents- Dialogue Program of different Phase 2014 to 2022 SEEDS Program , 2015-2017. Mental Health and Well-being Project 2024-2026."
+      description: "SCDC implemented HIV/AIDS (2066-2072), Anti- Human Trafficking Project (2011-2013, 2017-2021), Mental Health Project (2019-2020), and Adolescent Sexual Reproductive Health Project (2019-2020)."
     },
     {
       id: 2,
-      name: "Partner Organization",
+      name: "Stromme Foundation",
       image: "/partners/partner-2.jpeg",
-      description: "Collaborating with us to create a justice-able and equitable society through inclusive development initiatives."
+      description: "Stromme Foundation has been a Donor Partner for SCDC from 2014 and successfully completed ODW SAMVAD Program, Empowering adolescents- Dialogue Program of different Phase (2014 to 2022), SEEDS Program (2015-2017), and Mental Health and Well-being Project (2024-2026)."
     },
     {
       id: 3,
-      name: "INF/ PFR Pokhara",
+      name: "INF / PFR Pokhara",
       image: "/partners/partner-3.jpeg",
-      description: "CBR- People with Disabilities -Community Based Rehabilitation 2065-2070. CBR Project worked in advocating the rights of People with Disabilities and supported in their capacity building and skill development to establish and strengthened Community based rehabilitation."
+      description: "Community Based Rehabilitation (CBR) for People with Disabilities (2065-2070). The CBR Project worked in advocating the rights of People with Disabilities and supported their capacity building and skill development to establish and strengthen Community based rehabilitation."
     },
     {
       id: 4,
       name: "World Vision International",
       image: "/partners/partner-4.jpeg",
-      description: "Education Project 2011-2015. The Education Project, supported by World Vision Nepal, focused on strengthening the quality of education through capacity building of teachers and School Management Committees (SMCs). The project also facilitated the formation and mobilization of Child Clubs to promote meaningful participation of children in school activities and decision-making. In addition, the project supported the retrofitting of school buildings to improve their safety and resilience."
+      description: "Education Project (2011-2015). Supported by World Vision Nepal, focused on strengthening the quality of education through capacity building of teachers and School Management Committees (SMCs). The project facilitated the formation and mobilization of Child Clubs to promote meaningful participation of children and supported the retrofitting of school buildings."
     },
     {
       id: 5,
       name: "Nepal Family Planning",
       image: "/partners/partner-5.jpeg",
-      description: "Youth information programme in support of Nepal Family Planning 2055-2060."
+      description: "Youth information programme in support of Nepal Family Planning Association of Nepal (2055-2060)."
     }
   ];
 

@@ -11,44 +11,99 @@ export const metadata: Metadata = {
 export default function Page() {
   const projects = [
     {
-      title: "HIV/AIDS Project",
+      title: "Youth Information Programme in Support of Nepal Family Planning Association of Nepal 2055-2060",
       achievements: [
-        "5 VACC has been formed at local government level and are mobilized for prevention of HIV/AIDS.",
-        "76 HIV infected people have formed AWAZ Samuha at local level and transmission rate has been reduced by 51%.",
-        "Community people are aware on HIV/AIDS and have reduced the discriminative behavior towards HIV/AIDS infected people."
+        "Formation of Youth information Centre and its Mobilization.",
+        "Youth Exchange Program.",
+        "Capacity building and skill development training."
       ]
     },
     {
-      title: "Anti Human Trafficking",
+      title: "Education Project 2011-2015",
       achievements: [
-        "396 families Benefitted from the Project implemented by SCDC, United mission to Nepal funded Project from 2017-2021",
-        "7 Women groups formed and are in mobilization to fight against Human Trafficking & 5 Adolescents groups who have been educating other adolescents to protect themselves from trafficking."
+        "Promoting Quality Education.",
+        "Capacity building of teachers and School Management Committees (SMCs).",
+        "Formation and mobilization of Child Clubs.",
+        "School building retrofitting to improve their safety and resilience."
       ]
     },
     {
-      title: "Adolescents Sexual Reproductive Health Project",
+      title: "Community Based Rehabilitation (CBR) for People with Disabilities 2065-2070",
       achievements: [
-        "550 families benefitted from the program implemented by SCDC, UMN Funded Project (2018-2020).",
-        "ASRH groups formed and mobilized in 12 School of two working municipals.",
-        "Adolescents girls' friendly school Health Corner supported in 12 Schools.",
-        "Adolescents Peers to peers' education system has efficiently sensitized on ASRH in schools and community."
+        "Organizing People with Disabilities.",
+        "Capacity building and skill development to establish and strengthen Community based rehabilitation."
       ]
     },
     {
-      title: "SEEDS/SAMVAD Project",
+      title: "HIV/AIDS Project 2066-2072",
       achievements: [
-        "More than 3000 adolescents have improved in life skills and have built confidence to protect themselves.",
-        "397 drop out adolescents are re-enrolled in school; 20 child marriage cases stopped.",
-        "Under the 'Tole Tole ma wada' campaign by SATHEE network, 68 adolescents received birth certificates & citizenship recommendations.",
-        "The learning of SAMVAD has been appreciated by local government so Kanchan Rural Municipal supported for the operation of 5 school SAMVAD."
+        "Awareness Raising and prevention of HIV/AIDs.",
+        "PEER education to Educate Youth about the HIV/AIDS and its risk.",
+        "Organized HIV/AIDs contaminated People.",
+        "Formed Village AIDS Coordination Committee to work on the awareness raising and advocate for the rights and rehabilitation."
+      ]
+    },
+    {
+      title: "Anti-Human Trafficking",
+      achievements: [
+        "Raising awareness on Human Trafficking.",
+        "Capacity building of youth and women to fight against violence and human trafficking.",
+        "Mother and adolescents girl group formation and mobilization to fight against Human Trafficking.",
+        "IGA support to inspire women empowerment."
+      ]
+    },
+    {
+      title: "Adolescent Sexual Reproductive Health",
+      achievements: [
+        "Raising awareness through mobilization of PEER Education.",
+        "Capacity building of adolescents and students.",
+        "Teachers training and capacity building.",
+        "Capacity building Health workers.",
+        "Adolescents friendly Reproductive Health program."
       ]
     },
     {
       title: "Mental Health Project",
       achievements: [
-        "In total 209 mental health affected people are in recovering stage after receiving the treatment.",
-        "Reduced social discriminative behavior towards mental health affected people.",
-        "Mental health affected people have good access to services provided by government hospital."
+        "Awareness Raising & Psychosocial Counselling services.",
+        "Medicine Support.",
+        "Capacity building of Health workers.",
+        "SHG formation and Mobilization.",
+        "IGA support to People with Mental Health Problems."
+      ]
+    },
+    {
+      title: "SEEDS (Socio-economic empowerment for Dignity and Sustainability) Programme",
+      achievements: [
+        "Promoting Inclusive Education through SAMVAD Operation.",
+        "CBOs and SHGs formation, capacity building and mobilization.",
+        "Quality Education through Early Child Development Program support and CMCC - Community based Coaching class.",
+        "IGA, Livelihoods and Entrepreneurships Programme."
+      ]
+    },
+    {
+      title: "Empowering Adolescent (SAMVAD) Program",
+      achievements: [
+        "SAMVAD Centre operation.",
+        "Adolescents and youth capacity building.",
+        "IGA and entrepreneurship training and support.",
+        "SAMVAD Graduate Forum and Network formation and Mobilization."
+      ]
+    },
+    {
+      title: "Mental Health and Well-being Project",
+      achievements: [
+        "Awareness Raising, Capacity building and Trainings.",
+        "Mobilization of Trained FCHVs, Teachers, Health Workers.",
+        "Psychosocial Support and Referral Service.",
+        "IGA Support."
+      ]
+    },
+    {
+      title: "ICDP- Positive Parenting Programme",
+      achievements: [
+        "PEER-Educators Mobilization.",
+        "ICDP orientation and training to the parents."
       ]
     }
   ];
