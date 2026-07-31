@@ -46,7 +46,8 @@ const Header = () => {
       href: '#',
       dropdown: [
         { name: 'Projects', href: '/projects' },
-        { name: 'Program Areas', href: '/programs' },
+        { name: 'Core Program Area', href: '/programs' },
+        { name: 'Annual & Audit Reports', href: '/reports/annual' },
       ]
     },
     { 

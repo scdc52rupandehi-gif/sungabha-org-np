@@ -4,15 +4,15 @@ import Section from '@/components/Section';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Programs & Activities',
+  title: 'Core Program Area',
 };
 
 export default function Page() {
   return (
     <>
       <Hero 
-        title="Programs & Activities" 
-        subtitle="Detailed information about Programs & Activities."
+        title="Core Program Area" 
+        subtitle="Detailed information about our Core Program Area."
         backgroundImage="https://images.unsplash.com/photo-1488521787991-ed7bbaae773c?q=80&w=2070&auto=format&fit=crop"
       />
       <Section className="py-24">
