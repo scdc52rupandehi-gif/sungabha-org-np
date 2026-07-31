@@ -192,28 +192,35 @@ export default function DonateForm() {
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
                     <p className="text-sm text-zinc-500">Bank Name</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Demo Bank Ltd.</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
-                  <div>
-                    <p className="text-sm text-zinc-500">Account Name</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Demo NGO Account</p>
-                  </div>
-                </div>
-                <div className="flex items-start gap-3">
-                  <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
-                  <div>
-                    <p className="text-sm text-zinc-500">Account Number</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">12345678901234</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">SHINE RESUNGA DEVELOPMENT BANK LTD.</p>
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
                   <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
                   <div>
                     <p className="text-sm text-zinc-500">Branch</p>
-                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">Main Branch</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">RUDRAPUR BRANCH</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Account Name</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">SUNGABHA COMMUNITY DEVELOPMENT CENTER</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Account Number</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100 font-mono tracking-wider">00500600024364000005</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Building2 className="w-5 h-5 text-emerald-600 mt-1" />
+                  <div>
+                    <p className="text-sm text-zinc-500">Account Type</p>
+                    <p className="font-semibold text-zinc-900 dark:text-zinc-100">S.R. SAVING NPR</p>
                   </div>
                 </div>
               </div>
