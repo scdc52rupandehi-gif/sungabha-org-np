@@ -279,25 +279,42 @@ export default async function Home() {
       </section>
 
       {/* Map Section */}
-      <section className="w-full h-[400px] md:h-[500px] relative">
-        <iframe 
-          src="https://maps.google.com/maps?q=Sungabha%20Community%20Development%20Center%20(SCDC)&t=&z=14&ie=UTF8&iwloc=&output=embed" 
-          width="100%" 
-          height="100%" 
-          style={{ border: 0 }} 
-          allowFullScreen={false} 
-          loading="lazy" 
-          referrerPolicy="no-referrer-when-downgrade"
-          className="w-full h-full grayscale-[20%] contrast-125 opacity-90 hover:grayscale-0 hover:opacity-100 transition-all duration-500"
-        />
-        <div className="absolute top-4 left-4 z-10 bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-lg border border-border">
-          <h3 className="font-bold text-foreground font-heading">Find Us on Google Maps</h3>
-          <p className="text-sm text-muted-foreground mt-1">Sungabha Community Development Center (SCDC)</p>
-          <a href="https://share.google/MxNOIE2JTIzLPkFzi" target="_blank" rel="noreferrer" className="text-sm text-brand-blue font-bold hover:underline mt-2 inline-block">
-            Get Directions →
-          </a>
+      <Section className="py-20 bg-zinc-50 dark:bg-zinc-950/30">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-10">
+            <div className="inline-flex items-center gap-2 bg-brand-blue/10 text-brand-blue px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-4">
+              Our Location
+            </div>
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-foreground mb-4">
+              Visit Our Office
+            </h2>
+            <p className="text-muted-foreground">
+              We are always open to community interactions. Find us at our central office in Rupandehi.
+            </p>
+          </div>
+          
+          <div className="relative w-full h-[350px] md:h-[450px] rounded-3xl overflow-hidden shadow-2xl border border-border group">
+            <iframe 
+              src="https://maps.google.com/maps?q=Sungabha%20Community%20Development%20Center%20(SCDC)&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="100%" 
+              style={{ border: 0 }} 
+              allowFullScreen={false} 
+              loading="lazy" 
+              referrerPolicy="no-referrer-when-downgrade"
+              className="w-full h-full grayscale-[15%] contrast-125 opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+            />
+            
+            <div className="absolute bottom-6 left-6 z-10 bg-background/95 backdrop-blur-md p-5 rounded-2xl shadow-xl border border-border max-w-[280px] md:max-w-sm transform transition-transform duration-500 group-hover:-translate-y-2">
+              <h3 className="font-bold text-foreground font-heading text-lg leading-tight">Sungabha Community Development Center</h3>
+              <p className="text-sm text-muted-foreground mt-2">Kanchan-4, Sungabha Chowk, Rupandehi, Nepal</p>
+              <a href="https://share.google/MxNOIE2JTIzLPkFzi" target="_blank" rel="noreferrer" className="inline-flex items-center gap-2 bg-brand-blue text-white px-5 py-2.5 rounded-xl text-sm font-bold mt-4 hover:bg-brand-blue/90 transition-all shadow-md active:scale-95">
+                Get Directions <ArrowRight className="w-4 h-4" />
+              </a>
+            </div>
+          </div>
         </div>
-      </section>
+      </Section>
     </>
   );
 }
