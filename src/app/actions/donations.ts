@@ -1,15 +1,12 @@
 "use server";
-import { createServerClient } from "@supabase/ssr";
-import { cookies } from "next/headers";
+import { createClient } from "@supabase/supabase-js";
 import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 import { sendNotificationEmail } from "@/lib/mail";
 
 async function getSupabase() {
-  const cookieStore = await cookies();
-  return createServerClient(
+  return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { cookies: { getAll() { return cookieStore.getAll() } } }
+    process.env.SUPABASE_SERVICE_ROLE_KEY!
   );
 }
 
