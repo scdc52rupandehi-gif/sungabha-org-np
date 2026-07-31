@@ -7,7 +7,8 @@ import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare } from 'lucide-react';
+import VideoPlayer from '@/components/VideoPlayer';
+import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare, Play } from 'lucide-react';
 import { getTranslations, getLocale } from 'next-intl/server';
 
 async function getProjects(): Promise<any[]> {
@@ -153,6 +154,30 @@ export default async function Home() {
               />
             </div>
           </div>
+        </div>
+      </Section>
+
+      {/* Documentary Video Section */}
+      <Section className="bg-zinc-950 py-20 lg:py-32 overflow-hidden">
+        <div className="max-w-5xl mx-auto text-center mb-12">
+          <div className="inline-flex items-center gap-2 bg-brand-blue/20 text-brand-blue px-4 py-1.5 rounded-full text-xs font-bold tracking-widest uppercase mb-6">
+            Our Journey
+          </div>
+          <h2 className="text-4xl md:text-5xl font-heading font-bold text-white leading-tight mb-6">
+            28 Years of Impact
+          </h2>
+          <p className="text-lg text-zinc-400 max-w-2xl mx-auto leading-relaxed">
+            Witness our journey of empowering communities, transforming lives, and building a justice-able society in Nepal. Watch the SCDC documentary.
+          </p>
+        </div>
+        
+        <div className="relative max-w-5xl mx-auto rounded-3xl overflow-hidden shadow-2xl border border-zinc-800 aspect-[16/9] bg-zinc-900 group">
+          <div className="absolute inset-0 bg-gradient-to-tr from-brand-blue/10 to-brand-green/10 z-0" />
+          <VideoPlayer 
+            src="/video/scdc-documentary.mp4" 
+            poster="/Image/Homepage Hero Banner.png"
+            className="w-full h-full relative z-10"
+          />
         </div>
       </Section>
 
