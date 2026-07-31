@@ -1,7 +1,7 @@
 "use server";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
-import { revalidatePath } from "next/cache";
+import { revalidatePath, unstable_noStore as noStore } from "next/cache";
 import { sendNotificationEmail } from "@/lib/mail";
 
 async function getSupabase() {
@@ -97,6 +97,7 @@ export async function deleteDonation(id: string) {
 }
 
 export async function getDonations() {
+  noStore();
   try {
     const supabase = await getSupabase();
     const { data, error } = await supabase.from('donations').select('*').order('created_at', { ascending: false });
