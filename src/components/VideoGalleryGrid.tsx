@@ -93,10 +93,10 @@ export default function VideoGalleryGrid({ videos }: { videos: any[] }) {
           </button>
 
           {/* Main Video */}
-          <div className="relative w-full h-full max-w-5xl max-h-[80vh] flex items-center justify-center bg-black rounded-xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
+          <div className="relative w-full max-w-5xl aspect-video bg-black rounded-xl overflow-hidden shadow-2xl flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
              <iframe 
                 src={selectedVideoUrl} 
-                className="w-full h-full aspect-video" 
+                className="w-full h-full" 
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowFullScreen
               ></iframe>
