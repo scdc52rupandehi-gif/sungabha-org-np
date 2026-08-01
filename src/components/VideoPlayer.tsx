@@ -50,7 +50,7 @@ export default function VideoPlayer({ src, poster, className = "" }: VideoPlayer
       
       {hasRendered ? (
         <iframe
-          className="w-full h-full object-cover"
+          className="w-full h-full"
           src={`https://www.youtube.com/embed/${videoId}?autoplay=0&mute=0&controls=1&showinfo=0&modestbranding=1&rel=0`}
           title="SCDC Documentary"
           frameBorder="0"
