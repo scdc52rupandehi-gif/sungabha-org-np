@@ -125,11 +125,21 @@ export async function sendNotificationEmail({
     `;
   }
 
+  // Create a plain text fallback from the HTML content by stripping tags and replacing breaks
+  const textContent = htmlContent
+    .replace(/<br\s*[\/]?>/gi, '\n')
+    .replace(/<\/p>/gi, '\n\n')
+    .replace(/<\/h[1-6]>/gi, '\n\n')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\n\s*\n/g, '\n\n')
+    .trim();
+
   const mailOptions = {
-    from: '"SCDC Website" <scdc52rupandehi@gmail.com>',
+    from: '"SCDC Nepal" <scdc52rupandehi@gmail.com>',
     to: toAddress,
     replyTo: email || undefined,
     subject: mailSubject,
+    text: textContent,
     html: htmlContent,
   };
 
