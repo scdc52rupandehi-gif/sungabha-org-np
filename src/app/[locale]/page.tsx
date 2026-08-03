@@ -8,7 +8,7 @@ import { cookies } from 'next/headers';
 import Link from 'next/link';
 import Image from 'next/image';
 import VideoPlayer from '@/components/VideoPlayer';
-import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare, Play } from 'lucide-react';
+import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSquare, Play, MapPin } from 'lucide-react';
 import { getTranslations, getLocale } from 'next-intl/server';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
