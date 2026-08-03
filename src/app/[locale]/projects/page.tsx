@@ -25,7 +25,7 @@ export default async function ProjectsPage() {
               title={p.title}
               excerpt={(p.achievements?.[0] || "").substring(0, 100) + "..."}
               image={p.featured_image}
-              status={p.status}
+              status={p.status as "Completed" | "Active" | "Upcoming"}
               location={p.location || "Nepal"}
               href={"/projects/" + (p.slug || p.id)}
             />
