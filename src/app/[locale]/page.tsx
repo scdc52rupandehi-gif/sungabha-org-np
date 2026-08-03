@@ -12,36 +12,19 @@ import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSq
 import { getTranslations, getLocale } from 'next-intl/server';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
+import { projectsData } from '@/data/projects';
+
 async function getProjects(): Promise<any[]> {
-  return [
-    {
-      id: "1",
-      title: "HIV/AIDS Project",
-      description: "5 VACC has been formed at local government level and are mobilized for prevention of HIV/AIDS. 76 HIV infected people have formed AWAZ Samuha at local level and transmission rate has been reduced by 51%.",
-      featured_image: "/Image/Health%20%26%20Nutrition.png",
-      status: "Completed",
-      location: "Rupandehi",
-      slug: "hiv-aids-project"
-    },
-    {
-      id: "2",
-      title: "Anti Human Trafficking",
-      description: "396 families Benefitted from the Project. 7 Women groups formed and mobilized to fight against Human Trafficking alongside adolescent peer educators.",
-      featured_image: "/Image/Women%20Empowerment.png",
-      status: "Completed",
-      location: "Rupandehi",
-      slug: "anti-human-trafficking"
-    },
-    {
-      id: "3",
-      title: "SEEDS/SAMVAD Education",
-      description: "Re-enrolling dropped out adolescents, improving life skills, and preventing child marriages through youth forums and SATHEE networks.",
-      featured_image: "/Image/Education%20Program.png",
-      status: "Completed",
-      location: "Kanchan Rural Municipal",
-      slug: "seeds-samvad-project"
-    }
-  ];
+  // Return top 3 featured projects
+  return projectsData.slice(0, 3).map(p => ({
+    id: p.id,
+    title: p.title,
+    description: p.achievements[0],
+    featured_image: p.featured_image,
+    status: p.status,
+    location: p.location,
+    slug: p.slug
+  }));
 }
 
 export default async function Home() {

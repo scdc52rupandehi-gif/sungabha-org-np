@@ -6,7 +6,7 @@ export const projectsData = [
     partner: "Stromme Foundation",
     duration: "2024-Present",
     status: "Ongoing",
-    featured_image: "/Image/Health%20%26%20Nutrition.png",
+    featured_image: "/Image/Projects/scdc_mental_health_project.jpg",
     location: "SCDC Work Area",
     achievements: [
       "Conducted community awareness programmes on mental health.",
@@ -25,7 +25,7 @@ export const projectsData = [
     partner: "Stromme Foundation",
     duration: "2014-2024",
     status: "Completed",
-    featured_image: "/Image/Education%20Program.png",
+    featured_image: "/Image/Projects/scdc_samvad_adolescents.jpg",
     location: "SCDC Work Area",
     achievements: [
       "Operated SAMVAD Learning Centres.",
@@ -41,7 +41,7 @@ export const projectsData = [
     partner: "United Mission to Nepal (UMN)",
     duration: "2011-2013 & 2018-2021",
     status: "Completed",
-    featured_image: "/Image/Women%20Empowerment.png",
+    featured_image: "/Image/Projects/scdc_anti_trafficking.jpg",
     location: "Rupandehi",
     achievements: [
       "Raised awareness on human trafficking and gender-based violence.",
@@ -57,7 +57,7 @@ export const projectsData = [
     partner: "United Mission to Nepal (UMN)",
     duration: "2019-2020",
     status: "Completed",
-    featured_image: "/Image/Health%20%26%20Nutrition.png",
+    featured_image: "/Image/Projects/scdc_reproductive_health.jpg",
     location: "Rupandehi",
     achievements: [
       "Raised awareness through peer educator mobilization.",
@@ -73,7 +73,7 @@ export const projectsData = [
     partner: "United Mission to Nepal (UMN)",
     duration: "2019-2020",
     status: "Completed",
-    featured_image: "/Image/Child%20Protection.png",
+    featured_image: "/Image/Projects/scdc_mental_health_umn.jpg",
     location: "Rupandehi",
     achievements: [
       "Conducted mental health awareness campaigns.",
@@ -91,7 +91,7 @@ export const projectsData = [
     partner: "Stromme Foundation",
     duration: "2015-2017",
     status: "Completed",
-    featured_image: "/Image/Education%20Program.png",
+    featured_image: "/Image/Projects/scdc_seeds_empowerment.jpg",
     location: "Rupandehi",
     achievements: [
       "Promoted inclusive education through SAMVAD Centres.",
@@ -108,7 +108,7 @@ export const projectsData = [
     partner: "World Vision International",
     duration: "2011-2015",
     status: "Completed",
-    featured_image: "/Image/Education%20Program.png",
+    featured_image: "/Image/Projects/scdc_education_project.jpg",
     location: "Rupandehi",
     achievements: [
       "Promoted quality education in schools.",
@@ -124,7 +124,7 @@ export const projectsData = [
     partner: "United Mission to Nepal (UMN)",
     duration: "2009-2014",
     status: "Completed",
-    featured_image: "/Image/Health%20%26%20Nutrition.png",
+    featured_image: "/Image/Projects/scdc_hiv_prevention.jpg",
     location: "Rupandehi",
     achievements: [
       "Conducted HIV/AIDS awareness and prevention campaigns.",
@@ -140,7 +140,7 @@ export const projectsData = [
     partner: "INF Nepal",
     duration: "2004-2011",
     status: "Completed",
-    featured_image: "/Image/Health%20%26%20Nutrition.png",
+    featured_image: "/Image/Projects/scdc_cbr_disabilities.jpg",
     location: "Rupandehi",
     achievements: [
       "Organized and strengthened organizations of persons with disabilities.",
@@ -155,7 +155,7 @@ export const projectsData = [
     partner: "Nepal Family Planning Association (NFPA)",
     duration: "2054-2059 B.S.",
     status: "Completed",
-    featured_image: "/Image/Women%20Empowerment.png",
+    featured_image: "/Image/Projects/scdc_youth_information.jpg",
     location: "Rupandehi",
     achievements: [
       "Established and mobilized Youth Information Centres.",
