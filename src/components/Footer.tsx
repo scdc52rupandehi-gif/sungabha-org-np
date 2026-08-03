@@ -4,8 +4,8 @@ import React from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { usePathname } from 'next/navigation';
-import { MapPin, Phone, Mail, ArrowRight, Heart, Facebook, Instagram, Linkedin, Youtube } from 'lucide-react';
-
+import { MapPin, Phone, Mail, ArrowRight, Heart } from 'lucide-react';
+import { FaFacebook, FaInstagram, FaLinkedin, FaYoutube } from 'react-icons/fa';
 
 const Footer = () => {
   const pathname = usePathname();
@@ -44,16 +44,16 @@ const Footer = () => {
             </p>
             <div className="flex items-center gap-3">
               <a href="#" aria-label="Facebook" className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 hover:bg-blue-600 hover:text-white transition-all">
-                <Facebook size={18} />
+                <FaFacebook size={18} />
               </a>
               <a href="#" aria-label="Instagram" className="w-10 h-10 rounded-full bg-pink-100 flex items-center justify-center text-pink-600 hover:bg-gradient-to-tr hover:from-yellow-400 hover:via-pink-500 hover:to-purple-600 hover:text-white transition-all border-none">
-                <Instagram size={18} />
+                <FaInstagram size={18} />
               </a>
               <a href="#" aria-label="LinkedIn" className="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center text-blue-700 hover:bg-blue-700 hover:text-white transition-all">
-                <Linkedin size={18} />
+                <FaLinkedin size={18} />
               </a>
               <a href="https://youtube.com/@sungabhacommunitydevelopme1252?si=Jt1C9FmBVnf9uWxw" target="_blank" rel="noopener noreferrer" aria-label="YouTube" className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center text-red-600 hover:bg-red-600 hover:text-white transition-all">
-                <Youtube size={18} />
+                <FaYoutube size={18} />
               </a>
             </div>
           </div>

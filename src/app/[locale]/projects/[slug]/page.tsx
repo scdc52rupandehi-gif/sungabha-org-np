@@ -6,8 +6,9 @@ import Section from '@/components/Section';
 import { Target, CheckCircle2 } from 'lucide-react';
 import Image from 'next/image';
 
-export default function ProjectDetail({ params }: { params: { slug: string } }) {
-  const project = projectsData.find(p => p.slug === params.slug || p.id === params.slug);
+export default async function ProjectDetail({ params }: { params: Promise<{ slug: string }> }) {
+  const resolvedParams = await params;
+  const project = projectsData.find(p => p.slug === resolvedParams.slug || p.id === resolvedParams.slug);
   
   if (!project) {
     notFound();
