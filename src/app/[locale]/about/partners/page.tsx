@@ -13,7 +13,7 @@ export default function Page() {
     {
       id: 1,
       name: "United Mission to Nepal",
-      image: "/partners/partner-1.jpeg",
+      image: "/partners/partner-1.png",
       description: "SCDC implemented HIV/AIDS (2066-2072), Anti- Human Trafficking Project (2011-2013, 2017-2021), Mental Health Project (2019-2020), and Adolescent Sexual Reproductive Health Project (2019-2020)."
     },
     {
@@ -25,13 +25,13 @@ export default function Page() {
     {
       id: 3,
       name: "INF / PFR Pokhara",
-      image: "/partners/partner-3.jpeg",
+      image: "/partners/partner-3.png",
       description: "Community Based Rehabilitation (CBR) for People with Disabilities (2065-2070). The CBR Project worked in advocating the rights of People with Disabilities and supported their capacity building and skill development to establish and strengthen Community based rehabilitation."
     },
     {
       id: 4,
       name: "World Vision International",
-      image: "/partners/partner-4.jpeg",
+      image: "/partners/partner-4.png",
       description: "Education Project (2011-2015). Supported by World Vision Nepal, focused on strengthening the quality of education through capacity building of teachers and School Management Committees (SMCs). The project facilitated the formation and mobilization of Child Clubs to promote meaningful participation of children and supported the retrofitting of school buildings."
     },
     {

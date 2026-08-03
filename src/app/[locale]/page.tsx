@@ -240,11 +240,17 @@ export default async function Home() {
       {/* Our Partners Section */}
       <Section title="Our Partners" subtitle="Working together to create a sustainable impact." className="bg-zinc-50 dark:bg-zinc-900/50">
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-6 items-center justify-items-center mt-10">
-          {[1, 2, 3, 4, 5].map((num) => (
-            <div key={num} className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-all hover:-translate-y-1 w-full flex justify-center items-center aspect-video">
+          {[
+            { id: 1, ext: 'png' },
+            { id: 2, ext: 'jpeg' },
+            { id: 3, ext: 'png' },
+            { id: 4, ext: 'png' },
+            { id: 5, ext: 'jpeg' }
+          ].map((partner) => (
+            <div key={partner.id} className="bg-white dark:bg-zinc-800 p-6 rounded-2xl shadow-sm border border-zinc-100 dark:border-zinc-700 hover:shadow-lg transition-all hover:-translate-y-1 w-full flex justify-center items-center aspect-video">
               <Image 
-                src={`/partners/partner-${num}.jpeg`} 
-                alt={`Partner ${num}`} 
+                src={`/partners/partner-${partner.id}.${partner.ext}`} 
+                alt={`Partner ${partner.id}`} 
                 width={150} 
                 height={100} 
                 className="object-contain max-h-16 w-auto mix-blend-multiply dark:mix-blend-normal" 

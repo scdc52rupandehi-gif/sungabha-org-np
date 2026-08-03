@@ -11,99 +11,103 @@ export const metadata: Metadata = {
 export default function Page() {
   const projects = [
     {
-      title: "Youth Information Programme in Support of Nepal Family Planning Association of Nepal 2055-2060",
+      title: "Empowering Adolescents (SAMVAD) Programme",
+      partner: "Stromme Foundation",
+      duration: "2014-2024",
       achievements: [
-        "Formation of Youth information Centre and its Mobilization.",
-        "Youth Exchange Program.",
-        "Capacity building and skill development training."
+        "Operated SAMVAD Learning Centres.",
+        "Conducted leadership and capacity-building programmes.",
+        "Provided entrepreneurship and income-generating activity (IGA) training and support.",
+        "Formed and mobilized SAMVAD Graduate Forums and Networks."
       ]
     },
     {
-      title: "Education Project 2011-2015",
+      title: "Anti-Human Trafficking Project",
+      partner: "United Mission to Nepal (UMN)",
+      duration: "2011-2013 & 2018-2021",
       achievements: [
-        "Promoting Quality Education.",
-        "Capacity building of teachers and School Management Committees (SMCs).",
-        "Formation and mobilization of Child Clubs.",
-        "School building retrofitting to improve their safety and resilience."
+        "Raised awareness on human trafficking and gender-based violence.",
+        "Built the capacity of youth and women.",
+        "Formed and mobilized mothers' groups and adolescent girls' groups.",
+        "Supported income-generating activities (IGA) for women's economic empowerment."
       ]
     },
     {
-      title: "Community Based Rehabilitation (CBR) for People with Disabilities 2065-2070",
+      title: "Adolescent Sexual and Reproductive Health Project",
+      partner: "United Mission to Nepal (UMN)",
+      duration: "2019-2020",
       achievements: [
-        "Organizing People with Disabilities.",
-        "Capacity building and skill development to establish and strengthen Community based rehabilitation."
-      ]
-    },
-    {
-      title: "HIV/AIDS Project 2066-2072",
-      achievements: [
-        "Awareness Raising and prevention of HIV/AIDs.",
-        "PEER education to Educate Youth about the HIV/AIDS and its risk.",
-        "Organized HIV/AIDs contaminated People.",
-        "Formed Village AIDS Coordination Committee to work on the awareness raising and advocate for the rights and rehabilitation."
-      ]
-    },
-    {
-      title: "Anti-Human Trafficking",
-      achievements: [
-        "Raising awareness on Human Trafficking.",
-        "Capacity building of youth and women to fight against violence and human trafficking.",
-        "Mother and adolescents girl group formation and mobilization to fight against Human Trafficking.",
-        "IGA support to inspire women empowerment."
-      ]
-    },
-    {
-      title: "Adolescent Sexual Reproductive Health",
-      achievements: [
-        "Raising awareness through mobilization of PEER Education.",
-        "Capacity building of adolescents and students.",
-        "Teachers training and capacity building.",
-        "Capacity building Health workers.",
-        "Adolescents friendly Reproductive Health program."
+        "Raised awareness through peer educator mobilization.",
+        "Built the capacity of adolescents and students.",
+        "Conducted training for teachers and health workers.",
+        "Promoted adolescent-friendly sexual and reproductive health services."
       ]
     },
     {
       title: "Mental Health Project",
+      partner: "United Mission to Nepal (UMN)",
+      duration: "2019-2020",
       achievements: [
-        "Awareness Raising & Psychosocial Counselling services.",
-        "Medicine Support.",
-        "Capacity building of Health workers.",
-        "SHG formation and Mobilization.",
-        "IGA support to People with Mental Health Problems."
+        "Conducted mental health awareness campaigns.",
+        "Provided psychosocial counselling services.",
+        "Supported access to essential medicines.",
+        "Built the capacity of health workers.",
+        "Formed and mobilized Self-Help Groups (SHGs).",
+        "Supported income-generating activities for people with mental health conditions."
       ]
     },
     {
-      title: "SEEDS (Socio-economic empowerment for Dignity and Sustainability) Programme",
+      title: "SEEDS (Socio-Economic Empowerment for Dignity and Sustainability) Programme",
+      partner: "Stromme Foundation",
+      duration: "2015-2017",
       achievements: [
-        "Promoting Inclusive Education through SAMVAD Operation.",
-        "CBOs and SHGs formation, capacity building and mobilization.",
-        "Quality Education through Early Child Development Program support and CMCC - Community based Coaching class.",
-        "IGA, Livelihoods and Entrepreneurships Programme."
+        "Promoted inclusive education through SAMVAD Centres.",
+        "Formed and strengthened Community-Based Organizations (CBOs).",
+        "Established and mobilized Self-Help Groups (SHGs).",
+        "Supported Early Childhood Development (ECD) and Community-Based Coaching Classes (CMCC).",
+        "Promoted income generation, livelihoods, and entrepreneurship development."
       ]
     },
     {
-      title: "Empowering Adolescent (SAMVAD) Program",
+      title: "Education Project",
+      partner: "World Vision International",
+      duration: "2011-2015",
       achievements: [
-        "SAMVAD Centre operation.",
-        "Adolescents and youth capacity building.",
-        "IGA and entrepreneurship training and support.",
-        "SAMVAD Graduate Forum and Network formation and Mobilization."
+        "Promoted quality education in schools.",
+        "Built the capacity of teachers and School Management Committees (SMCs).",
+        "Formed and mobilized Child Clubs to encourage student participation.",
+        "Retrofitted school buildings to improve safety and disaster resilience."
       ]
     },
     {
-      title: "Mental Health and Well-being Project",
+      title: "HIV/AIDS Prevention Project",
+      partner: "United Mission to Nepal (UMN)",
+      duration: "2009-2014",
       achievements: [
-        "Awareness Raising, Capacity building and Trainings.",
-        "Mobilization of Trained FCHVs, Teachers, Health Workers.",
-        "Psychosocial Support and Referral Service.",
-        "IGA Support."
+        "Conducted HIV/AIDS awareness and prevention campaigns.",
+        "Mobilized peer educators to educate youth.",
+        "Organized and supported people living with HIV/AIDS.",
+        "Formed Village AIDS Coordination Committees for awareness, advocacy, and rehabilitation."
       ]
     },
     {
-      title: "ICDP- Positive Parenting Programme",
+      title: "Community-Based Rehabilitation (CBR) for Persons with Disabilities",
+      partner: "INF Nepal",
+      duration: "2004-2011",
       achievements: [
-        "PEER-Educators Mobilization.",
-        "ICDP orientation and training to the parents."
+        "Organized and strengthened organizations of persons with disabilities.",
+        "Provided capacity-building and skill development opportunities.",
+        "Strengthened community-based rehabilitation systems and services."
+      ]
+    },
+    {
+      title: "Youth Information Programme",
+      partner: "Nepal Family Planning Association (NFPA)",
+      duration: "2054-2059 B.S.",
+      achievements: [
+        "Established and mobilized Youth Information Centres.",
+        "Conducted Youth Exchange Programmes.",
+        "Organized capacity-building and skill development training for youth."
       ]
     }
   ];
@@ -119,11 +123,19 @@ export default function Page() {
         <div className="max-w-4xl mx-auto space-y-12">
           {projects.map((project, i) => (
             <div key={i} className="bg-card border border-border shadow-md rounded-3xl p-8 md:p-10 hover:shadow-xl transition-all duration-300">
-              <div className="flex items-center gap-4 mb-6 pb-6 border-b border-border">
+              <div className="flex items-center gap-4 mb-4 pb-4 border-b border-border">
                 <div className="w-14 h-14 bg-brand-blue/10 rounded-2xl flex items-center justify-center flex-shrink-0">
                   <Target className="w-7 h-7 text-brand-blue" />
                 </div>
                 <h2 className="text-2xl md:text-3xl font-heading font-bold text-foreground">{project.title}</h2>
+              </div>
+              <div className="flex flex-wrap gap-3 mb-6">
+                <span className="px-3 py-1 bg-brand-green/10 text-brand-green text-sm font-semibold rounded-full border border-brand-green/20">
+                  Partner: {project.partner}
+                </span>
+                <span className="px-3 py-1 bg-brand-blue/10 text-brand-blue text-sm font-semibold rounded-full border border-brand-blue/20">
+                  Duration: {project.duration}
+                </span>
               </div>
               <ul className="space-y-4">
                 {project.achievements.map((achievement, j) => (
