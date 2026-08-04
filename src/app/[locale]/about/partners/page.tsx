@@ -13,14 +13,14 @@ export default function Page() {
     {
       id: 1,
       name: "United Mission to Nepal",
-      image: "/partners/partner-1.png",
+      image: "/partners/partner-2.jpeg",
       description: "SCDC implemented HIV/AIDS (2066-2072), Anti- Human Trafficking Project (2011-2013, 2017-2021), Mental Health Project (2019-2020), and Adolescent Sexual Reproductive Health Project (2019-2020)."
     },
     {
       id: 2,
-      name: "Strømme Foundation",
-      image: "/partners/partner-2.jpeg",
-      description: "Strømme Foundation has been a Donor Partner for SCDC from 2014 and successfully completed ODW SAMVAD Program, Empowering adolescents- Dialogue Program of different Phase (2014 to 2022), SEEDS Program (2015-2017), and Mental Health and Well-being Project (2024-2026)."
+      name: "Stromme Foundation",
+      image: "/partners/partner-1.png",
+      description: "Stromme Foundation has been a Donor Partner for SCDC from 2014 and successfully completed ODW SAMVAD Program, Empowering adolescents- Dialogue Program of different Phase (2014 to 2022), SEEDS Program (2015-2017), and Mental Health and Well-being Project (2024-2026)."
     },
     {
       id: 3,
