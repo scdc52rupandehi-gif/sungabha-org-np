@@ -18,9 +18,9 @@ export default function Page() {
     },
     {
       id: 2,
-      name: "Stromme Foundation",
+      name: "Strømme Foundation",
       image: "/partners/partner-2.jpeg",
-      description: "Stromme Foundation has been a Donor Partner for SCDC from 2014 and successfully completed ODW SAMVAD Program, Empowering adolescents- Dialogue Program of different Phase (2014 to 2022), SEEDS Program (2015-2017), and Mental Health and Well-being Project (2024-2026)."
+      description: "Strømme Foundation has been a Donor Partner for SCDC from 2014 and successfully completed ODW SAMVAD Program, Empowering adolescents- Dialogue Program of different Phase (2014 to 2022), SEEDS Program (2015-2017), and Mental Health and Well-being Project (2024-2026)."
     },
     {
       id: 3,
