@@ -12,19 +12,22 @@ import { ArrowRight, Users, Target, Heart, CheckCircle2, Award, Globe, MessageSq
 import { getTranslations, getLocale } from 'next-intl/server';
 import AnimatedCounter from '@/components/AnimatedCounter';
 
-import { projectsData } from '@/data/projects';
+export const revalidate = 0; // Disable caching on homepage for dynamic projects
 
 async function getProjects(): Promise<any[]> {
-  // Return top 3 featured projects
-  return projectsData.slice(0, 3).map(p => ({
-    id: p.id,
-    title: p.title,
-    description: p.achievements[0],
-    featured_image: p.featured_image,
-    status: p.status,
-    location: p.location,
-    slug: p.slug
-  }));
+  try {
+    const cookieStore = await cookies();
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      { cookies: { getAll() { return cookieStore.getAll() } } }
+    );
+    const { data } = await supabase.from('projects').select('*').order('created_at', { ascending: false }).limit(3);
+    return data || [];
+  } catch (error) {
+    console.error("Error loading homepage projects:", error);
+    return [];
+  }
 }
 
 export default async function Home() {

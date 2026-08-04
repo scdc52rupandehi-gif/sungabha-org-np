@@ -3,12 +3,12 @@ import React, { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Plus, Edit, Trash2 } from 'lucide-react';
+import { Plus, Edit, Trash2, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
 import { toast } from "sonner";
 import { DataTable } from "@/components/ui/data-table";
 import { DeleteDialog } from "@/components/ui/delete-dialog";
-import { deleteProject } from "@/app/actions/projects";
+import { deleteProject, markProjectComplete } from "@/app/actions/projects";
 
 export default function ProjectListPage() {
   const supabase = createClient();
@@ -45,8 +45,29 @@ export default function ProjectListPage() {
     }
   };
 
+  const handleMarkComplete = async (id: string) => {
+    if (confirm("Are you sure you want to mark this project as completed?")) {
+      try {
+        await markProjectComplete(id);
+        toast.success("Project marked as completed");
+        fetchItems();
+      } catch (error) {
+        toast.error("Failed to update status");
+      }
+    }
+  };
+
   const columns = [
     { header: "ID / Title", accessorKey: "title", cell: (item: any) => item.title || item.name || item.full_name || item.id },
+    { header: "Status", accessorKey: "status", cell: (item: any) => (
+      <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+        item.status === 'Completed' ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-400' :
+        item.status === 'Ongoing' || item.status === 'Active' ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-400' :
+        'bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-400'
+      }`}>
+        {item.status || 'Active'}
+      </span>
+    )},
     { header: "Created At", accessorKey: "created_at", cell: (item: any) => new Date(item.created_at).toLocaleDateString() }
   ];
 
@@ -71,6 +92,11 @@ export default function ProjectListPage() {
             searchKey="title" 
             actions={(item) => (
               <>
+                {(item.status === 'Ongoing' || item.status === 'Active') && (
+                  <Button variant="ghost" size="icon" onClick={() => handleMarkComplete(item.id)} title="Mark as Completed" className="text-green-600 hover:text-green-700 hover:bg-green-50 dark:hover:bg-green-900/20">
+                    <CheckCircle size={16} />
+                  </Button>
+                )}
                 <Link href={`/admin/projects/${item.id}/edit`}>
                   <Button variant="ghost" size="icon"><Edit size={16} /></Button>
                 </Link>
