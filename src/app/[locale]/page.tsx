@@ -302,7 +302,7 @@ export default async function Home() {
             {/* Map Frame */}
             <div className="w-full lg:w-7/12 relative aspect-[4/3] lg:aspect-video rounded-3xl overflow-hidden shadow-xl border border-zinc-200 dark:border-zinc-800 group bg-zinc-200 dark:bg-zinc-800">
               <iframe 
-                src="https://maps.google.com/maps?q=Sungabha%20Community%20Development%20Center%20(SCDC)&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+                src="https://maps.google.com/maps?q=27%C2%B036'45.2%22N+83%C2%B015'00.3%22E&t=&z=14&ie=UTF8&iwloc=&output=embed" 
                 className="absolute inset-0 w-full h-full grayscale-[15%] contrast-110 opacity-90 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700 border-0"
                 allowFullScreen={false} 
                 loading="lazy" 
