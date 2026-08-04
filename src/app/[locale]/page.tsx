@@ -208,7 +208,7 @@ export default async function Home() {
                 id={p.id}
                 title={displayTitle}
                 excerpt={displayDesc?.substring(0, 100) + "..."}
-                image={p.featured_image}
+                image={p.featured_image || '/Image/default-placeholder.png'}
                 status={p.status as any}
                 location={p.location || (locale === 'ne' ? "रुपन्देही" : "Rupandehi")}
                 href={"/projects/" + (p.slug || p.id)}

@@ -18,11 +18,17 @@ export default async function ProjectDetail({ params }: { params: Promise<{ slug
     { cookies: { getAll() { return cookieStore.getAll() } } }
   );
 
-  const { data: project } = await supabase
-    .from('projects')
-    .select('*')
-    .or(`slug.eq.${resolvedParams.slug},id.eq.${resolvedParams.slug}`)
-    .single();
+  let query = supabase.from('projects').select('*');
+  
+  // Check if slug is a valid UUID
+  const uuidRegex = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+  if (uuidRegex.test(resolvedParams.slug)) {
+    query = query.or(`slug.eq.${resolvedParams.slug},id.eq.${resolvedParams.slug}`);
+  } else {
+    query = query.eq('slug', resolvedParams.slug);
+  }
+
+  const { data: project } = await query.single();
   
   if (!project) {
     notFound();
