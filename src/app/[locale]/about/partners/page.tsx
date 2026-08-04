@@ -52,7 +52,7 @@ export default function Page() {
       <Section className="py-24">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {partners.map((partner) => (
-            <div key={partner.id} className="bg-white dark:bg-zinc-900 rounded-3xl p-8 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all flex flex-col md:flex-row gap-8 items-start group">
+            <div key={partner.id} className="bg-white dark:bg-zinc-900 rounded-3xl p-8 border border-zinc-200 dark:border-zinc-800 shadow-sm hover:shadow-xl transition-all flex flex-col md:flex-row gap-8 items-center group">
               <div className="w-full md:w-1/3 bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl p-4 flex items-center justify-center shrink-0 aspect-square group-hover:bg-brand-blue/5 transition-colors">
                 <Image 
                   src={partner.image} 
@@ -63,10 +63,7 @@ export default function Page() {
                 />
               </div>
               <div className="w-full md:w-2/3">
-                <h3 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">{partner.name}</h3>
-                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
-                  {partner.description}
-                </p>
+                <h3 className="text-2xl font-bold text-zinc-900 dark:text-white">{partner.name}</h3>
               </div>
             </div>
           ))}

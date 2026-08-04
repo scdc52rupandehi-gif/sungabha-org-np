@@ -20,7 +20,7 @@ const projectsData = [
     description: "Creating awareness about mental health, reducing stigma, and providing psychosocial support at community levels.",
     partner: "Stromme Foundation",
     duration: "2024-Present",
-    status: "Ongoing",
+    status: "Active",
     featured_image: "/Image/Projects/scdc_mental_health_project.jpg",
     location: "SCDC Work Area",
     achievements: [

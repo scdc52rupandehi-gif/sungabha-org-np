@@ -36,18 +36,20 @@ export const projectsData = [
   },
   {
     id: "3",
-    title: "Anti-Human Trafficking Project",
-    slug: "anti-human-trafficking",
+    title: "Mental Health Project",
+    slug: "mental-health-project",
     partner: "United Mission to Nepal (UMN)",
-    duration: "2011-2013 & 2018-2021",
+    duration: "2019-2020",
     status: "Completed",
-    featured_image: "/Image/Projects/scdc_anti_trafficking.jpg",
+    featured_image: "/Image/Projects/scdc_mental_health_umn.jpg",
     location: "Rupandehi",
     achievements: [
-      "Raised awareness on human trafficking and gender-based violence.",
-      "Built the capacity of youth and women.",
-      "Formed and mobilized mothers' groups and adolescent girls' groups.",
-      "Supported income-generating activities (IGA) for women's economic empowerment."
+      "Conducted mental health awareness campaigns.",
+      "Provided psychosocial counselling services.",
+      "Supported access to essential medicines.",
+      "Built the capacity of health workers.",
+      "Formed and mobilized Self-Help Groups (SHGs).",
+      "Supported income-generating activities for people with mental health conditions."
     ]
   },
   {
@@ -68,20 +70,18 @@ export const projectsData = [
   },
   {
     id: "5",
-    title: "Mental Health Project",
-    slug: "mental-health-project",
+    title: "Anti-Human Trafficking Project",
+    slug: "anti-human-trafficking",
     partner: "United Mission to Nepal (UMN)",
-    duration: "2019-2020",
+    duration: "2011-2013 & 2018-2021",
     status: "Completed",
-    featured_image: "/Image/Projects/scdc_mental_health_umn.jpg",
+    featured_image: "/Image/Projects/scdc_anti_trafficking.jpg",
     location: "Rupandehi",
     achievements: [
-      "Conducted mental health awareness campaigns.",
-      "Provided psychosocial counselling services.",
-      "Supported access to essential medicines.",
-      "Built the capacity of health workers.",
-      "Formed and mobilized Self-Help Groups (SHGs).",
-      "Supported income-generating activities for people with mental health conditions."
+      "Raised awareness on human trafficking and gender-based violence.",
+      "Built the capacity of youth and women.",
+      "Formed and mobilized mothers' groups and adolescent girls' groups.",
+      "Supported income-generating activities (IGA) for women's economic empowerment."
     ]
   },
   {
@@ -103,22 +103,6 @@ export const projectsData = [
   },
   {
     id: "7",
-    title: "Education Project",
-    slug: "education-project",
-    partner: "World Vision International",
-    duration: "2011-2015",
-    status: "Completed",
-    featured_image: "/Image/Projects/scdc_education_project.jpg",
-    location: "Rupandehi",
-    achievements: [
-      "Promoted quality education in schools.",
-      "Built the capacity of teachers and School Management Committees (SMCs).",
-      "Formed and mobilized Child Clubs to encourage student participation.",
-      "Retrofitted school buildings to improve safety and disaster resilience."
-    ]
-  },
-  {
-    id: "8",
     title: "HIV/AIDS Prevention Project",
     slug: "hiv-aids-prevention",
     partner: "United Mission to Nepal (UMN)",
@@ -131,6 +115,22 @@ export const projectsData = [
       "Mobilized peer educators to educate youth.",
       "Organized and supported people living with HIV/AIDS.",
       "Formed Village AIDS Coordination Committees for awareness, advocacy, and rehabilitation."
+    ]
+  },
+  {
+    id: "8",
+    title: "Education Project",
+    slug: "education-project",
+    partner: "World Vision International",
+    duration: "2011-2015",
+    status: "Completed",
+    featured_image: "/Image/Projects/scdc_education_project.jpg",
+    location: "Rupandehi",
+    achievements: [
+      "Promoted quality education in schools.",
+      "Built the capacity of teachers and School Management Committees (SMCs).",
+      "Formed and mobilized Child Clubs to encourage student participation.",
+      "Retrofitted school buildings to improve safety and disaster resilience."
     ]
   },
   {
