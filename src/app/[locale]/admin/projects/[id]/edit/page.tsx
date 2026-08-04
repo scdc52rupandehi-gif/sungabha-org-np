@@ -7,7 +7,7 @@ import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { updateProject } from "@/app/actions/projects";
 import { createClient } from '@/lib/supabase/client';
-import { X, Image as ImageIcon } from 'lucide-react';
+import { X, Image as ImageIcon, UploadCloud } from 'lucide-react';
 import Image from 'next/image';
 
 export default function EditProjectPage({ params }: { params: Promise<{ id: string }> }) {
@@ -17,6 +17,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
   const [id, setId] = useState<string>("");
   const [project, setProject] = useState<any>(null);
   const [images, setImages] = useState<string[]>([]);
+  const [featuredImage, setFeaturedImage] = useState<string>("");
   const [achievements, setAchievements] = useState<string[]>([]);
   
   const supabase = createClient();
@@ -35,6 +36,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
       if (data) {
         setProject(data);
         setImages(data.images || []);
+        setFeaturedImage(data.featured_image || "");
         setAchievements(data.achievements || []);
       }
     } catch (err) {
@@ -66,6 +68,29 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
       toast.success("Images uploaded successfully!");
     } catch (error: any) {
       toast.error(error.message || "Failed to upload images");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleFeaturedImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) return;
+    setLoading(true);
+    
+    try {
+      const file = e.target.files[0];
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random()}.${fileExt}`;
+      const filePath = `featured_${fileName}`;
+
+      const { error: uploadError } = await supabase.storage.from('project_media').upload(filePath, file);
+      if (uploadError) throw uploadError;
+
+      const { data: { publicUrl } } = supabase.storage.from('project_media').getPublicUrl(filePath);
+      setFeaturedImage(publicUrl);
+      toast.success("Featured Image uploaded successfully!");
+    } catch (error: any) {
+      toast.error(error.message || "Failed to upload featured image");
     } finally {
       setLoading(false);
     }
@@ -149,12 +174,31 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
 
             <div className="space-y-4 pt-4 border-t">
               <div className="space-y-2">
-                <label className="text-sm font-medium">Featured Image URL</label>
-                <Input name="featured_image" defaultValue={project?.featured_image || ""} placeholder="/Image/Projects/..." />
+                <label className="text-sm font-medium">Featured Image</label>
+                <input type="hidden" name="featured_image" value={featuredImage} />
+                <div className="flex items-center gap-4">
+                  {featuredImage ? (
+                    <div className="relative w-32 h-24 rounded-md overflow-hidden bg-zinc-100 border group">
+                      <Image src={featuredImage} alt="Featured" fill className="object-cover" />
+                      <button type="button" onClick={() => setFeaturedImage("")} className="absolute top-1 right-1 bg-red-500 text-white p-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity">
+                        <X className="h-3 w-3" />
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="w-32 h-24 rounded-md border-2 border-dashed border-zinc-200 dark:border-zinc-800 flex items-center justify-center text-zinc-400">
+                      <ImageIcon className="h-6 w-6" />
+                    </div>
+                  )}
+                  <label className="cursor-pointer bg-zinc-100 dark:bg-zinc-800 hover:bg-zinc-200 dark:hover:bg-zinc-700 text-zinc-700 dark:text-zinc-200 px-4 py-2 rounded-md font-medium text-sm transition-colors flex items-center gap-2">
+                    <UploadCloud className="h-4 w-4" />
+                    <span>Upload Main Image</span>
+                    <input type="file" accept="image/*" className="hidden" onChange={handleFeaturedImageUpload} disabled={loading} />
+                  </label>
+                </div>
                 <p className="text-xs text-zinc-500">Main image shown on the project card.</p>
               </div>
               
-              <div className="space-y-2">
+              <div className="space-y-2 pt-4">
                 <label className="text-sm font-medium">Project Gallery Images</label>
                 <div className="border-2 border-dashed border-zinc-200 dark:border-zinc-800 rounded-lg p-6 text-center">
                   <div className="flex flex-col items-center gap-2">
@@ -182,7 +226,7 @@ export default function EditProjectPage({ params }: { params: Promise<{ id: stri
               </div>
             </div>
 
-            <Button type="submit" disabled={loading} className="w-full mt-6">
+            <Button type="submit" disabled={loading} className="w-full mt-6 text-white font-bold bg-zinc-900 hover:bg-zinc-800">
               {loading ? "Saving..." : "Save Changes"}
             </Button>
           </form>

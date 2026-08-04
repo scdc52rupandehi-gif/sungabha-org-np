@@ -34,13 +34,20 @@ const ProjectCard = ({ id, title, excerpt, image, status, location, date, href }
       {/* Image Container with Blur Placeholder */}
       <div className="relative h-64 overflow-hidden w-full">
         <div className="absolute inset-0 bg-muted animate-pulse" />
-        <Image 
-          src={image} 
-          alt={title}
-          fill
-          className="absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-110"
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-        />
+        {image && image.trim() !== '' && image !== '/Image/default-placeholder.png' ? (
+          <Image 
+            src={image} 
+            alt={title}
+            fill
+            className="absolute inset-0 object-cover transition-transform duration-700 group-hover:scale-110"
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+          />
+        ) : (
+          <div className="absolute inset-0 flex flex-col items-center justify-center bg-zinc-800 text-zinc-500 gap-2">
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>
+            <span className="text-xs font-medium uppercase tracking-wider">No Image</span>
+          </div>
+        )}
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-60" />
         <div className="absolute top-4 left-4 z-10">
           <span className={cn("px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md border shadow-sm", statusColors[status])}>
