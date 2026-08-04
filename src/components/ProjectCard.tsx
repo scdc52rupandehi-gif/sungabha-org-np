@@ -20,9 +20,9 @@ interface ProjectCardProps {
 
 const ProjectCard = ({ id, title, excerpt, image, status, location, date, href }: ProjectCardProps) => {
   const statusColors = {
-    'Active': 'bg-brand-green/10 text-brand-green border-brand-green/20',
-    'Completed': 'bg-brand-blue/10 text-brand-blue border-brand-blue/20',
-    'Upcoming': 'bg-brand-orange/10 text-brand-orange border-brand-orange/20'
+    'Active': 'bg-green-600 text-white',
+    'Completed': 'bg-blue-600 text-white',
+    'Upcoming': 'bg-orange-500 text-white'
   };
 
   return (
@@ -50,7 +50,7 @@ const ProjectCard = ({ id, title, excerpt, image, status, location, date, href }
         )}
         <div className="absolute inset-0 bg-gradient-to-t from-zinc-950/80 via-transparent to-transparent opacity-60" />
         <div className="absolute top-4 left-4 z-10">
-          <span className={cn("px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider backdrop-blur-md border shadow-sm", statusColors[status])}>
+          <span className={cn("px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider shadow-md", statusColors[status])}>
             {status}
           </span>
         </div>
