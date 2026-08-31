@@ -1,25 +1,6 @@
 export const projectsData = [
   {
     id: "1",
-    title: "Mental Health and Well-being Project",
-    slug: "mental-health-well-being-project",
-    partner: "Stromme Foundation",
-    duration: "2024-Present",
-    status: "Ongoing",
-    featured_image: "/Image/Projects/scdc_mental_health_project.jpg",
-    location: "SCDC Work Area",
-    achievements: [
-      "Conducted community awareness programmes on mental health.",
-      "Organized capacity-building and training programmes.",
-      "Mobilized Female Community Health Volunteers (FCHVs), teachers, and health workers.",
-      "Provided psychosocial support and referral services.",
-      "Supported income-generating activities for vulnerable individuals.",
-      "Implemented the ICDP Positive Parenting Programme.",
-      "Mobilized peer educators to promote mental health awareness and community support."
-    ]
-  },
-  {
-    id: "2",
     title: "Empowering Adolescents (SAMVAD) Programme",
     slug: "empowering-adolescents-samvad",
     partner: "Stromme Foundation",
@@ -35,7 +16,39 @@ export const projectsData = [
     ]
   },
   {
+    id: "2",
+    title: "Anti-Human Trafficking Project",
+    slug: "anti-human-trafficking",
+    partner: "United Mission to Nepal (UMN)",
+    duration: "2011-2013 & 2018-2021",
+    status: "Completed",
+    featured_image: "/Image/Projects/scdc_anti_trafficking.jpg",
+    location: "Rupandehi",
+    achievements: [
+      "Raised awareness on human trafficking and gender-based violence.",
+      "Built the capacity of youth and women.",
+      "Formed and mobilized mothers' groups and adolescent girls' groups.",
+      "Supported income-generating activities (IGA) for women's economic empowerment."
+    ]
+  },
+  {
     id: "3",
+    title: "Adolescent Sexual and Reproductive Health Project",
+    slug: "adolescent-sexual-reproductive-health",
+    partner: "United Mission to Nepal (UMN)",
+    duration: "2019-2020",
+    status: "Completed",
+    featured_image: "/Image/Projects/scdc_reproductive_health.jpg",
+    location: "Rupandehi",
+    achievements: [
+      "Raised awareness through peer educator mobilization.",
+      "Built the capacity of adolescents and students.",
+      "Conducted training for teachers and health workers.",
+      "Promoted adolescent-friendly sexual and reproductive health services."
+    ]
+  },
+  {
+    id: "4",
     title: "Mental Health Project",
     slug: "mental-health-project",
     partner: "United Mission to Nepal (UMN)",
@@ -53,39 +66,7 @@ export const projectsData = [
     ]
   },
   {
-    id: "4",
-    title: "Adolescent Sexual and Reproductive Health Project",
-    slug: "adolescent-sexual-reproductive-health",
-    partner: "United Mission to Nepal (UMN)",
-    duration: "2019-2020",
-    status: "Completed",
-    featured_image: "/Image/Projects/scdc_reproductive_health.jpg",
-    location: "Rupandehi",
-    achievements: [
-      "Raised awareness through peer educator mobilization.",
-      "Built the capacity of adolescents and students.",
-      "Conducted training for teachers and health workers.",
-      "Promoted adolescent-friendly sexual and reproductive health services."
-    ]
-  },
-  {
     id: "5",
-    title: "Anti-Human Trafficking Project",
-    slug: "anti-human-trafficking",
-    partner: "United Mission to Nepal (UMN)",
-    duration: "2011-2013 & 2018-2021",
-    status: "Completed",
-    featured_image: "/Image/Projects/scdc_anti_trafficking.jpg",
-    location: "Rupandehi",
-    achievements: [
-      "Raised awareness on human trafficking and gender-based violence.",
-      "Built the capacity of youth and women.",
-      "Formed and mobilized mothers' groups and adolescent girls' groups.",
-      "Supported income-generating activities (IGA) for women's economic empowerment."
-    ]
-  },
-  {
-    id: "6",
     title: "SEEDS (Socio-Economic Empowerment for Dignity and Sustainability) Programme",
     slug: "seeds-programme",
     partner: "Stromme Foundation",
@@ -99,6 +80,22 @@ export const projectsData = [
       "Established and mobilized Self-Help Groups (SHGs).",
       "Supported Early Childhood Development (ECD) and Community-Based Coaching Classes (CMCC).",
       "Promoted income generation, livelihoods, and entrepreneurship development."
+    ]
+  },
+  {
+    id: "6",
+    title: "Education Project",
+    slug: "education-project",
+    partner: "World Vision International",
+    duration: "2011-2015",
+    status: "Completed",
+    featured_image: "/Image/Projects/scdc_education_project.jpg",
+    location: "Rupandehi",
+    achievements: [
+      "Promoted quality education in schools.",
+      "Built the capacity of teachers and School Management Committees (SMCs).",
+      "Formed and mobilized Child Clubs to encourage student participation.",
+      "Retrofitted school buildings to improve safety and disaster resilience."
     ]
   },
   {
@@ -119,22 +116,6 @@ export const projectsData = [
   },
   {
     id: "8",
-    title: "Education Project",
-    slug: "education-project",
-    partner: "World Vision International",
-    duration: "2011-2015",
-    status: "Completed",
-    featured_image: "/Image/Projects/scdc_education_project.jpg",
-    location: "Rupandehi",
-    achievements: [
-      "Promoted quality education in schools.",
-      "Built the capacity of teachers and School Management Committees (SMCs).",
-      "Formed and mobilized Child Clubs to encourage student participation.",
-      "Retrofitted school buildings to improve safety and disaster resilience."
-    ]
-  },
-  {
-    id: "9",
     title: "Community-Based Rehabilitation (CBR) for Persons with Disabilities",
     slug: "cbr-project",
     partner: "INF Nepal",
@@ -149,7 +130,7 @@ export const projectsData = [
     ]
   },
   {
-    id: "10",
+    id: "9",
     title: "Youth Information Programme",
     slug: "youth-information-programme",
     partner: "Nepal Family Planning Association (NFPA)",
@@ -161,6 +142,25 @@ export const projectsData = [
       "Established and mobilized Youth Information Centres.",
       "Conducted Youth Exchange Programmes.",
       "Organized capacity-building and skill development training for youth."
+    ]
+  },
+  {
+    id: "10",
+    title: "Mental Health and Well-being Project",
+    slug: "mental-health-well-being-project",
+    partner: "Stromme Foundation",
+    duration: "2024-Present",
+    status: "Ongoing",
+    featured_image: "/Image/Projects/scdc_mental_health_project.jpg",
+    location: "SCDC Work Area",
+    achievements: [
+      "Conducted community awareness programmes on mental health.",
+      "Organized capacity-building and training programmes.",
+      "Mobilized Female Community Health Volunteers (FCHVs), teachers, and health workers.",
+      "Provided psychosocial support and referral services.",
+      "Supported income-generating activities for vulnerable individuals.",
+      "Implemented the ICDP Positive Parenting Programme.",
+      "Mobilized peer educators to promote mental health awareness and community support."
     ]
   }
 ];

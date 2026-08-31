@@ -77,7 +77,6 @@ const Footer = () => {
               <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/publication"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Publications</Link></li>
               <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/reports/annual"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Annual Reports</Link></li>
               <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/notice"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Newsletters & Notices</Link></li>
-              <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/career"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Careers</Link></li>
               <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/volunteer"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Volunteer</Link></li>
             </ul>
           </div>
@@ -105,13 +104,18 @@ const Footer = () => {
           
         </div>
         
-        <div className="pt-8 border-t border-border flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-sm text-muted-foreground font-medium">
-            © {new Date().getFullYear()} Sungabha Community Development Centre.
-          </p>
-          <div className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
-            <Link href="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
-            <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+        <div className="pt-8 border-t border-border flex flex-col items-center gap-4">
+          <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4">
+            <p className="text-sm text-muted-foreground font-medium">
+              © {new Date().getFullYear()} Sungabha Community Development Centre.
+            </p>
+            <div className="flex items-center gap-6 text-sm font-medium text-muted-foreground">
+              <Link href="/privacy-policy" className="hover:text-foreground transition-colors">Privacy Policy</Link>
+              <Link href="/terms" className="hover:text-foreground transition-colors">Terms of Service</Link>
+            </div>
+          </div>
+          <div className="w-full text-center text-xs text-muted-foreground/80 mt-2">
+            Digital Partner: Renuva Digital | <a href="https://www.ajayharijan.com.np" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">www.ajayharijan.com.np</a> | Contact: <a href="tel:+9779745367144" className="hover:text-foreground transition-colors">+977-9745367144</a>
           </div>
         </div>
       </div>

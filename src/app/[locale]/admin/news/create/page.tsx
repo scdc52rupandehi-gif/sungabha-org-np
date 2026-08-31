@@ -40,8 +40,25 @@ export default function CreateNewsPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
-              <label className="text-sm font-medium">Title / Name</label>
-              <Input name="title" placeholder="Enter title or name..." required />
+              <label className="text-sm font-medium">Title</label>
+              <Input name="title" placeholder="Enter title..." required />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Description</label>
+              <textarea 
+                name="content" 
+                className="flex min-h-[120px] w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+                placeholder="Enter description..." 
+                required 
+              />
+            </div>
+            <div className="space-y-2">
+              <label className="text-sm font-medium">Attach PDF (Optional)</label>
+              <Input name="attached_file" type="file" accept=".pdf" />
+            </div>
+            <div className="flex items-center gap-2">
+              <input type="checkbox" name="is_published" id="is_published" value="true" defaultChecked />
+              <label htmlFor="is_published" className="text-sm font-medium">Publish immediately</label>
             </div>
             <Button type="submit" disabled={loading} className="w-full">
               {loading ? "Saving..." : "Save News"}

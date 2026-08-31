@@ -224,3 +224,10 @@ DROP POLICY IF EXISTS "Allow admin delete from volunteer-documents" ON storage.o
 CREATE POLICY "Allow admin delete from volunteer-documents" 
 ON storage.objects FOR DELETE 
 USING (auth.role() = 'authenticated' AND bucket_id = 'volunteer-documents');
+
+-- ==========================================
+-- 7. ADD ATTACHED PDF FIELD TO NEWS & EVENTS
+-- ==========================================
+BEGIN;
+ALTER TABLE public.news_events ADD COLUMN IF NOT EXISTS attached_file_url TEXT;
+COMMIT;
