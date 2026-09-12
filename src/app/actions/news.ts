@@ -39,6 +39,19 @@ export async function createNews(formData: FormData) {
     data.attached_file_url = attached_file_url;
   }
   
+  // Generate a slug from title if it doesn't exist
+  if (!data.slug && data.title) {
+    data.slug = data.title
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-')
+      .replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
+  }
+  
+  // Set type if not provided
+  if (!data.type) {
+    data.type = "News";
+  }
+
   // Ensure checkboxes like is_published are properly mapped if missing from FormData
   // Usually if checkbox is unchecked, it doesn't appear in FormData
   if (!data.is_published) {
