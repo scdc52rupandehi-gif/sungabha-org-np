@@ -26,7 +26,7 @@ export async function createNews(formData: FormData) {
       contentType: attachedFile.type,
       upsert: true
     });
-    if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
+    if (uploadError) return { success: false, error: `Upload failed: ${uploadError.message}` };
     
     const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
     attached_file_url = publicUrlData.publicUrl;
@@ -55,9 +55,15 @@ export async function createNews(formData: FormData) {
       .replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
   }
 
-  const { error } = await supabase.from('news_events').insert(data);
-  if (error) throw new Error(error.message);
-  revalidatePath("/admin/news");
+  try {
+    const { error } = await supabase.from('news_events').insert(data);
+    if (error) return { success: false, error: error.message };
+    
+    revalidatePath("/admin/news");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message || "Server action failed" };
+  }
 }
 
 export async function updateNews(id: string, formData: FormData) {

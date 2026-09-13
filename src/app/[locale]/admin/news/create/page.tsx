@@ -18,9 +18,13 @@ export default function CreateNewsPage() {
     setLoading(true);
     const formData = new FormData(e.currentTarget);
     try {
-      await createNews(formData);
-      toast.success("News created successfully!");
-      router.push("/admin/news");
+      const result = await createNews(formData);
+      if (result && !result.success) {
+        toast.error(result.error);
+      } else {
+        toast.success("News created successfully!");
+        router.push("/admin/news");
+      }
     } catch (error: any) {
       toast.error(error.message || "Something went wrong");
     } finally {
