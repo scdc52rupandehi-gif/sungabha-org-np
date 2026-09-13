@@ -47,13 +47,11 @@ export async function createDownload(formData: FormData) {
     }
     
     const title = formData.get('title') as string;
-    const description = formData.get('description') as string;
     const published_year = formData.get('published_year') as string;
     const category = formData.get('category') as string || 'Publication';
     
     const data: Record<string, any> = {
       title,
-      description,
       published_year,
       category
     };
@@ -95,13 +93,11 @@ export async function updateDownload(id: string, formData: FormData) {
     }
     
     const title = formData.get('title') as string;
-    const description = formData.get('description') as string;
     const published_year = formData.get('published_year') as string;
     const category = formData.get('category') as string || 'Publication';
     
     const data: Record<string, any> = {
       title,
-      description,
       published_year,
       category
     };
