@@ -32,14 +32,20 @@ export async function createDownload(formData: FormData) {
     file_url = publicUrlData.publicUrl;
   }
   
-  formData.delete('file');
-  const data: Record<string, any> = Object.fromEntries(formData.entries());
+  const title = formData.get('title') as string;
+  const description = formData.get('description') as string;
+  const published_year = formData.get('published_year') as string;
+  const category = formData.get('category') as string || 'Publication';
+  
+  const data: Record<string, any> = {
+    title,
+    description,
+    published_year,
+    category
+  };
+
   if (file_url) {
     data.file_url = file_url;
-  }
-  
-  if (!data.category) {
-    data.category = 'Publication';
   }
 
   const { error } = await supabase.from('documents').insert(data);
@@ -67,16 +73,20 @@ export async function updateDownload(id: string, formData: FormData) {
     file_url = publicUrlData.publicUrl;
   }
   
-  formData.delete('file');
-  formData.delete('existing_file_url');
+  const title = formData.get('title') as string;
+  const description = formData.get('description') as string;
+  const published_year = formData.get('published_year') as string;
+  const category = formData.get('category') as string || 'Publication';
   
-  const data: Record<string, any> = Object.fromEntries(formData.entries());
+  const data: Record<string, any> = {
+    title,
+    description,
+    published_year,
+    category
+  };
+  
   if (file_url) {
     data.file_url = file_url;
-  }
-
-  if (!data.category) {
-    data.category = 'Publication';
   }
 
   const { error } = await supabase.from('documents').update(data).eq('id', id);

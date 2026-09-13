@@ -32,29 +32,27 @@ export async function createNews(formData: FormData) {
     attached_file_url = publicUrlData.publicUrl;
   }
   
-  formData.delete('attached_file');
-  const data: Record<string, any> = Object.fromEntries(formData.entries());
+  const title = formData.get('title') as string;
+  const content = formData.get('content') as string;
+  const is_published = formData.get('is_published') === 'true' || formData.get('is_published') === 'on';
+  
+  const data: Record<string, any> = {
+    title,
+    content,
+    is_published,
+    type: "News"
+  };
+
   if (attached_file_url) {
     data.attached_file_url = attached_file_url;
   }
   
   // Generate a slug from title if it doesn't exist
-  if (!data.slug && data.title) {
-    data.slug = data.title
+  if (title) {
+    data.slug = title
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
-  }
-  
-  // Set type if not provided
-  if (!data.type) {
-    data.type = "News";
-  }
-
-  // Ensure checkboxes like is_published are properly mapped if missing from FormData
-  // Usually if checkbox is unchecked, it doesn't appear in FormData
-  if (!data.is_published) {
-    data.is_published = "false";
   }
 
   const { error } = await supabase.from('news_events').insert(data);
@@ -82,15 +80,16 @@ export async function updateNews(id: string, formData: FormData) {
     attached_file_url = publicUrlData.publicUrl;
   }
   
-  formData.delete('attached_file');
-  formData.delete('existing_file_url');
+  const title = formData.get('title') as string;
+  const content = formData.get('content') as string;
+  const is_published = formData.get('is_published') === 'true' || formData.get('is_published') === 'on';
   
-  const data: Record<string, any> = Object.fromEntries(formData.entries());
-  data.attached_file_url = attached_file_url || null; // Set to null if deleted
-
-  if (!data.is_published) {
-    data.is_published = "false";
-  }
+  const data: Record<string, any> = {
+    title,
+    content,
+    is_published,
+    attached_file_url: attached_file_url || null
+  };
 
   const { error } = await supabase.from('news_events').update(data).eq('id', id);
   if (error) throw new Error(error.message);
