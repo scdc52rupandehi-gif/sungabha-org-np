@@ -59,6 +59,20 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="space-y-2">
+              <label className="text-sm font-medium">Type</label>
+              <select 
+                name="type" 
+                className="flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm shadow-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
+                required
+                defaultValue={news.type || "News"}
+              >
+                <option value="News" className="text-zinc-900">News</option>
+                <option value="Event" className="text-zinc-900">Event</option>
+                <option value="Notice" className="text-zinc-900">Notice</option>
+                <option value="Tender" className="text-zinc-900">Tender</option>
+              </select>
+            </div>
+            <div className="space-y-2">
               <label className="text-sm font-medium">Title</label>
               <Input name="title" defaultValue={news.title} placeholder="Enter title..." required />
             </div>

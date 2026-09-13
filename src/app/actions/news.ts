@@ -47,13 +47,14 @@ export async function createNews(formData: FormData) {
     
     const title = formData.get('title') as string;
     const content = formData.get('content') as string;
+    const type = formData.get('type') as string || 'News';
     const is_published = formData.get('is_published') === 'true' || formData.get('is_published') === 'on';
     
     const data: Record<string, any> = {
       title,
       content,
+      type,
       is_published,
-      type: "News"
     };
 
     if (attached_file_url) {
@@ -99,11 +100,13 @@ export async function updateNews(id: string, formData: FormData) {
   
   const title = formData.get('title') as string;
   const content = formData.get('content') as string;
+  const type = formData.get('type') as string || 'News';
   const is_published = formData.get('is_published') === 'true' || formData.get('is_published') === 'on';
   
   const data: Record<string, any> = {
     title,
     content,
+    type,
     is_published,
     attached_file_url: attached_file_url || null
   };
