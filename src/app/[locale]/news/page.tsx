@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 export const revalidate = 60; // Revalidate every minute
 
 export default async function Page() {
-  const supabase = createClient();
+  const supabase = await createClient();
   const { data: newsItems } = await supabase
     .from('news_events')
     .select('*')
