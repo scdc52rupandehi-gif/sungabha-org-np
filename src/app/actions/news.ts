@@ -14,48 +14,47 @@ async function getSupabase() {
 
 export async function createNews(formData: FormData) {
   const supabase = await getSupabase();
-  
-  const attachedFile = formData.get('attached_file') as File | null;
-  let attached_file_url = null;
-  
-  if (attachedFile && attachedFile.size > 0) {
-    const ext = attachedFile.name.split('.').pop();
-    const fileName = `news_events/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
-    
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, attachedFile, {
-      contentType: attachedFile.type,
-      upsert: true
-    });
-    if (uploadError) return { success: false, error: `Upload failed: ${uploadError.message}` };
-    
-    const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
-    attached_file_url = publicUrlData.publicUrl;
-  }
-  
-  const title = formData.get('title') as string;
-  const content = formData.get('content') as string;
-  const is_published = formData.get('is_published') === 'true' || formData.get('is_published') === 'on';
-  
-  const data: Record<string, any> = {
-    title,
-    content,
-    is_published,
-    type: "News"
-  };
-
-  if (attached_file_url) {
-    data.attached_file_url = attached_file_url;
-  }
-  
-  // Generate a slug from title if it doesn't exist
-  if (title) {
-    data.slug = title
-      .toLowerCase()
-      .replace(/[^a-z0-9]+/g, '-')
-      .replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
-  }
-
   try {
+    const attachedFile = formData.get('attached_file') as File | null;
+    let attached_file_url = null;
+    
+    if (attachedFile && attachedFile.size > 0) {
+      const ext = attachedFile.name.split('.').pop();
+      const fileName = `news_events/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+      
+      const arrayBuffer = await attachedFile.arrayBuffer();
+      const { error: uploadError } = await supabase.storage.from('media').upload(fileName, arrayBuffer, {
+        contentType: attachedFile.type,
+        upsert: true
+      });
+      if (uploadError) return { success: false, error: `Upload failed: ${uploadError.message}` };
+      
+      const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
+      attached_file_url = publicUrlData.publicUrl;
+    }
+    
+    const title = formData.get('title') as string;
+    const content = formData.get('content') as string;
+    const is_published = formData.get('is_published') === 'true' || formData.get('is_published') === 'on';
+    
+    const data: Record<string, any> = {
+      title,
+      content,
+      is_published,
+      type: "News"
+    };
+
+    if (attached_file_url) {
+      data.attached_file_url = attached_file_url;
+    }
+    
+    if (title) {
+      data.slug = title
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)+/g, '') + '-' + Date.now().toString().slice(-4);
+    }
+
     const { error } = await supabase.from('news_events').insert(data);
     if (error) return { success: false, error: error.message };
     
