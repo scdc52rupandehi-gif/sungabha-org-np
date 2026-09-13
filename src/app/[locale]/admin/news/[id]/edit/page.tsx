@@ -34,6 +34,15 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
+    
+    // Check file size limit (4MB)
+    const file = formData.get('attached_file') as File;
+    if (file && file.size > 4 * 1024 * 1024) {
+      toast.error("File is too large! Maximum allowed size is 4MB.");
+      setLoading(false);
+      return;
+    }
+
     try {
       await updateNews(id, formData);
       toast.success("News updated successfully!");
@@ -89,7 +98,7 @@ export default function EditNewsPage({ params }: { params: Promise<{ id: string 
             </div>
             
             <div className="space-y-2">
-              <label className="text-sm font-medium">Attach PDF (Leave empty to keep existing)</label>
+              <label className="text-sm font-medium">Attach PDF (Leave empty to keep existing, Max 4MB)</label>
               {news.attached_file_url && (
                 <div className="text-sm mb-2 text-muted-foreground flex items-center gap-2">
                   <span>Current File:</span>

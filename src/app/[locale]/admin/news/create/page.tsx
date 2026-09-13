@@ -17,6 +17,15 @@ export default function CreateNewsPage() {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
+    
+    // Check file size limit (4MB)
+    const file = formData.get('attached_file') as File;
+    if (file && file.size > 4 * 1024 * 1024) {
+      toast.error("File is too large! Maximum allowed size is 4MB.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const result = await createNews(formData);
       if (result && !result.success) {
@@ -71,7 +80,7 @@ export default function CreateNewsPage() {
               />
             </div>
             <div className="space-y-2">
-              <label className="text-sm font-medium">Attach PDF (Optional)</label>
+              <label className="text-sm font-medium">Attach PDF (Optional, Max 4MB)</label>
               <Input name="attached_file" type="file" accept=".pdf" />
             </div>
             <div className="flex items-center gap-2">

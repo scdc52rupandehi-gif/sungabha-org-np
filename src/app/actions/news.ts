@@ -88,7 +88,8 @@ export async function updateNews(id: string, formData: FormData) {
     const ext = attachedFile.name.split('.').pop();
     const fileName = `news_events/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
     
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, attachedFile, {
+    const arrayBuffer = await attachedFile.arrayBuffer();
+    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, arrayBuffer, {
       contentType: attachedFile.type,
       upsert: true
     });
