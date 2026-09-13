@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import { createClient } from '@/lib/supabase/client';
-import { LayoutDashboard, Users, FileText, Image as ImageIcon, Briefcase, Heart, Mail, Settings, LogOut, Grid, UserCheck, UsersRound, ChevronLeft, ChevronRight } from 'lucide-react';
+import { LayoutDashboard, Users, FileText, Image as ImageIcon, Briefcase, Heart, Mail, Settings, LogOut, Grid, UserCheck, UsersRound, ChevronLeft, ChevronRight, DownloadCloud, FileBarChart } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { toast } from 'sonner';
 
@@ -21,6 +21,8 @@ export default function AdminSidebar() {
     { name: 'Projects', href: '/admin/projects', icon: Briefcase },
     { name: 'Programs', href: '/admin/programs', icon: Grid },
     { name: 'News & Events', href: '/admin/news', icon: FileText },
+    { name: 'Downloads/Pubs', href: '/admin/downloads', icon: DownloadCloud },
+    { name: 'Reports', href: '/admin/reports', icon: FileBarChart },
     { name: 'Gallery', href: '/admin/gallery', icon: ImageIcon },
     { name: 'Donations', href: '/admin/donations', icon: Heart },
     { name: 'Volunteers', href: '/admin/volunteers', icon: UserCheck },
