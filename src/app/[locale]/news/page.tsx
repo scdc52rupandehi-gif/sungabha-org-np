@@ -58,9 +58,9 @@ export default async function Page() {
                         href={item.attached_file_url} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="text-brand-blue hover:underline text-sm font-medium flex items-center gap-1 mt-auto"
+                        className="text-brand-blue hover:underline text-sm font-medium flex items-center gap-2 mt-auto"
                       >
-                        <span className="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-file-text"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/><path d="M10 9H8"/><path d="M16 13H8"/><path d="M16 17H8"/></svg>
                         Download PDF
                       </a>
                     )}
