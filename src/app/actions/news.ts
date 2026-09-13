@@ -21,11 +21,10 @@ export async function createNews(formData: FormData) {
   if (attachedFile && attachedFile.size > 0) {
     const ext = attachedFile.name.split('.').pop();
     const fileName = `news_events/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
-    const arrayBuffer = await attachedFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
     
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, buffer, {
+    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, attachedFile, {
       contentType: attachedFile.type,
+      upsert: true
     });
     if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
     
@@ -72,11 +71,10 @@ export async function updateNews(id: string, formData: FormData) {
   if (attachedFile && attachedFile.size > 0) {
     const ext = attachedFile.name.split('.').pop();
     const fileName = `news_events/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
-    const arrayBuffer = await attachedFile.arrayBuffer();
-    const buffer = Buffer.from(arrayBuffer);
     
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, buffer, {
+    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, attachedFile, {
       contentType: attachedFile.type,
+      upsert: true
     });
     if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
     
