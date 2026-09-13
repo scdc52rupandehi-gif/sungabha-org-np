@@ -76,7 +76,7 @@ const Footer = () => {
             <ul className="space-y-4">
               <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/publication"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Publications</Link></li>
               <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/reports/annual"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Annual Reports</Link></li>
-              <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/notice"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Newsletters & Notices</Link></li>
+              <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/notice"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Notices</Link></li>
               <li><Link className="text-muted-foreground hover:text-brand-blue transition-all text-sm flex items-center gap-2 group" href="/volunteer"><ArrowRight size={14} className="text-brand-blue/0 group-hover:text-brand-blue transition-all -ml-4 group-hover:ml-0" /> Volunteer</Link></li>
             </ul>
           </div>

@@ -66,7 +66,6 @@ const Header = () => {
       dropdown: [
         { name: 'Publications', href: '/publication' },
         { name: 'Notices', href: '/notice' },
-        { name: 'Newsletters', href: '/newsletter' },
         { name: 'Tenders', href: '/tender' },
       ]
     },
