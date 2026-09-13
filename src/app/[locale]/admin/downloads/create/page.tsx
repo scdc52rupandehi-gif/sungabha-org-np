@@ -17,8 +17,19 @@ export default function CreateDownloadPage() {
     e.preventDefault();
     setLoading(true);
     const formData = new FormData(e.currentTarget);
+    const file = formData.get('file') as File;
+    if (file && file.size > 4 * 1024 * 1024) {
+      toast.error("File is too large! Maximum allowed size is 4MB.");
+      setLoading(false);
+      return;
+    }
+
     try {
-      await createDownload(formData);
+      const result = await createDownload(formData);
+      if (result && !result.success) {
+        toast.error(result.error);
+        return;
+      }
       toast.success("Download created successfully!");
       router.push("/admin/downloads");
     } catch (error: any) {

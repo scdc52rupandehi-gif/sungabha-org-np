@@ -25,85 +25,99 @@ async function getSupabase() {
 }
 
 export async function createDownload(formData: FormData) {
-  const supabase = await getSupabase();
-  
-  const attachedFile = formData.get('file') as File | null;
-  let file_url = '';
-  
-  if (attachedFile && attachedFile.size > 0) {
-    const ext = attachedFile.name.split('.').pop();
-    const fileName = `documents/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+  try {
+    const supabase = await getSupabase();
     
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, attachedFile, {
-      contentType: attachedFile.type,
-      upsert: true
-    });
-    if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
+    const attachedFile = formData.get('file') as File | null;
+    let file_url = '';
     
-    const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
-    file_url = publicUrlData.publicUrl;
-  }
-  
-  const title = formData.get('title') as string;
-  const description = formData.get('description') as string;
-  const published_year = formData.get('published_year') as string;
-  const category = formData.get('category') as string || 'Publication';
-  
-  const data: Record<string, any> = {
-    title,
-    description,
-    published_year,
-    category
-  };
+    if (attachedFile && attachedFile.size > 0) {
+      const ext = attachedFile.name.split('.').pop();
+      const fileName = `documents/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+      
+      const arrayBuffer = await attachedFile.arrayBuffer();
+      const { error: uploadError } = await supabase.storage.from('media').upload(fileName, arrayBuffer, {
+        contentType: attachedFile.type,
+        upsert: true
+      });
+      if (uploadError) return { success: false, error: `Upload failed: ${uploadError.message}` };
+      
+      const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
+      file_url = publicUrlData.publicUrl;
+    }
+    
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const published_year = formData.get('published_year') as string;
+    const category = formData.get('category') as string || 'Publication';
+    
+    const data: Record<string, any> = {
+      title,
+      description,
+      published_year,
+      category
+    };
 
-  if (file_url) {
-    data.file_url = file_url;
-  }
+    if (file_url) {
+      data.file_url = file_url;
+    }
 
-  const { error } = await supabase.from('documents').insert(data);
-  if (error) throw new Error(error.message);
-  revalidatePath("/admin/downloads");
+    const { error } = await supabase.from('documents').insert(data);
+    if (error) return { success: false, error: error.message };
+    
+    revalidatePath("/admin/downloads");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message || "Server action failed" };
+  }
 }
 
 export async function updateDownload(id: string, formData: FormData) {
-  const supabase = await getSupabase();
-  
-  const attachedFile = formData.get('file') as File | null;
-  let file_url = formData.get('existing_file_url') as string | null;
-  
-  if (attachedFile && attachedFile.size > 0) {
-    const ext = attachedFile.name.split('.').pop();
-    const fileName = `documents/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+  try {
+    const supabase = await getSupabase();
     
-    const { error: uploadError } = await supabase.storage.from('media').upload(fileName, attachedFile, {
-      contentType: attachedFile.type,
-      upsert: true
-    });
-    if (uploadError) throw new Error(`Upload failed: ${uploadError.message}`);
+    const attachedFile = formData.get('file') as File | null;
+    let file_url = formData.get('existing_file_url') as string | null;
     
-    const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
-    file_url = publicUrlData.publicUrl;
-  }
-  
-  const title = formData.get('title') as string;
-  const description = formData.get('description') as string;
-  const published_year = formData.get('published_year') as string;
-  const category = formData.get('category') as string || 'Publication';
-  
-  const data: Record<string, any> = {
-    title,
-    description,
-    published_year,
-    category
-  };
-  
-  if (file_url) {
-    data.file_url = file_url;
-  }
+    if (attachedFile && attachedFile.size > 0) {
+      const ext = attachedFile.name.split('.').pop();
+      const fileName = `documents/${Date.now()}-${Math.random().toString(36).substring(7)}.${ext}`;
+      
+      const arrayBuffer = await attachedFile.arrayBuffer();
+      const { error: uploadError } = await supabase.storage.from('media').upload(fileName, arrayBuffer, {
+        contentType: attachedFile.type,
+        upsert: true
+      });
+      if (uploadError) return { success: false, error: `Upload failed: ${uploadError.message}` };
+      
+      const { data: publicUrlData } = supabase.storage.from('media').getPublicUrl(fileName);
+      file_url = publicUrlData.publicUrl;
+    }
+    
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const published_year = formData.get('published_year') as string;
+    const category = formData.get('category') as string || 'Publication';
+    
+    const data: Record<string, any> = {
+      title,
+      description,
+      published_year,
+      category
+    };
+    
+    if (file_url) {
+      data.file_url = file_url;
+    }
 
-  const { error } = await supabase.from('documents').update(data).eq('id', id);
-  if (error) throw new Error(error.message);
-  revalidatePath("/admin/downloads");
+    const { error } = await supabase.from('documents').update(data).eq('id', id);
+    if (error) return { success: false, error: error.message };
+    
+    revalidatePath("/admin/downloads");
+    return { success: true };
+  } catch (err: any) {
+    return { success: false, error: err.message || "Server action failed" };
+  }
 }
 
 export async function deleteDownload(id: string) {
